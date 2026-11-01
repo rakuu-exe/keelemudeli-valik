@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-039.schema.json",
+  "title": "K2-039 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "staatus": {
+      "enum": [
+        "UUS",
+        "MENETLUSES",
+        "KINNITATUD",
+        "TAGASI_LÜKATUD",
+        null
+      ]
+    }
+  },
+  "required": [
+    "staatus"
+  ],
+  "additionalProperties": false
+}

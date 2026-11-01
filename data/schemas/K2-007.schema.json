@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-007.schema.json",
+  "title": "K2-007 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "nimi": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ametikoht": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "osakond": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "nimi",
+    "ametikoht",
+    "osakond"
+  ],
+  "additionalProperties": false
+}

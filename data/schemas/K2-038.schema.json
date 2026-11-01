@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-038.schema.json",
+  "title": "K2-038 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "osalejad": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "arv": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "osalejad",
+    "arv"
+  ],
+  "additionalProperties": false
+}

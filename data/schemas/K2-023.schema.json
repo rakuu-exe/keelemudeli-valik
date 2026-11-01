@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-023.schema.json",
+  "title": "K2-023 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "summa_kokku": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "summa_km_ta": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "summa_kokku",
+    "summa_km_ta"
+  ],
+  "additionalProperties": false
+}

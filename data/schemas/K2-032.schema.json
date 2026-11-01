@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-032.schema.json",
+  "title": "K2-032 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "klient": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tarnekuupäev": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "summa": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "valuuta": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "klient",
+    "tarnekuupäev",
+    "summa",
+    "valuuta"
+  ],
+  "additionalProperties": false
+}

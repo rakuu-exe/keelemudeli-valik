@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-013.schema.json",
+  "title": "K2-013 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "iban": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "summa": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "selgitus": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "iban",
+    "summa",
+    "selgitus"
+  ],
+  "additionalProperties": false
+}

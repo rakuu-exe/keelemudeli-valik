@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-028.schema.json",
+  "title": "K2-028 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "arved": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "object",
+        "properties": {
+          "klient": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "summa": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "klient",
+          "summa"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "arved"
+  ],
+  "additionalProperties": false
+}

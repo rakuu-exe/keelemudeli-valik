@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-011.schema.json",
+  "title": "K2-011 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "arve_nr": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "kuupäev": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "summa_km_ta": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "km_määr": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "ostja_nimi": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ostja_reg": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "arve_nr",
+    "kuupäev",
+    "summa_km_ta",
+    "km_määr",
+    "ostja_nimi",
+    "ostja_reg"
+  ],
+  "additionalProperties": false
+}

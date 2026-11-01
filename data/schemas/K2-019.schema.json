@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-019.schema.json",
+  "title": "K2-019 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "kaal_kg": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "kogus_tk": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "kaal_kg",
+    "kogus_tk"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-029.schema.json",
+  "title": "K2-029 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "read": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "object",
+        "properties": {
+          "toode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "kogus": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "ühikuhind": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "toode",
+          "kogus",
+          "ühikuhind"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "kogusumma": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "read",
+    "kogusumma"
+  ],
+  "additionalProperties": false
+}

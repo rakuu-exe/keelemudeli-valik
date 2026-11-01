@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-015.schema.json",
+  "title": "K2-015 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "kellaaeg": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{1,2}\\.\\d{2}$"
+    },
+    "koht": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "kellaaeg",
+    "koht"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-021.schema.json",
+  "title": "K2-021 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "ostja_isikukood": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "müüja_registrikood": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "ostja_isikukood",
+    "müüja_registrikood"
+  ],
+  "additionalProperties": false
+}

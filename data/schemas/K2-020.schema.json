@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-020.schema.json",
+  "title": "K2-020 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "summa_km_ta": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "km_summa": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "summa_kokku": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "summa_km_ta",
+    "km_summa",
+    "summa_kokku"
+  ],
+  "additionalProperties": false
+}

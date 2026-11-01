@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-017.schema.json",
+  "title": "K2-017 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "koostaja": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "andmete_allikas": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "koostaja",
+    "andmete_allikas"
+  ],
+  "additionalProperties": false
+}

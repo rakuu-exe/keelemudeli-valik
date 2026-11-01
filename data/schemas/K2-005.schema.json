@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-005.schema.json",
+  "title": "K2-005 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "tellimuse_nr": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "staatus": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "tellimuse_nr",
+    "staatus"
+  ],
+  "additionalProperties": false
+}

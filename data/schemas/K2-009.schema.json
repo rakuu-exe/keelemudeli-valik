@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-009.schema.json",
+  "title": "K2-009 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "aine": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "eap": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "õppejõud": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "aine",
+    "eap",
+    "õppejõud"
+  ],
+  "additionalProperties": false
+}

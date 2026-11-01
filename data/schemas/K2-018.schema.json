@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-018.schema.json",
+  "title": "K2-018 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "tänav": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "korter": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "linn": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sihtnumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "maakond": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "tänav",
+    "korter",
+    "linn",
+    "sihtnumber",
+    "maakond"
+  ],
+  "additionalProperties": false
+}

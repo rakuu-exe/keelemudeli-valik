@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-008.schema.json",
+  "title": "K2-008 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "pealkiri": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "koht": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "pealkiri",
+    "koht"
+  ],
+  "additionalProperties": false
+}

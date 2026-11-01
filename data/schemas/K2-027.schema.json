@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-027.schema.json",
+  "title": "K2-027 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "kuupäev": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "summa": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "maksja": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "viitenumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "kuupäev",
+    "summa",
+    "maksja",
+    "viitenumber"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-016.schema.json",
+  "title": "K2-016 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "kogus": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "summa": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "kogus",
+    "summa"
+  ],
+  "additionalProperties": false
+}

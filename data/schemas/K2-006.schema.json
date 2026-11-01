@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-006.schema.json",
+  "title": "K2-006 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "tänav": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sihtnumber": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "linn": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "tänav",
+    "sihtnumber",
+    "linn"
+  ],
+  "additionalProperties": false
+}

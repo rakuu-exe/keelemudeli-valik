@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-003.schema.json",
+  "title": "K2-003 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "toode": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hind": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "toode",
+    "hind"
+  ],
+  "additionalProperties": false
+}

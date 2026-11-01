@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-010.schema.json",
+  "title": "K2-010 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "tarneaeg_päevades": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "tarneviis": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "tarneaeg_päevades",
+    "tarneviis"
+  ],
+  "additionalProperties": false
+}

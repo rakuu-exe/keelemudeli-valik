@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-037.schema.json",
+  "title": "K2-037 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "osalejad": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "object",
+        "properties": {
+          "nimi": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "roll": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "nimi",
+          "roll"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "arendajate_arv": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "osalejad",
+    "arendajate_arv"
+  ],
+  "additionalProperties": false
+}

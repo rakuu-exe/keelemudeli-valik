@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-001.schema.json",
+  "title": "K2-001 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "kontakt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "isikute_arv": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "kellaaeg": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "kontakt",
+    "isikute_arv",
+    "kellaaeg"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-035.schema.json",
+  "title": "K2-035 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "arve_nr": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "summa": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "kuupäev": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "seotud_arve": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tüüp": {
+      "enum": [
+        "ARVE",
+        "KREEDITARVE",
+        null
+      ]
+    }
+  },
+  "required": [
+    "arve_nr",
+    "summa",
+    "kuupäev",
+    "seotud_arve",
+    "tüüp"
+  ],
+  "additionalProperties": false
+}

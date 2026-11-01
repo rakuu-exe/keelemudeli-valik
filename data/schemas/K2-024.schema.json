@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-024.schema.json",
+  "title": "K2-024 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "nimi": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "telefon": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "epost": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "nimi",
+    "telefon",
+    "epost"
+  ],
+  "additionalProperties": false
+}

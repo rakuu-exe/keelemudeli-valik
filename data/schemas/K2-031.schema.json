@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-031.schema.json",
+  "title": "K2-031 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "tellija": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "nimi": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "epost": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "nimi",
+        "epost"
+      ],
+      "additionalProperties": false
+    },
+    "aadress": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "tänav": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sihtnumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "linn": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "tänav",
+        "sihtnumber",
+        "linn"
+      ],
+      "additionalProperties": false
+    },
+    "tooted": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "object",
+        "properties": {
+          "nimi": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "hind": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "nimi",
+          "hind"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "tellija",
+    "aadress",
+    "tooted"
+  ],
+  "additionalProperties": false
+}

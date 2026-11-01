@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/K2-014.schema.json",
+  "title": "K2-014 väljundi struktuur",
+  "type": "object",
+  "properties": {
+    "telefon_e164": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^\\+\\d{7,15}$"
+    }
+  },
+  "required": [
+    "telefon_e164"
+  ],
+  "additionalProperties": false
+}
