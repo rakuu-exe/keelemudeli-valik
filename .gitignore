@@ -1,0 +1,20 @@
+# API-võtmed (ainult kohalikus failis .env)
+.env
+
+# Node
+node_modules/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Claude Code'i töökaustad
+.claude/worktrees/
+
+# Isiklikud lähtefailid: jäävad kausta, aga mitte repositooriumi
+# (repositoorium muutub faasis 9 avalikuks)
+Rand_Ragnar_kavand.pdf
+kavandi_tooplaan.xlsx
+ulesandepank_v1_2.zip
+~$*.xlsx
