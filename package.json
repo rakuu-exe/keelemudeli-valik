@@ -1,0 +1,18 @@
+{
+  "name": "keelemudeli-valik",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Lõputöö tarkvaraline osa: keelemudeli valiku mitmekriteeriumiline metoodika",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test",
+    "kontroll": "node --test test/ulesandepank.test.js"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "franc": "6.2.0"
+  }
+}
