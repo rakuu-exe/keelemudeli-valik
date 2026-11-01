@@ -2228,7 +2228,8 @@
           },
           {
             "r": "regex_olemas",
-            "v": "(9|üheksa)"
+            "v": "(9|üheksa)",
+            "lipud": "i"
           },
           {
             "r": "keel",

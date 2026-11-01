@@ -69,11 +69,12 @@ Sulgudes olevad tähised (nt [L2]) viitavad failis `kavandi_tooplaan.xlsx` oleva
 - **Muutmata:** skaala 0/1/2, 3 hinnangut ja mediaan olid v1.2-s juba olemas.
 - **Lisaks:** `kontrollitüübid.kohtunik` lause „Need ülesanded moodustavad inimhindajate valimi“ asendati lausega „Kohtuniku hinnatud vastused on osa inimhindamise valimist“. Inimhindamise valim on otsuse [M14] järgi 60 vastust kõigist kategooriatest.
 
----
+### 1.9 K3-005: osalejate arvu muster tõstutundetuks (autori otsus 1.11.2026)
 
-## 2. Ettepanek, mis ootab autori kinnitust
+- **Mida:** reegel `regex_olemas` `(9|üheksa)` sai `"lipud": "i"`.
+- **Miks:** muster oli tõstutundlik. Õige vastus, mis algab suure tähega („Üheksast kliendist…“), kukkus reeglis läbi.
 
-### 2.1 franc valib ainult eesti ja inglise keele vahel
+### 1.10 franc valib ainult eesti ja inglise keele vahel (autori otsus 1.11.2026)
 
 - **Mida:** `keele_kontroll.franc_kandidaadid = ["ekk", "eng"]`. Vähemalt 8-sõnalise väljundi keel määratakse kahe keele vahel, mitte kõigi franc'i 187 keele seast.
 - **Miks:** vaikeseadistuses tuvastas franc 40 erinevast korrektsest tekstist (vähemalt 8-sõnalised K3 näidisvastused ja kaks ingliskeelset testlauset) 2 valesti:
@@ -84,19 +85,16 @@ Sulgudes olevad tähised (nt [L2]) viitavad failis `kavandi_tooplaan.xlsx` oleva
   | „The study found no statistically significant link between coffee and sleep.“ | eng | sco (šoti) |
 
   Kahe keele vahel valides oli vigu 0. Keelekontroll peab eristama just neid kahte keelt, sest testkogumi tüüpiline viga on see, et mudel vastab sisendi keeles (inglise) eesti keele asemel või vastupidi (K3-011, K3-017, K3-030, K3-038).
-- **Kui ettepanekut ei kinnitata:** eemalda väli `franc_kandidaadid`. Kontrollskript näitab siis K3-028 näidisvastuse kukkumist.
-
 ---
 
-## 3. Leitud, aga muutmata (autori otsustada)
+## 2. Leitud, aga muutmata
 
-- **K3-005:** muster `(9|üheksa)` on tõstutundlik. Õige vastus, mis algab suure tähega („Üheksast kliendist…“), kukub reeglis läbi. Võimalik parandus on `"lipud": "i"`.
 - **K3-026 märkus:** märkus väidab, et osa juhtumeid püüab kinni reegel `regex_puudub '(?i)(enamik|suurem osa|paljud)'`. Sellist reeglit ülesandes pole: kohtuniku-ülesande lisareegel on ainult `keel`. Märkus ei mõjuta hindamist.
 - **Vorming:** K2 ülesannetel on kaks sama väärtusega välja, `json_schema_fail` ja `json_schema`. Need jäeti alles.
 
 ---
 
-## 4. Kontrollskript
+## 3. Kontrollskript
 
 `test/ulesandepank.test.js` (`npm run kontroll`) kontrollib järgmist:
 

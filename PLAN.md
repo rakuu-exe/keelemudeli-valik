@@ -31,7 +31,7 @@ Tööplaan lõputöö tarkvaralise osa ehitamiseks. Aluseks on allkirjastatud ka
 
 ## Faas 0 – Seadistus ja ülesandepank v1.3
 
-- [ ] Node 22 projekt (`"type": "module"`), `.gitignore` (sh `.env`), `.env.example` viie võtmega.
+- [ ] Node 24 projekt (`"type": "module"`), `.gitignore` (sh `.env`), `.env.example` viie võtmega.
 - [ ] Kopeeri `ulesandepank_v1_2.json`, `kategooria2_skeemid.json` ja `schemas/` kausta `data/`.
 - [ ] Koosta `ulesandepank_v1_3.json` [L2, L4]:
   - eemalda `mõõtmisjuhis.süsteemijuhis` ja märkus mõtlemisrežiimi fikseerimise kohta (kasutatakse pakkuja vaikeseadistust);

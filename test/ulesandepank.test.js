@@ -59,9 +59,17 @@ describe('v1.3 muudatused', () => {
     }
   });
 
-  test('endised 9 (?i)-regexit on tõstutundetud', () => {
-    const tundetud = regexReeglid.filter(({ r }) => (r.lipud ?? '').includes('i'));
-    assert.equal(tundetud.length, 9);
+  test('endised 9 (?i)-regexit ja K3-005 on tõstutundetud', () => {
+    const tundetud = regexReeglid.filter(({ r }) => (r.lipud ?? '').includes('i')).map(({ id }) => id);
+    assert.deepEqual(tundetud, ['K3-005', 'K3-014', 'K3-019', 'K3-021', 'K3-024', 'K3-030', 'K3-032',
+      'K3-038', 'K3-040', 'K3-040']);
+  });
+
+  test('K3-005 leiab osalejate arvu ka lause alguses', () => {
+    const r = koostaRegex(koikReeglid(leia('K3-005')).find((x) => x.r === 'regex_olemas'));
+    for (const s of ['Üheksast kliendist viis oli rahul.', 'Küsitluses osales üheksa klienti.', 'Osales 9 klienti.']) {
+      assert.ok(r.test(s), s);
+    }
   });
 
   test('K3-032 lähtetekstis pole tegusõna „viis läbi“', () => {

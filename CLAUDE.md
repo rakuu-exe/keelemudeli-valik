@@ -47,7 +47,7 @@ Kasuta lõputööga samu termineid: **mõõtmiskonveier** (mitte „torustik“)
 
 ## Tehnoloogia
 
-- **Mõõtmiskonveier:** Node.js 22, ESM.
+- **Mõõtmiskonveier:** Node.js 24, ESM.
   - `openai` (OpenAI, xAI ja DeepSeek OpenAI-ühilduva API kaudu, erineva `baseURL`-iga)
   - `@anthropic-ai/sdk`
   - `@google/genai`

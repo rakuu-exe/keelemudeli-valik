@@ -5,7 +5,7 @@
   "description": "Lõputöö tarkvaraline osa: keelemudeli valiku mitmekriteeriumiline metoodika",
   "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "scripts": {
     "test": "node --test",
