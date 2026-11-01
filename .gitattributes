@@ -1,0 +1,5 @@
+# Kõik tekstifailid LF-reavahetustega (korratavuse test võrdleb räsisid)
+* text=auto eol=lf
+*.pdf binary
+*.xlsx binary
+*.png binary
