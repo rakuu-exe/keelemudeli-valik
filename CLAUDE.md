@@ -68,6 +68,7 @@ config/
   models.json        mudelid ja maksimaalne väljundpikkus
   pricing.json       hinnad (USD), hinnakirja kuupäev
   profiles.json      kasutusprofiilide kaalud, päevane maht 10 000
+  run.proov.json     proovipäring (1 ülesanne × 5 mudelit, faas 1)
   run.pilot.json     pilootkatse (1 kordus)
   run.main.json      põhimõõtmine (5 kordust)
   run.luna.json      korratavuse test (kuues mudel, ~10 ülesannet)
@@ -118,11 +119,19 @@ results/
   "error": null,
   "finishReason": "stop",
   "usage": { "input": 214, "cachedInput": 192, "output": 57, "reasoning": null },
+  "usageRaw": { "<pakkuja usage-objekt muutmata kujul>": "…" },
   "text": "<mudeli täpne vastus>"
 }
 ```
 
-`cachedInput` ja `reasoning` on `null`, kui pakkuja neid ei tagasta. Käivitamisel loetakse olemasolevad võtmed ja need jäetakse vahele.
+- `usage.input`: kogu sisend, sh vahemälust loetud osa.
+- `usage.output`: kogu väljund, sh mõtlemistokenid.
+- `usage.cachedInput` ja `usage.reasoning` on `null`, kui pakkuja neid ei tagasta.
+- `usageRaw` (autori otsus 2.11.2026): pakkuja algne usage-objekt. Selle põhjal saab kulu uuesti arvutada, kui normaliseerimine osutub valeks. Toorridu ei muudeta.
+- `ttftMs`: aeg päringu algusest esimese mittetühja vastuseteksti tükini; mõtlemist ei arvestata (autori otsus 2.11.2026). `null`, kui vastuses teksti pole.
+- Veaga rida: `status: "error"`, `error: { "httpStatus", "message" }`; `modelVersion`, aegade, `usage`, `usageRaw` ja `text` väärtus on `null`.
+
+Käivitamisel loetakse olemasolevad võtmed ja need jäetakse vahele.
 
 ### Skoori rida (`results/scored/<runId>.jsonl`)
 
