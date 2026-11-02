@@ -1,0 +1,51 @@
+{
+  "maxOutputTokens": 16000,
+  "models": [
+    {
+      "id": "openai",
+      "provider": "OpenAI",
+      "adapter": "openaiCompatible",
+      "model": "gpt-6.1-terra",
+      "apiKeyEnv": "OPENAI_API_KEY",
+      "baseURL": "https://api.openai.com/v1",
+      "maxTokensParam": "max_completion_tokens",
+      "completionIncludesReasoning": true
+    },
+    {
+      "id": "anthropic",
+      "provider": "Anthropic",
+      "adapter": "anthropic",
+      "model": "claude-sonnet-5-5",
+      "apiKeyEnv": "ANTHROPIC_API_KEY",
+      "baseURL": "https://api.anthropic.com"
+    },
+    {
+      "id": "google",
+      "provider": "Google",
+      "adapter": "google",
+      "model": "gemini-3.8-flash",
+      "apiKeyEnv": "GEMINI_API_KEY",
+      "baseURL": "https://generativelanguage.googleapis.com/"
+    },
+    {
+      "id": "deepseek",
+      "provider": "DeepSeek",
+      "adapter": "openaiCompatible",
+      "model": "deepseek-flash",
+      "apiKeyEnv": "DEEPSEEK_API_KEY",
+      "baseURL": "https://api.deepseek.com",
+      "maxTokensParam": "max_tokens",
+      "completionIncludesReasoning": true
+    },
+    {
+      "id": "xai",
+      "provider": "xAI",
+      "adapter": "openaiCompatible",
+      "model": "grok-4.7",
+      "apiKeyEnv": "XAI_API_KEY",
+      "baseURL": "https://api.x.ai/v1",
+      "maxTokensParam": "max_completion_tokens",
+      "completionIncludesReasoning": false
+    }
+  ]
+}
