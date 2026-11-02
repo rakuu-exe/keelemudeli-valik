@@ -1,6 +1,6 @@
 {
-  "kirjeldus": "Kategooria 3 näidisvastused kontrollskripti jaoks. Iga näidisvastus peab läbima oma ülesande reeglid (kohtuniku-ülesannetel ainult lisareeglid), mis näitab, et reeglid on õige vastusega täidetavad. Näidisvastuseid mudelitele ei saadeta ja hindamises ei kasutata. Kohtuniku-ülesannete näidisvastused on kirjutatud rubriigi hinde 2 järgi.",
-  "vastused": {
+  "description": "Category 3 sample answers for the check script. Each sample answer must pass the rules of its task (judge tasks: only extra_rules), which shows that the rules can be satisfied by a correct answer. Sample answers are never sent to the models and are not used in scoring. The judge task sample answers are written to score 2 on the rubric.",
+  "answers": {
     "K3-001": "Tallinnas toimunud tehnoloogiakonverentsil osales 127 inimest 14 riigist. Järgmise aasta eelarve on 2,4 miljonit eurot ja peaesinejaks oli Soome ettevõtte tehnoloogiajuht.",
     "K3-002": "Tartus avati möödunud reedel 8,5 miljonit eurot maksnud raamatukogu, mille ehitus kestis kaks aastat. Avapäeval käis seal üle kolme tuhande inimese.",
     "K3-003": "Tarkvara versioon 4.2 parandas 17 viga ja lisas kaks uut funktsiooni. Uuendus on klientidele tasuta ning vanemate versioonide tugi lõpeb 1. juunil 2026.",

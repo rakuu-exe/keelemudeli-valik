@@ -1,76 +1,74 @@
 // Google Gemini API (@google/genai).
 //
-// Saadetakse ainult mudel, kasutajasõnum ja maxOutputTokens. Mõtlemistaset ei määrata
-// (pakkuja vaikeseadistus). Mõtteid vastuses ei tagastata, sest includeThoughts jääb määramata.
+// Only the model, the user message and maxOutputTokens are sent. No thinking level is set
+// (provider default). Thoughts are not returned, because includeThoughts is left unset.
 //
-// SDK valikud, mis API-le ei lähe, aga on mõõtmiseks vajalikud:
-//  - automaticContinuation: false: muidu võib SDK finishReason CONTINUATION korral teha
-//    sama toorrea all uusi arveldatavaid päringuid. Toorrida = üks API-päring.
-//  - retryOptions.attempts: 1: korduskatsed teeb konveier (faas 2), mitte SDK.
-import { ApiError, GoogleGenAI } from '@google/genai';
-import { apiVoti, kell as vaikeKell, taisarv, teisendaViga } from './yhine.js';
+// SDK options that are not sent to the API but are needed for measurement:
+//  - automaticContinuation: false: otherwise, on finishReason CONTINUATION, the SDK may make
+//    further billable requests under the same raw row. One raw row = one API request.
+//  - retryOptions.attempts: 1: retries are done by the pipeline (phase 2), not by the SDK.
+import { ApiError as GenAIApiError, GoogleGenAI } from '@google/genai';
+import { EMPTY_USAGE, clock as defaultClock, getApiKey, intOrNull, toApiError } from './common.js';
 
-// fetch'i võrguvead (ühendus katkes, striim lõppes enneaegu, ajalõpp) on samuti API vead.
-const onApiViga = (e) =>
-  e instanceof ApiError ||
+// Network errors from fetch (dropped connection, stream ended early, timeout) are API errors too.
+const isSdkError = (e) =>
+  e instanceof GenAIApiError ||
   e?.name === 'AbortError' ||
   e?.name === 'TimeoutError' ||
   (e instanceof TypeError && /fetch failed|terminated|network/i.test(e.message));
 
-export function looGoogle(mudel, { env = {}, maxValjund, fetch, kell = vaikeKell } = {}) {
-  if (!mudel.baseURL) throw new Error(`${mudel.id}: baseURL puudub`);
-  // baseUrl alati seadistusest, et GOOGLE_GEMINI_BASE_URL seda ei muudaks.
-  const httpOptions = { baseUrl: mudel.baseURL, retryOptions: { attempts: 1 } };
+export function createGoogle(model, { env = {}, maxOutputTokens, fetch, clock = defaultClock } = {}) {
+  if (!model.baseURL) throw new Error(`${model.id}: baseURL is missing`);
+  // baseUrl always from the config, so that GOOGLE_GEMINI_BASE_URL cannot change it.
+  const httpOptions = { baseUrl: model.baseURL, retryOptions: { attempts: 1 } };
   if (fetch) httpOptions.fetch = fetch;
-  const klient = new GoogleGenAI({ apiKey: apiVoti(mudel, env), vertexai: false, httpOptions });
+  const client = new GoogleGenAI({ apiKey: getApiKey(model, env), vertexai: false, httpOptions });
 
-  return async function saada(sonum) {
-    const paring = {
-      model: mudel.model,
-      contents: [{ role: 'user', parts: [{ text: sonum }] }],
-      config: { maxOutputTokens: maxValjund, automaticContinuation: false },
+  return async function send(message) {
+    const request = {
+      model: model.model,
+      contents: [{ role: 'user', parts: [{ text: message }] }],
+      config: { maxOutputTokens, automaticContinuation: false },
     };
-    let tekst = '';
+    let text = '';
     let ttftMs = null;
     let finishReason = null;
     let modelVersion = null;
     let usageRaw = null;
-    const algus = kell();
+    const start = clock();
     try {
-      const striim = await klient.models.generateContentStream(paring);
-      for await (const tykk of striim) {
-        if (tykk.modelVersion) modelVersion = tykk.modelVersion;
-        // usageMetadata on jooksev kokkuvõte: viimane tükk annab lõplikud arvud.
-        if (tykk.usageMetadata) usageRaw = tykk.usageMetadata;
-        const kandidaat = tykk.candidates?.[0];
-        if (!kandidaat) continue;
-        for (const osa of kandidaat.content?.parts ?? []) {
-          if (osa.thought || typeof osa.text !== 'string' || osa.text.length === 0) continue;
-          if (ttftMs === null) ttftMs = kell() - algus;
-          tekst += osa.text;
+      const stream = await client.models.generateContentStream(request);
+      for await (const chunk of stream) {
+        if (chunk.modelVersion) modelVersion = chunk.modelVersion;
+        // usageMetadata is a running total: the last chunk has the final counts.
+        if (chunk.usageMetadata) usageRaw = chunk.usageMetadata;
+        const candidate = chunk.candidates?.[0];
+        if (!candidate) continue;
+        for (const part of candidate.content?.parts ?? []) {
+          if (part.thought || typeof part.text !== 'string' || part.text.length === 0) continue;
+          if (ttftMs === null) ttftMs = clock() - start;
+          text += part.text;
         }
-        if (kandidaat.finishReason) finishReason = kandidaat.finishReason;
+        if (candidate.finishReason) finishReason = candidate.finishReason;
       }
     } catch (e) {
-      throw teisendaViga(e, onApiViga);
+      throw toApiError(e, isSdkError);
     }
-    const totalMs = kell() - algus;
-    const usage = usageRaw
-      ? normaliseeriUsage(usageRaw)
-      : { input: null, cachedInput: null, output: null, reasoning: null };
-    return { text: tekst, modelVersion, finishReason, usage, usageRaw, ttftMs, totalMs };
+    const totalMs = clock() - start;
+    const usage = usageRaw ? normalizeUsage(usageRaw) : EMPTY_USAGE;
+    return { text, modelVersion, finishReason, usage, usageRaw, ttftMs, totalMs };
   };
 }
 
-// promptTokenCount sisaldab vahemälust loetud osa (cachedContentTokenCount).
-// candidatesTokenCount ei sisalda mõtteid: kogu väljund = candidates + thoughts.
-export function normaliseeriUsage(u) {
-  const kandidaadid = taisarv(u.candidatesTokenCount);
-  const motted = taisarv(u.thoughtsTokenCount);
+// promptTokenCount includes the part read from cache (cachedContentTokenCount).
+// candidatesTokenCount excludes thoughts: total output = candidates + thoughts.
+export function normalizeUsage(u) {
+  const candidates = intOrNull(u.candidatesTokenCount);
+  const thoughts = intOrNull(u.thoughtsTokenCount);
   return {
-    input: taisarv(u.promptTokenCount),
-    cachedInput: taisarv(u.cachedContentTokenCount),
-    output: kandidaadid === null && motted === null ? null : (kandidaadid ?? 0) + (motted ?? 0),
-    reasoning: motted,
+    input: intOrNull(u.promptTokenCount),
+    cachedInput: intOrNull(u.cachedContentTokenCount),
+    output: candidates === null && thoughts === null ? null : (candidates ?? 0) + (thoughts ?? 0),
+    reasoning: thoughts,
   };
 }

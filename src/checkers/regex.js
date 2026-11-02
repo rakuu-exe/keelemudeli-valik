@@ -1,11 +1,11 @@
-// Reeglite regex_olemas ja regex_puudub mustri koostamine.
-// terve_sona: Unicode-sõnapiir, sest JS \b ei loe täpitähti tähtedeks.
+// Building the pattern of the regex_present and regex_absent rules.
+// whole_word: Unicode word boundary, because JS \b does not treat accented letters (õ, ä, ö, ü) as letters.
 
-export function koostaRegex(reegel) {
-  const lipud = reegel.lipud ?? '';
-  if (reegel.terve_sona) {
-    const u = lipud.includes('u') ? lipud : lipud + 'u';
-    return new RegExp(`(?<![\\p{L}\\p{N}])(?:${reegel.v})(?![\\p{L}\\p{N}])`, u);
+export function buildRegex(rule) {
+  const flags = rule.flags ?? '';
+  if (rule.whole_word) {
+    const withUnicode = flags.includes('u') ? flags : flags + 'u';
+    return new RegExp(`(?<![\\p{L}\\p{N}])(?:${rule.value})(?![\\p{L}\\p{N}])`, withUnicode);
   }
-  return new RegExp(reegel.v, lipud);
+  return new RegExp(rule.value, flags);
 }

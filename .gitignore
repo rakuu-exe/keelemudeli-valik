@@ -1,4 +1,4 @@
-# API-võtmed (ainult kohalikus failis .env)
+# API keys (only in the local .env file)
 .env
 
 # Node
@@ -9,11 +9,11 @@ node_modules/
 __pycache__/
 *.pyc
 
-# Claude Code'i töökaustad
+# Claude Code worktrees
 .claude/worktrees/
 
-# Isiklikud lähtefailid: jäävad kausta, aga mitte repositooriumi
-# (repositoorium muutub faasis 9 avalikuks)
+# Personal source files: they stay in the folder but not in the repository
+# (the repository becomes public in phase 9)
 Rand_Ragnar_kavand.pdf
 kavandi_tooplaan.xlsx
 ulesandepank_v1_2.zip

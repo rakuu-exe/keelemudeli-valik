@@ -1,16 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Kategooria 2 ülesannete JSON Schema kogum",
-  "description": "ID-põhine register; iga ülesande tegelik valideerimisskeem asub eraldi failis.",
-  "kokkulepped": {
-    "eesmärk": "Skeem kontrollib ainult vormingukuulekust (kas väljund on nõutud struktuuriga). Sisu õigsust kontrollib korrektsuse samm etaloni alusel.",
-    "null": "Iga lehtväli lubab väärtust null, sest juhis käsib puuduva välja väärtuseks panna null. Null olemasoleva info asemel on korrektsuse viga, mitte vormingu viga.",
-    "kohustuslikud_väljad": "Kõik skeemis nimetatud väljad on kohustuslikud; puuduv võti on vormingu viga.",
-    "lisaväljad": "additionalProperties: false. Skeemivälised võtmed on vormingu viga, sest juhis nõuab väljundit AINULT vastavalt skeemile.",
-    "mustrid": "Kuupäev ^\\d{4}-\\d{2}-\\d{2}$, kellaaeg ^\\d{1,2}\\.\\d{2}$, rahvusvaheline telefoninumber ^\\+\\d{7,15}$. Muster kontrollib ainult kuju; vale kuupäev õiges kujus on korrektsuse viga.",
-    "loendid": "Massiivi pikkust ja unikaalsust skeem ei kontrolli. Need on sisuküsimused (nt K2-028, K2-038) ja hinnatakse korrektsuse sammus.",
-    "lubatud_väärtused": "K2-035 ja K2-039 enum-väljad on vormingureegel: lubatud hulgast väljas olev väärtus on vormingu viga.",
-    "valideerija": "Ajv draft 2020-12 režiimis: import Ajv2020 from 'ajv/dist/2020'. Ajv-formats pole vajalik, kuna kasutatakse ainult pattern-mustreid."
+  "title": "JSON Schema collection for category 2 tasks",
+  "description": "ID-based register; each task's actual validation schema is in a separate file.",
+  "conventions": {
+    "purpose": "The schema checks only format compliance (whether the output has the required structure). Content correctness is checked by the correctness step against the reference.",
+    "null": "Every leaf field allows null, because the instruction says to set a missing field to null. Null instead of available information is a correctness error, not a format error.",
+    "required_fields": "All fields named in the schema are required; a missing key is a format error.",
+    "additional_fields": "additionalProperties: false. Keys outside the schema are a format error, because the instruction requires output ONLY according to the schema.",
+    "patterns": "Date ^\\d{4}-\\d{2}-\\d{2}$, time ^\\d{1,2}\\.\\d{2}$, international phone number ^\\+\\d{7,15}$. The pattern checks only the form; a wrong date in the right form is a correctness error.",
+    "lists": "The schema does not check array length or uniqueness. These are content questions (e.g. K2-028, K2-038) and are scored in the correctness step.",
+    "allowed_values": "The enum fields of K2-035 and K2-039 are a format rule: a value outside the allowed set is a format error.",
+    "validator": "Ajv in draft 2020-12 mode: import Ajv2020 from 'ajv/dist/2020'. ajv-formats is not needed, because only pattern constraints are used."
   },
   "schemas": {
     "K2-001": "schemas/K2-001.schema.json",

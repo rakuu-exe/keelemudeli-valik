@@ -1,25 +1,25 @@
-// Adapteri valik mudeli seadistuse (config/models.json) välja "adapter" järgi.
-// Uue mudeli lisamiseks piisab models.json reast, kui selle pakkujale on adapter olemas.
-import { looOpenaiCompatible } from './openaiCompatible.js';
-import { looAnthropic } from './anthropic.js';
-import { looGoogle } from './google.js';
-import { looFake } from './fake.js';
+// Adapter selection by the field "adapter" of the model config (config/models.json).
+// Adding a model only needs a row in models.json if an adapter for its provider exists.
+import { createOpenAICompatible } from './openaiCompatible.js';
+import { createAnthropic } from './anthropic.js';
+import { createGoogle } from './google.js';
+import { createFake } from './fake.js';
 
-const ADAPTERID = {
-  openaiCompatible: looOpenaiCompatible,
-  anthropic: looAnthropic,
-  google: looGoogle,
-  fake: looFake,
+const ADAPTERS = {
+  openaiCompatible: createOpenAICompatible,
+  anthropic: createAnthropic,
+  google: createGoogle,
+  fake: createFake,
 };
 
-// valikud: { env, maxValjund, fetch, kell } päris adapteritele; { vastus, viga } võltsadapterile.
-export function looAdapter(mudel, valikud = {}) {
-  const loo = ADAPTERID[mudel.adapter];
-  if (!loo) throw new Error(`${mudel.id}: tundmatu adapter "${mudel.adapter}"`);
-  if (mudel.adapter !== 'fake' && !Number.isInteger(valikud.maxValjund)) {
-    throw new Error(`${mudel.id}: maxValjund puudub`);
+// options: { env, maxOutputTokens, fetch, clock } for real adapters; { respond, fail } for the fake one.
+export function createAdapter(model, options = {}) {
+  const create = ADAPTERS[model.adapter];
+  if (!create) throw new Error(`${model.id}: unknown adapter "${model.adapter}"`);
+  if (model.adapter !== 'fake' && !Number.isInteger(options.maxOutputTokens)) {
+    throw new Error(`${model.id}: maxOutputTokens is missing`);
   }
-  return loo(mudel, valikud);
+  return create(model, options);
 }
 
-export { ApiViga } from './yhine.js';
+export { ApiError } from './common.js';

@@ -1,0 +1,7 @@
+{
+  "runId": "2026-11-02-probe",
+  "description": "Probe request (PLAN.md phase 1, [PK9]): each model answers one task through the pipeline. The rows go into the billing check, not into the main comparison.",
+  "models": ["openai", "anthropic", "google", "deepseek", "xai"],
+  "tasks": ["K1-001"],
+  "repeats": 1
+}

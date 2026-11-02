@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "schemas/K2-024.schema.json",
-  "title": "K2-024 väljundi struktuur",
+  "title": "K2-024 output structure",
   "type": "object",
   "properties": {
     "nimi": {

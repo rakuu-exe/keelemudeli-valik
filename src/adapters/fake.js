@@ -1,22 +1,21 @@
-// Võltsadapter testide ja --dry-run jaoks. Ei tee võrgupäringuid.
-// Vastus on deterministlik: sama sõnum ja mudel annavad alati sama tulemuse.
-import { ApiViga } from './yhine.js';
+// Fake adapter for tests and --dry-run. Makes no network requests.
+// The result is deterministic: the same message and model always give the same result.
+import { ApiError } from './common.js';
 
-// valikud.vastus(sonum, mudel) → tekst; valikud.viga(sonum, mudel) → ApiViga või null.
-export function looFake(mudel, { vastus, viga } = {}) {
-  return async function saada(sonum) {
-    const e = viga?.(sonum, mudel);
-    if (e) throw e instanceof ApiViga ? e : new ApiViga(String(e));
-    const tekst = vastus ? vastus(sonum, mudel) : `Võltsvastus (${mudel.id})`;
-    const input = Math.ceil(sonum.length / 4);
-    const output = Math.ceil(tekst.length / 4);
-    const usageRaw = { input_tokens: input, output_tokens: output };
+// options.respond(message, model) → text; options.fail(message, model) → ApiError or null.
+export function createFake(model, { respond, fail } = {}) {
+  return async function send(message) {
+    const error = fail?.(message, model);
+    if (error) throw error instanceof ApiError ? error : new ApiError(String(error));
+    const text = respond ? respond(message, model) : `Fake answer (${model.id})`;
+    const input = Math.ceil(message.length / 4);
+    const output = Math.ceil(text.length / 4);
     return {
-      text: tekst,
-      modelVersion: `fake-${mudel.model ?? mudel.id}`,
+      text,
+      modelVersion: `fake-${model.model ?? model.id}`,
       finishReason: 'stop',
       usage: { input, cachedInput: null, output, reasoning: null },
-      usageRaw,
+      usageRaw: { input_tokens: input, output_tokens: output },
       ttftMs: 1,
       totalMs: 2,
     };

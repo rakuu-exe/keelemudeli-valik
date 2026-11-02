@@ -2,14 +2,14 @@
   "name": "keelemudeli-valik",
   "version": "0.1.0",
   "private": true,
-  "description": "Lõputöö tarkvaraline osa: keelemudeli valiku mitmekriteeriumiline metoodika",
+  "description": "Software part of the thesis: a multi-criteria methodology for choosing a language model",
   "type": "module",
   "engines": {
     "node": ">=24"
   },
   "scripts": {
     "test": "node --test",
-    "kontroll": "node --test test/ulesandepank.test.js"
+    "check": "node --test test/taskBank.test.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "1.3.0",

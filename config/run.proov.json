@@ -1,7 +1,0 @@
-{
-  "runId": "2026-11-02-proov",
-  "description": "Proovipäring (PLAN.md faas 1, [PK9]): iga mudel vastab ühele ülesandele läbi konveieri. Read lähevad hinnaarvutuse kontrolli, mitte põhivõrdlusse.",
-  "models": ["openai", "anthropic", "google", "deepseek", "xai"],
-  "tasks": ["K1-001"],
-  "repeats": 1
-}

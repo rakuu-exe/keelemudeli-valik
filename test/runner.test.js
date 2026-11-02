@@ -1,60 +1,60 @@
-// Konveieri põhiosa testid võltsadapteriga: toorrea kuju, järjekord ja jätkamine.
+// Tests of the core pipeline with the fake adapter: raw row shape, order and resuming.
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { looAdapter, ApiViga } from '../src/adapters/index.js';
-import { laePank, kasutajasonum } from '../src/pank.js';
-import { koostaPlaan, kaivita, usageKlapib } from '../src/runner/run.js';
-import { looToorrida, loeToorread, toorreaVoti } from '../src/runner/toorrida.js';
+import { createAdapter, ApiError } from '../src/adapters/index.js';
+import { loadTaskBank, buildUserMessage } from '../src/taskBank.js';
+import { buildPlan, executePlan, usageTotalMatches } from '../src/runner/run.js';
+import { buildRawRow, readRawRows, rawRowKey } from '../src/runner/rawRows.js';
 
-const pank = laePank();
-const MUDELID = JSON.parse(fs.readFileSync(new URL('../config/models.json', import.meta.url), 'utf8'));
-const TOORREA_VALJAD = [
-  'key', 'runId', 'taskId', 'modelId', 'modelRequested', 'modelVersion', 'kordus', 'tsStartUtc',
+const bank = loadTaskBank();
+const MODELS = JSON.parse(fs.readFileSync(new URL('../config/models.json', import.meta.url), 'utf8'));
+const RAW_ROW_FIELDS = [
+  'key', 'runId', 'taskId', 'modelId', 'modelRequested', 'modelVersion', 'repeat', 'tsStartUtc',
   'ttftMs', 'totalMs', 'status', 'error', 'finishReason', 'usage', 'usageRaw', 'text',
 ];
 
-const ajutineFail = () => path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'konveier-')), 'raw.jsonl');
-const voltsAdapterid = (plaan, valikud = {}) =>
-  new Map(plaan.mudelid.map((m) => [m.id, looAdapter({ ...m, adapter: 'fake' }, valikud)]));
+const tempFile = () => path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'pipeline-')), 'raw.jsonl');
+const fakeAdapters = (plan, options = {}) =>
+  new Map(plan.models.map((m) => [m.id, createAdapter({ ...m, adapter: 'fake' }, options)]));
 
-describe('toorrida', () => {
-  const mudel = MUDELID.models[0];
-  const alus = { runId: 'r', taskId: 'K2-026', mudel, kordus: 3, tsStartUtc: '2026-11-02T10:00:00.000Z' };
+describe('raw row', () => {
+  const model = MODELS.models[0];
+  const base = { runId: 'r', taskId: 'K2-026', model, repeat: 3, tsStartUtc: '2026-11-02T10:00:00.000Z' };
 
-  test('võti ja väljad CLAUDE.md järgi (+ usageRaw)', () => {
-    const tulemus = {
+  test('key and fields as in CLAUDE.md (incl. usageRaw)', () => {
+    const result = {
       text: ' Tallinn\n', modelVersion: 'v', finishReason: 'stop', ttftMs: 1.5, totalMs: 2.5,
       usage: { input: 1, cachedInput: null, output: 2, reasoning: null }, usageRaw: { a: 1 },
     };
-    const rida = looToorrida({ ...alus, tulemus });
-    assert.deepEqual(Object.keys(rida), TOORREA_VALJAD);
-    assert.equal(rida.key, 'r|K2-026|openai|3');
-    assert.equal(rida.modelRequested, 'gpt-6.1-terra');
-    assert.equal(rida.status, 'ok');
-    assert.equal(rida.text, ' Tallinn\n'); // toorvastust ei puhastata
+    const row = buildRawRow({ ...base, result });
+    assert.deepEqual(Object.keys(row), RAW_ROW_FIELDS);
+    assert.equal(row.key, 'r|K2-026|openai|3');
+    assert.equal(row.modelRequested, 'gpt-6.1-terra');
+    assert.equal(row.status, 'ok');
+    assert.equal(row.text, ' Tallinn\n'); // the raw answer is not cleaned
   });
 
-  test('veaga rida: status error, vastuse väljad null', () => {
-    const rida = looToorrida({ ...alus, viga: new ApiViga('Rate limit', { status: 429, korratav: true }) });
-    assert.deepEqual(Object.keys(rida), TOORREA_VALJAD);
-    assert.equal(rida.status, 'error');
-    assert.deepEqual(rida.error, { httpStatus: 429, message: 'Rate limit' });
-    assert.equal(rida.text, null);
-    assert.equal(rida.usage, null);
+  test('error row: status error, answer fields null', () => {
+    const row = buildRawRow({ ...base, error: new ApiError('Rate limit', { status: 429, retryable: true }) });
+    assert.deepEqual(Object.keys(row), RAW_ROW_FIELDS);
+    assert.equal(row.status, 'error');
+    assert.deepEqual(row.error, { httpStatus: 429, message: 'Rate limit' });
+    assert.equal(row.text, null);
+    assert.equal(row.usage, null);
   });
 });
 
-describe('konveier', () => {
-  const jooks = { runId: 'test', models: ['openai', 'anthropic', 'google'], tasks: ['K1-001', 'K2-001'], repeats: 2 };
+describe('pipeline', () => {
+  const run = { runId: 'test', models: ['openai', 'anthropic', 'google'], tasks: ['K1-001', 'K2-001'], repeats: 2 };
 
-  test('ringid: välimine kordus, sisemine ülesanded × mudelid', () => {
-    const plaan = koostaPlaan(jooks, MUDELID, pank);
-    assert.equal(plaan.paringud.length, 2 * 2 * 3);
+  test('rounds: outer loop is the repeat, inner loop is tasks × models', () => {
+    const plan = buildPlan(run, MODELS, bank);
+    assert.equal(plan.requests.length, 2 * 2 * 3);
     assert.deepEqual(
-      plaan.paringud.slice(0, 7).map((p) => `${p.kordus}|${p.ulesanne.id}|${p.mudel.id}`),
+      plan.requests.slice(0, 7).map((p) => `${p.repeat}|${p.task.id}|${p.model.id}`),
       [
         '1|K1-001|openai', '1|K1-001|anthropic', '1|K1-001|google',
         '1|K2-001|openai', '1|K2-001|anthropic', '1|K2-001|google',
@@ -63,79 +63,79 @@ describe('konveier', () => {
     );
   });
 
-  test('"all" = kõik 120 ülesannet; tundmatu mudel või ülesanne → viga', () => {
-    assert.equal(koostaPlaan({ ...jooks, tasks: 'all', repeats: 1 }, MUDELID, pank).paringud.length, 120 * 3);
-    assert.throws(() => koostaPlaan({ ...jooks, models: ['puudub'] }, MUDELID, pank), /puudub/);
-    assert.throws(() => koostaPlaan({ ...jooks, tasks: ['K9-999'] }, MUDELID, pank), /K9-999/);
+  test('"all" = all 120 tasks; unknown model or task → error', () => {
+    assert.equal(buildPlan({ ...run, tasks: 'all', repeats: 1 }, MODELS, bank).requests.length, 120 * 3);
+    assert.throws(() => buildPlan({ ...run, models: ['missing'] }, MODELS, bank), /missing/);
+    assert.throws(() => buildPlan({ ...run, tasks: ['K9-999'] }, MODELS, bank), /K9-999/);
   });
 
-  test('iga päring salvestatakse; adapter saab malli järgi koostatud kasutajasõnumi', async () => {
-    const fail = ajutineFail();
-    const plaan = koostaPlaan(jooks, MUDELID, pank);
-    const saadetud = [];
-    const adapterid = voltsAdapterid(plaan, { vastus: (sonum) => (saadetud.push(sonum), 'Tallinn') });
-    await kaivita({ jooks, plaan, pank, valjundFail: fail, adapterid });
+  test('every request is stored; the adapter gets the user message built from the template', async () => {
+    const file = tempFile();
+    const plan = buildPlan(run, MODELS, bank);
+    const sent = [];
+    const adapters = fakeAdapters(plan, { respond: (message) => (sent.push(message), 'Tallinn') });
+    await executePlan({ run, plan, bank, outputFile: file, adapters });
 
-    const read = loeToorread(fail);
-    assert.equal(read.length, 12);
-    assert.equal(new Set(read.map((r) => r.key)).size, 12);
-    assert.ok(read.every((r) => r.status === 'ok' && r.text === 'Tallinn'));
-    const k1 = pank['ülesanded'].find((u) => u.id === 'K1-001');
-    assert.equal(saadetud[0], kasutajasonum(k1, pank));
+    const rows = readRawRows(file);
+    assert.equal(rows.length, 12);
+    assert.equal(new Set(rows.map((r) => r.key)).size, 12);
+    assert.ok(rows.every((r) => r.status === 'ok' && r.text === 'Tallinn'));
+    const k1 = bank.tasks.find((t) => t.id === 'K1-001');
+    assert.equal(sent[0], buildUserMessage(k1, bank));
   });
 
-  test('katkestatud jooks jätkub duplikaatideta', async () => {
-    const fail = ajutineFail();
-    const plaan = koostaPlaan(jooks, MUDELID, pank);
-    // Esimene käivitus katkeb 5. päringu juures (nt protsess suletakse).
+  test('an interrupted run resumes without duplicates', async () => {
+    const file = tempFile();
+    const plan = buildPlan(run, MODELS, bank);
+    // The first run stops at the 5th request (e.g. the process is killed).
     let n = 0;
-    const katkev = new Map(plaan.mudelid.map((m) => [m.id, async (sonum) => {
-      if (++n === 5) throw new Error('katkestus');
-      return looAdapter({ ...m, adapter: 'fake' })(sonum);
+    const interrupted = new Map(plan.models.map((m) => [m.id, async (message) => {
+      if (++n === 5) throw new Error('interrupted');
+      return createAdapter({ ...m, adapter: 'fake' })(message);
     }]));
-    await assert.rejects(kaivita({ jooks, plaan, pank, valjundFail: fail, adapterid: katkev }), /katkestus/);
-    assert.equal(loeToorread(fail).length, 4);
+    await assert.rejects(executePlan({ run, plan, bank, outputFile: file, adapters: interrupted }), /interrupted/);
+    assert.equal(readRawRows(file).length, 4);
 
-    const lisatud = await kaivita({ jooks, plaan, pank, valjundFail: fail, adapterid: voltsAdapterid(plaan) });
-    assert.equal(lisatud.length, 8);
-    const read = loeToorread(fail);
-    assert.equal(read.length, 12);
-    assert.equal(new Set(read.map((r) => r.key)).size, 12);
+    const added = await executePlan({ run, plan, bank, outputFile: file, adapters: fakeAdapters(plan) });
+    assert.equal(added.length, 8);
+    const rows = readRawRows(file);
+    assert.equal(rows.length, 12);
+    assert.equal(new Set(rows.map((r) => r.key)).size, 12);
 
-    const kolmas = await kaivita({ jooks, plaan, pank, valjundFail: fail, adapterid: voltsAdapterid(plaan) });
-    assert.equal(kolmas.length, 0);
+    const third = await executePlan({ run, plan, bank, outputFile: file, adapters: fakeAdapters(plan) });
+    assert.equal(third.length, 0);
   });
 
-  test('API viga → veaga rida, jooks jätkub', async () => {
-    const fail = ajutineFail();
-    const plaan = koostaPlaan({ ...jooks, repeats: 1 }, MUDELID, pank);
-    const adapterid = voltsAdapterid(plaan, {
-      viga: (_, m) => (m.id === 'google' ? new ApiViga('Bad request', { status: 400 }) : null),
+  test('API error → error row, the run continues', async () => {
+    const file = tempFile();
+    const plan = buildPlan({ ...run, repeats: 1 }, MODELS, bank);
+    const adapters = fakeAdapters(plan, {
+      fail: (_, m) => (m.id === 'google' ? new ApiError('Bad request', { status: 400 }) : null),
     });
-    await kaivita({ jooks: { ...jooks, repeats: 1 }, plaan, pank, valjundFail: fail, adapterid });
-    const read = loeToorread(fail);
-    assert.equal(read.length, 6);
-    assert.deepEqual(read.filter((r) => r.status === 'error').map((r) => r.key), [
-      toorreaVoti({ runId: 'test', taskId: 'K1-001', modelId: 'google', kordus: 1 }),
-      toorreaVoti({ runId: 'test', taskId: 'K2-001', modelId: 'google', kordus: 1 }),
+    await executePlan({ run: { ...run, repeats: 1 }, plan, bank, outputFile: file, adapters });
+    const rows = readRawRows(file);
+    assert.equal(rows.length, 6);
+    assert.deepEqual(rows.filter((r) => r.status === 'error').map((r) => r.key), [
+      rawRowKey({ runId: 'test', taskId: 'K1-001', modelId: 'google', repeat: 1 }),
+      rawRowKey({ runId: 'test', taskId: 'K2-001', modelId: 'google', repeat: 1 }),
     ]);
   });
 
-  test('olemasolevad read jäävad muutmata (fail ainult kasvab)', async () => {
-    const fail = ajutineFail();
-    const plaan = koostaPlaan({ ...jooks, repeats: 1 }, MUDELID, pank);
-    await kaivita({ jooks, plaan: { ...plaan, paringud: plaan.paringud.slice(0, 2) }, pank, valjundFail: fail, adapterid: voltsAdapterid(plaan) });
-    const enne = fs.readFileSync(fail, 'utf8');
-    await kaivita({ jooks, plaan, pank, valjundFail: fail, adapterid: voltsAdapterid(plaan) });
-    assert.ok(fs.readFileSync(fail, 'utf8').startsWith(enne));
+  test('existing rows stay unchanged (the file only grows)', async () => {
+    const file = tempFile();
+    const plan = buildPlan({ ...run, repeats: 1 }, MODELS, bank);
+    await executePlan({ run, plan: { ...plan, requests: plan.requests.slice(0, 2) }, bank, outputFile: file, adapters: fakeAdapters(plan) });
+    const before = fs.readFileSync(file, 'utf8');
+    await executePlan({ run, plan, bank, outputFile: file, adapters: fakeAdapters(plan) });
+    assert.ok(fs.readFileSync(file, 'utf8').startsWith(before));
   });
 });
 
-describe('usageKlapib', () => {
-  test('OpenAI-ühilduv total_tokens ja Gemini totalTokenCount', () => {
-    assert.equal(usageKlapib({ usage: { input: 32, output: 103 }, usageRaw: { total_tokens: 135 } }), true);
-    assert.equal(usageKlapib({ usage: { input: 32, output: 9 }, usageRaw: { total_tokens: 135 } }), false);
-    assert.equal(usageKlapib({ usage: { input: 214, output: 57 }, usageRaw: { totalTokenCount: 271 } }), true);
-    assert.equal(usageKlapib({ usage: { input: 1, output: 2 }, usageRaw: { input_tokens: 1 } }), null);
+describe('usageTotalMatches', () => {
+  test('OpenAI-compatible total_tokens and Gemini totalTokenCount', () => {
+    assert.equal(usageTotalMatches({ usage: { input: 32, output: 103 }, usageRaw: { total_tokens: 135 } }), true);
+    assert.equal(usageTotalMatches({ usage: { input: 32, output: 9 }, usageRaw: { total_tokens: 135 } }), false);
+    assert.equal(usageTotalMatches({ usage: { input: 214, output: 57 }, usageRaw: { totalTokenCount: 271 } }), true);
+    assert.equal(usageTotalMatches({ usage: { input: 1, output: 2 }, usageRaw: { input_tokens: 1 } }), null);
   });
 });

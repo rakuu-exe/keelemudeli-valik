@@ -1,76 +1,76 @@
 // Anthropic Messages API (@anthropic-ai/sdk).
 //
-// Saadetakse ainult model, max_tokens ja üks kasutajasõnum (striimina). Süsteemijuhist,
-// thinking- ega effort-parameetrit ei saadeta: Sonnet 5.5 töötab vaikimisi adaptiivse
-// mõtlemisega ja vaikimisi effort-tasemel. Mõtlemisplokid striimitakse tühja tekstiga ega
-// ole vastuse osa. Refusal-fallback'i ei kasutata: keeldumine on tavaline vastus.
+// Only model, max_tokens and one user message are sent (streamed). No system prompt, thinking or
+// effort parameter is sent: Sonnet 5.5 runs with its default adaptive thinking and default effort.
+// Thinking blocks stream with empty text and are not part of the answer. The refusal fallback is not
+// used: a refusal is a normal answer.
 import Anthropic from '@anthropic-ai/sdk';
-import { apiVoti, kell as vaikeKell, taisarv, teisendaViga } from './yhine.js';
+import { clock as defaultClock, getApiKey, intOrNull, toApiError } from './common.js';
 
-const onApiViga = (e) => e instanceof Anthropic.APIError;
+const isSdkError = (e) => e instanceof Anthropic.APIError;
 
-export function looAnthropic(mudel, { env = {}, maxValjund, fetch, kell = vaikeKell } = {}) {
-  if (!mudel.baseURL) throw new Error(`${mudel.id}: baseURL puudub`);
-  const klient = new Anthropic({
-    apiKey: apiVoti(mudel, env), // selgesõnaline võti: SDK ei otsi siis teisi autentimisviise
-    baseURL: mudel.baseURL, // alati seadistusest, et ANTHROPIC_BASE_URL seda ei muudaks
-    maxRetries: 0, // korduskatsed teeb konveier (faas 2), mitte SDK
+export function createAnthropic(model, { env = {}, maxOutputTokens, fetch, clock = defaultClock } = {}) {
+  if (!model.baseURL) throw new Error(`${model.id}: baseURL is missing`);
+  const client = new Anthropic({
+    apiKey: getApiKey(model, env), // explicit key: the SDK then does not look for other credentials
+    baseURL: model.baseURL, // always from the config, so that ANTHROPIC_BASE_URL cannot change it
+    maxRetries: 0, // retries are done by the pipeline (phase 2), not by the SDK
     fetch,
   });
 
-  return async function saada(sonum) {
-    const paring = {
-      model: mudel.model,
-      max_tokens: maxValjund,
-      messages: [{ role: 'user', content: sonum }],
+  return async function send(message) {
+    const request = {
+      model: model.model,
+      max_tokens: maxOutputTokens,
+      messages: [{ role: 'user', content: message }],
     };
     let ttftMs = null;
-    let sonumLopp;
-    const algus = kell();
+    let finalMessage;
+    const start = clock();
     try {
-      const striim = klient.messages.stream(paring);
-      for await (const sundmus of striim) {
+      const stream = client.messages.stream(request);
+      for await (const event of stream) {
         if (
           ttftMs === null &&
-          sundmus.type === 'content_block_delta' &&
-          sundmus.delta.type === 'text_delta' &&
-          sundmus.delta.text.length > 0
+          event.type === 'content_block_delta' &&
+          event.delta.type === 'text_delta' &&
+          event.delta.text.length > 0
         ) {
-          ttftMs = kell() - algus;
+          ttftMs = clock() - start;
         }
       }
-      sonumLopp = await striim.finalMessage();
+      finalMessage = await stream.finalMessage();
     } catch (e) {
-      throw teisendaViga(e, onApiViga);
+      throw toApiError(e, isSdkError);
     }
-    const totalMs = kell() - algus;
+    const totalMs = clock() - start;
 
-    const tekst = sonumLopp.content
-      .filter((plokk) => plokk.type === 'text')
-      .map((plokk) => plokk.text)
+    const text = finalMessage.content
+      .filter((block) => block.type === 'text')
+      .map((block) => block.text)
       .join('');
     return {
-      text: tekst,
-      modelVersion: sonumLopp.model ?? null,
-      finishReason: sonumLopp.stop_reason ?? null,
-      usage: normaliseeriUsage(sonumLopp.usage),
-      usageRaw: sonumLopp.usage,
+      text,
+      modelVersion: finalMessage.model ?? null,
+      finishReason: finalMessage.stop_reason ?? null,
+      usage: normalizeUsage(finalMessage.usage),
+      usageRaw: finalMessage.usage,
       ttftMs,
       totalMs,
     };
   };
 }
 
-// input_tokens ei sisalda vahemälu osa: kogu sisend = input + cache_read + cache_creation.
-// output_tokens sisaldab mõtlemistokeneid; nende arv on output_tokens_details.thinking_tokens.
-export function normaliseeriUsage(u) {
-  const sisend = taisarv(u.input_tokens);
-  const loetud = taisarv(u.cache_read_input_tokens);
-  const loodud = taisarv(u.cache_creation_input_tokens);
+// input_tokens excludes the cache part: total input = input + cache_read + cache_creation.
+// output_tokens includes reasoning tokens; their count is output_tokens_details.thinking_tokens.
+export function normalizeUsage(u) {
+  const input = intOrNull(u.input_tokens);
+  const cacheRead = intOrNull(u.cache_read_input_tokens);
+  const cacheCreation = intOrNull(u.cache_creation_input_tokens);
   return {
-    input: sisend === null ? null : sisend + (loetud ?? 0) + (loodud ?? 0),
-    cachedInput: loetud,
-    output: taisarv(u.output_tokens),
-    reasoning: taisarv(u.output_tokens_details?.thinking_tokens),
+    input: input === null ? null : input + (cacheRead ?? 0) + (cacheCreation ?? 0),
+    cachedInput: cacheRead,
+    output: intOrNull(u.output_tokens),
+    reasoning: intOrNull(u.output_tokens_details?.thinking_tokens),
   };
 }

@@ -1,122 +1,122 @@
-// Mõõtmiskonveier: saadab jooksu seadistuses nimetatud ülesanded mudelitele ja salvestab
-// iga päringu toorreana faili results/raw/<runId>.jsonl.
+// Measurement pipeline: sends the tasks named in the run config to the models and stores
+// every request as a raw row in results/raw/<runId>.jsonl.
 //
-//   node src/runner/run.js --config config/run.proov.json
+//   node src/runner/run.js --config config/run.probe.json
 //
-// Järjekord: välimine tsükkel on kordus, sisemine ülesanded × mudelid [M7].
-// Juba salvestatud võtmeid ei korrata, nii et katkenud jooksu saab uuesti käivitada.
-// Korduskatsed vigade korral, --dry-run ja --limit lisanduvad faasis 2.
+// Order: the outer loop is the repeat, the inner loop is tasks × models [M7].
+// Keys already stored are not requested again, so an interrupted run can simply be restarted.
+// Retries on errors, --dry-run and --limit are added in phase 2.
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { config as laeEnv } from 'dotenv';
-import { looAdapter, ApiViga } from '../adapters/index.js';
-import { laePank, kasutajasonum } from '../pank.js';
-import { looToorrida, lisaToorrida, olemasolevadVotmed, toorreaVoti } from './toorrida.js';
+import { config as loadEnv } from 'dotenv';
+import { createAdapter, ApiError } from '../adapters/index.js';
+import { loadTaskBank, buildUserMessage } from '../taskBank.js';
+import { buildRawRow, appendRawRow, existingKeys, rawRowKey } from './rawRows.js';
 
-export const JUUR = new URL('../../', import.meta.url);
-const loeJson = (url) => JSON.parse(fs.readFileSync(url, 'utf8'));
+export const ROOT = new URL('../../', import.meta.url);
+const readJson = (url) => JSON.parse(fs.readFileSync(url, 'utf8'));
 
-// Jooksu seadistus: { runId, description, models: [id...], tasks: "all" | [id...], repeats }
-export function koostaPlaan(jooks, mudeliSeadistus, pank) {
-  if (!/^[\w.-]+$/.test(jooks.runId ?? '')) throw new Error(`Vigane runId: ${jooks.runId}`);
-  if (!Number.isInteger(jooks.repeats) || jooks.repeats < 1) throw new Error('repeats peab olema positiivne täisarv');
+// Run config: { runId, description, models: [id...], tasks: "all" | [id...], repeats }
+export function buildPlan(run, modelConfig, bank) {
+  if (!/^[\w.-]+$/.test(run.runId ?? '')) throw new Error(`Invalid runId: ${run.runId}`);
+  if (!Number.isInteger(run.repeats) || run.repeats < 1) throw new Error('repeats must be a positive integer');
 
-  const koikMudelid = new Map(mudeliSeadistus.models.map((m) => [m.id, m]));
-  const mudelid = jooks.models.map((id) => {
-    const m = koikMudelid.get(id);
-    if (!m) throw new Error(`Mudelit "${id}" pole failis config/models.json`);
+  const allModels = new Map(modelConfig.models.map((m) => [m.id, m]));
+  const models = run.models.map((id) => {
+    const m = allModels.get(id);
+    if (!m) throw new Error(`Model "${id}" is not in config/models.json`);
     return m;
   });
 
-  const koikUlesanded = new Map(pank['ülesanded'].map((u) => [u.id, u]));
-  const ulesanded = jooks.tasks === 'all'
-    ? pank['ülesanded']
-    : jooks.tasks.map((id) => {
-      const u = koikUlesanded.get(id);
-      if (!u) throw new Error(`Ülesannet "${id}" pole ülesandepangas`);
-      return u;
+  const allTasks = new Map(bank.tasks.map((t) => [t.id, t]));
+  const tasks = run.tasks === 'all'
+    ? bank.tasks
+    : run.tasks.map((id) => {
+      const t = allTasks.get(id);
+      if (!t) throw new Error(`Task "${id}" is not in the task bank`);
+      return t;
     });
 
-  const paringud = [];
-  for (let kordus = 1; kordus <= jooks.repeats; kordus++) {
-    for (const ulesanne of ulesanded) {
-      for (const mudel of mudelid) paringud.push({ kordus, ulesanne, mudel });
+  const requests = [];
+  for (let repeat = 1; repeat <= run.repeats; repeat++) {
+    for (const task of tasks) {
+      for (const model of models) requests.push({ repeat, task, model });
     }
   }
-  return { mudelid, paringud };
+  return { models, requests };
 }
 
-// adapterid: Map mudeli id → saada(sonum). Tagastab selles jooksus lisatud read.
-export async function kaivita({ jooks, plaan, pank, valjundFail, adapterid, logi = () => {} }) {
-  const olemas = olemasolevadVotmed(valjundFail);
-  const lisatud = [];
-  for (const { kordus, ulesanne, mudel } of plaan.paringud) {
-    const alus = { runId: jooks.runId, taskId: ulesanne.id, mudel, kordus };
-    if (olemas.has(toorreaVoti({ ...alus, modelId: mudel.id }))) continue;
+// adapters: Map model id → send(message). Returns the rows added in this run.
+export async function executePlan({ run, plan, bank, outputFile, adapters, log = () => {} }) {
+  const done = existingKeys(outputFile);
+  const added = [];
+  for (const { repeat, task, model } of plan.requests) {
+    const base = { runId: run.runId, taskId: task.id, model, repeat };
+    if (done.has(rawRowKey({ ...base, modelId: model.id }))) continue;
 
-    const sonum = kasutajasonum(ulesanne, pank);
+    const message = buildUserMessage(task, bank);
     const tsStartUtc = new Date().toISOString();
-    let rida;
+    let row;
     try {
-      rida = looToorrida({ ...alus, tsStartUtc, tulemus: await adapterid.get(mudel.id)(sonum) });
+      row = buildRawRow({ ...base, tsStartUtc, result: await adapters.get(model.id)(message) });
     } catch (e) {
-      if (!(e instanceof ApiViga)) throw e;
-      rida = looToorrida({ ...alus, tsStartUtc, viga: e });
+      if (!(e instanceof ApiError)) throw e;
+      row = buildRawRow({ ...base, tsStartUtc, error: e });
     }
-    lisaToorrida(valjundFail, rida);
-    lisatud.push(rida);
-    logi(rida);
+    appendRawRow(outputFile, row);
+    added.push(row);
+    log(row);
   }
-  return lisatud;
+  return added;
 }
 
-// Normaliseerimise kontroll: kui pakkuja annab kogusumma, peab input + output sellega klappima.
-export function usageKlapib(rida) {
-  const kokku = rida.usageRaw?.total_tokens ?? rida.usageRaw?.totalTokenCount;
-  if (typeof kokku !== 'number' || rida.usage?.input == null || rida.usage?.output == null) return null;
-  return rida.usage.input + rida.usage.output === kokku;
+// Normalization check: if the provider reports a total, input + output must match it.
+export function usageTotalMatches(row) {
+  const total = row.usageRaw?.total_tokens ?? row.usageRaw?.totalTokenCount;
+  if (typeof total !== 'number' || row.usage?.input == null || row.usage?.output == null) return null;
+  return row.usage.input + row.usage.output === total;
 }
 
-function reaKokkuvote(r) {
-  if (r.status === 'error') return `${r.key}  VIGA ${r.error.httpStatus ?? '-'}: ${r.error.message}`;
+function summarizeRow(r) {
+  if (r.status === 'error') return `${r.key}  ERROR ${r.error.httpStatus ?? '-'}: ${r.error.message}`;
   const u = r.usage;
-  const klapib = usageKlapib(r);
+  const matches = usageTotalMatches(r);
   return [
     r.key,
-    `mudel=${r.modelVersion}`,
+    `model=${r.modelVersion}`,
     `finish=${r.finishReason}`,
     `ttft=${r.ttftMs === null ? '-' : r.ttftMs.toFixed(0)}ms`,
-    `kokku=${r.totalMs.toFixed(0)}ms`,
-    `tokenid in=${u.input} cache=${u.cachedInput} out=${u.output} mõtlemine=${u.reasoning}`,
-    klapib === null ? '' : `summa ${klapib ? 'klapib' : 'EI KLAPI'}`,
-    `tekst=${JSON.stringify(r.text.length > 60 ? r.text.slice(0, 60) + '…' : r.text)}`,
+    `total=${r.totalMs.toFixed(0)}ms`,
+    `tokens in=${u.input} cached=${u.cachedInput} out=${u.output} reasoning=${u.reasoning}`,
+    matches === null ? '' : `sum ${matches ? 'matches' : 'DOES NOT MATCH'}`,
+    `text=${JSON.stringify(r.text.length > 60 ? r.text.slice(0, 60) + '…' : r.text)}`,
   ].filter(Boolean).join('  ');
 }
 
 async function main() {
   const i = process.argv.indexOf('--config');
   if (i === -1 || !process.argv[i + 1]) {
-    console.error('Kasutus: node src/runner/run.js --config config/run.<nimi>.json');
+    console.error('Usage: node src/runner/run.js --config config/run.<name>.json');
     process.exit(2);
   }
-  // Võtmed loetakse ainult .env failist, mitte süsteemi keskkonnast: nii ei saa juhuslikult
-  // kasutada mõnda muud (nt isiklikku) võtit ja hinnaarvutuse kontroll klapib [PK9].
-  const votmed = {};
-  laeEnv({ path: fileURLToPath(new URL('.env', JUUR)), quiet: true, processEnv: votmed });
+  // Keys are read only from .env, not from the system environment, so that no other
+  // (e.g. personal) key can be used by accident and the billing check adds up [PK9].
+  const keys = {};
+  loadEnv({ path: fileURLToPath(new URL('.env', ROOT)), quiet: true, processEnv: keys });
 
-  const jooks = JSON.parse(fs.readFileSync(process.argv[i + 1], 'utf8'));
-  const mudeliSeadistus = loeJson(new URL('config/models.json', JUUR));
-  const pank = laePank();
-  const plaan = koostaPlaan(jooks, mudeliSeadistus, pank);
-  const adapterid = new Map(
-    plaan.mudelid.map((m) => [m.id, looAdapter(m, { env: votmed, maxValjund: mudeliSeadistus.maxOutputTokens })]),
+  const run = JSON.parse(fs.readFileSync(process.argv[i + 1], 'utf8'));
+  const modelConfig = readJson(new URL('config/models.json', ROOT));
+  const bank = loadTaskBank();
+  const plan = buildPlan(run, modelConfig, bank);
+  const adapters = new Map(
+    plan.models.map((m) => [m.id, createAdapter(m, { env: keys, maxOutputTokens: modelConfig.maxOutputTokens })]),
   );
-  const valjundFail = fileURLToPath(new URL(`results/raw/${jooks.runId}.jsonl`, JUUR));
+  const outputFile = fileURLToPath(new URL(`results/raw/${run.runId}.jsonl`, ROOT));
 
-  console.log(`${jooks.runId}: ${plaan.paringud.length} päringut plaanis → ${valjundFail}`);
-  const lisatud = await kaivita({ jooks, plaan, pank, valjundFail, adapterid, logi: (r) => console.log(reaKokkuvote(r)) });
-  const vigu = lisatud.filter((r) => r.status === 'error').length;
-  console.log(`Valmis: ${lisatud.length} uut rida, neist vigu ${vigu}. Vahele jäeti ${plaan.paringud.length - lisatud.length} juba olemasolevat.`);
+  console.log(`${run.runId}: ${plan.requests.length} requests planned → ${outputFile}`);
+  const added = await executePlan({ run, plan, bank, outputFile, adapters, log: (r) => console.log(summarizeRow(r)) });
+  const errors = added.filter((r) => r.status === 'error').length;
+  console.log(`Done: ${added.length} new rows, ${errors} errors. Skipped ${plan.requests.length - added.length} existing.`);
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === fs.realpathSync(process.argv[1])) {

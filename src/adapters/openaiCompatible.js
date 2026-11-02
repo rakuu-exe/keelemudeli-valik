@@ -1,78 +1,76 @@
-// OpenAI-ühilduv Chat Completions API: OpenAI, xAI ja DeepSeek (erinev baseURL).
+// OpenAI-compatible Chat Completions API: OpenAI, xAI and DeepSeek (different baseURL).
 //
-// Saadetakse ainult: model, üks kasutajasõnum, maksimaalne väljundpikkus ja striimimise valikud.
-// Max väljundi parameetri nimi tuleb seadistusest (maxTokensParam): OpenAI ja xAI
-// max_completion_tokens (max_tokens on neil aegunud), DeepSeek max_tokens.
-// stream_options.include_usage on mittegenereeriv valik: ilma selleta ei tule striimis tokenite arve.
+// Only these are sent: model, one user message, the maximum output length and the streaming options.
+// The name of the max output parameter comes from the config (maxTokensParam): OpenAI and xAI use
+// max_completion_tokens (max_tokens is deprecated there), DeepSeek uses max_tokens.
+// stream_options.include_usage is a non-generative option: without it the stream carries no token counts.
 import OpenAI from 'openai';
-import { apiVoti, kell as vaikeKell, taisarv, teisendaViga } from './yhine.js';
+import { EMPTY_USAGE, clock as defaultClock, getApiKey, intOrNull, toApiError } from './common.js';
 
-const onApiViga = (e) => e instanceof OpenAI.APIError;
+const isSdkError = (e) => e instanceof OpenAI.APIError;
 
-export function looOpenaiCompatible(mudel, { env = {}, maxValjund, fetch, kell = vaikeKell } = {}) {
-  if (!mudel.baseURL) throw new Error(`${mudel.id}: baseURL puudub`);
-  if (!mudel.maxTokensParam) throw new Error(`${mudel.id}: maxTokensParam puudub`);
-  const klient = new OpenAI({
-    apiKey: apiVoti(mudel, env),
-    baseURL: mudel.baseURL, // alati seadistusest, et keskkonnamuutuja OPENAI_BASE_URL seda ei muudaks
+export function createOpenAICompatible(model, { env = {}, maxOutputTokens, fetch, clock = defaultClock } = {}) {
+  if (!model.baseURL) throw new Error(`${model.id}: baseURL is missing`);
+  if (!model.maxTokensParam) throw new Error(`${model.id}: maxTokensParam is missing`);
+  const client = new OpenAI({
+    apiKey: getApiKey(model, env),
+    baseURL: model.baseURL, // always from the config, so that OPENAI_BASE_URL cannot change it
     organization: null,
     project: null,
-    maxRetries: 0, // korduskatsed teeb konveier (faas 2), mitte SDK
+    maxRetries: 0, // retries are done by the pipeline (phase 2), not by the SDK
     fetch,
   });
 
-  return async function saada(sonum) {
-    const paring = {
-      model: mudel.model,
-      messages: [{ role: 'user', content: sonum }],
-      [mudel.maxTokensParam]: maxValjund,
+  return async function send(message) {
+    const request = {
+      model: model.model,
+      messages: [{ role: 'user', content: message }],
+      [model.maxTokensParam]: maxOutputTokens,
       stream: true,
       stream_options: { include_usage: true },
     };
-    let tekst = '';
+    let text = '';
     let ttftMs = null;
     let finishReason = null;
     let modelVersion = null;
     let usageRaw = null;
-    const algus = kell();
+    const start = clock();
     try {
-      const striim = await klient.chat.completions.create(paring);
-      for await (const tykk of striim) {
-        if (tykk.model) modelVersion = tykk.model;
-        if (tykk.usage) usageRaw = tykk.usage;
-        const valik = tykk.choices?.[0];
-        if (!valik) continue;
-        const osa = valik.delta?.content;
-        if (typeof osa === 'string' && osa.length > 0) {
-          if (ttftMs === null) ttftMs = kell() - algus;
-          tekst += osa;
+      const stream = await client.chat.completions.create(request);
+      for await (const chunk of stream) {
+        if (chunk.model) modelVersion = chunk.model;
+        if (chunk.usage) usageRaw = chunk.usage;
+        const choice = chunk.choices?.[0];
+        if (!choice) continue;
+        const piece = choice.delta?.content;
+        if (typeof piece === 'string' && piece.length > 0) {
+          if (ttftMs === null) ttftMs = clock() - start;
+          text += piece;
         }
-        if (valik.finish_reason) finishReason = valik.finish_reason;
+        if (choice.finish_reason) finishReason = choice.finish_reason;
       }
     } catch (e) {
-      throw teisendaViga(e, onApiViga);
+      throw toApiError(e, isSdkError);
     }
-    const totalMs = kell() - algus;
-    // Kui pakkuja usage't ei saatnud, jääb see null-iks: vastus on olemas, kulu arvutus märkab puudumist.
-    const usage = usageRaw ? normaliseeriUsage(usageRaw, mudel) : TYHI_USAGE;
-    return { text: tekst, modelVersion, finishReason, usage, usageRaw, ttftMs, totalMs };
+    const totalMs = clock() - start;
+    // If the provider sent no usage, it stays null: the answer is kept and the cost step notices the gap.
+    const usage = usageRaw ? normalizeUsage(usageRaw, model) : EMPTY_USAGE;
+    return { text, modelVersion, finishReason, usage, usageRaw, ttftMs, totalMs };
   };
 }
 
-const TYHI_USAGE = Object.freeze({ input: null, cachedInput: null, output: null, reasoning: null });
-
-// prompt_tokens sisaldab vahemälust loetud osa. DeepSeek tagastab sama arvu ka väljal
-// prompt_cache_hit_tokens. completion_tokens sisaldab OpenAI-l ja DeepSeekil mõtlemistokeneid;
-// xAI dokumentatsiooni näite järgi mitte (prompt + completion + reasoning = total).
-// Seda määrab seadistuse väli completionIncludesReasoning.
-export function normaliseeriUsage(u, mudel) {
-  const reasoning = taisarv(u.completion_tokens_details?.reasoning_tokens);
-  const cachedInput = taisarv(u.prompt_tokens_details?.cached_tokens) ?? taisarv(u.prompt_cache_hit_tokens);
-  const lisa = mudel.completionIncludesReasoning === false ? (reasoning ?? 0) : 0;
+// prompt_tokens includes the part read from cache. DeepSeek also reports the same number in
+// prompt_cache_hit_tokens. completion_tokens includes reasoning tokens for OpenAI and DeepSeek;
+// according to the example in the xAI docs it does not (prompt + completion + reasoning = total).
+// This is set by the config field completionIncludesReasoning.
+export function normalizeUsage(u, model) {
+  const reasoning = intOrNull(u.completion_tokens_details?.reasoning_tokens);
+  const cachedInput = intOrNull(u.prompt_tokens_details?.cached_tokens) ?? intOrNull(u.prompt_cache_hit_tokens);
+  const extra = model.completionIncludesReasoning === false ? (reasoning ?? 0) : 0;
   return {
-    input: taisarv(u.prompt_tokens),
+    input: intOrNull(u.prompt_tokens),
     cachedInput,
-    output: taisarv(u.completion_tokens) === null ? null : u.completion_tokens + lisa,
+    output: intOrNull(u.completion_tokens) === null ? null : u.completion_tokens + extra,
     reasoning,
   };
 }
