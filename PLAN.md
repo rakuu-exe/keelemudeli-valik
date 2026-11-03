@@ -69,7 +69,7 @@ Work plan for building the software part of the thesis. It is based on the signe
 
 Every answer gets **format** (0/1) and **correctness** (0…1). Raw rows with errors are skipped.
 
-- [ ] **K1:** format = the answer is (ignoring whitespace, case-insensitively) one of the allowed answers; correctness = after the task bank normalization it matches the reference.
+- [ ] **K1:** format = the answer is (ignoring whitespace, case-insensitively, and ignoring one final period: author's decision 3.11.2026) one of the allowed answers; correctness = after the task bank normalization it matches the reference.
 - [ ] **K2** [M2a, M2b]:
   - format = the answer parses as JSON **without changes** and matches the schema (code fence markers ``` → format 0);
   - correctness is computed after removing the code fence markers; if the JSON still does not parse → 0;

@@ -117,7 +117,7 @@ tools/
 results/
   raw/               raw rows
   dry-run/           rows of --dry-run (fake adapter; ignored by git)
-  scored/            scores
+  scored/            score rows, manual_check.md for the manual check
   judge/             input/, key.csv, scores.jsonl
   cost/              cost
   human/             sample, key, rater scores
@@ -174,7 +174,20 @@ On start, the existing keys are read and skipped (an error row also counts as st
 
 ### Score row (`results/scored/<runId>.jsonl`)
 
-`key`, `taskId`, `modelId`, `repeat`, `category`, `scoringMethod` (`rules` or `judge`), `format` (0/1), `correctness` (0…1).
+`key`, `taskId`, `modelId`, `repeat`, `category`, `scoringMethod` (`rules` or `judge`), `format` (0/1), `correctness` (0…1), `nullViolations`.
+
+- `correctness` is `null` for the 8 judge tasks until phase 3b joins the judge median.
+- `nullViolations` (author's decision 3.11.2026, from the task bank's json_fields definition): K2 only, the number of `expected_null` fields that got a value; `null` for K1 and K3, and for a K2 answer from which no JSON object could be read.
+- Error rows get no score row. The file is derived: `node src/checkers/score.js --run <runId>` writes it again from the raw rows.
+
+### Scoring rules (phase 3) [M2, M3]
+
+- **K1:** format = the answer, ignoring leading and trailing whitespace, case and one final period, is one of the allowed answers ("Tallinnas." → format 1, author's decision 3.11.2026; "Tallinnas?" or "Vastus: Tallinnas" → format 0); correctness = after the task's normalization steps it is one of the allowed answers.
+- **K2:** format = `JSON.parse` of the unchanged answer succeeds and the JSON schema passes (code fence markers → format 0). Correctness is computed after removing code fence markers; no JSON object → 0. Text: whitespace normalized, case-insensitive; numbers: a JSON number with the same value (`"2"` is not `2`); `null` must be `null`; lists: the same elements in any order; objects: the same keys, every value correct. Correctness = share of correct top-level fields.
+- **K3:** format = all length and structure rules pass (`max_words`, `min_words`, `sentence_count`, `max_line_breaks`); correctness = share of content rules passed (`contains`, `not_contains`, `regex_present`, `regex_absent`, `language`).
+- **K3 judge tasks:** format = the length and structure rules of `extra_rules` only; the language rule there is not used, and K3-026 (no length rule) gets format 1 (author's decision 3.11.2026). Correctness comes from the judge.
+- **Empty answer** (only whitespace) in K3: format 0, correctness 0 (judge tasks: format 0), because "at most N words" and "in Estonian" would hold for an empty text (author's decision 3.11.2026). It is still a normal answer, not an error. In K1 and K2 an empty answer gets 0 and 0 by the normal rules.
+- **Manual check** (PLAN.md phase 3, done on the pilot run data, author's decision 3.11.2026): `node src/checkers/sample.js --run pilot` writes `results/scored/pilot.manual_check.md` with 20 rule scores drawn with a fixed seed, in turn from each category.
 
 ### Judge (`results/judge/`)
 
