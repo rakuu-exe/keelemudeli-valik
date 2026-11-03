@@ -8,35 +8,17 @@
 // with a fixed seed, in turn from each category, so that all three scoring methods are checked.
 // The scores are computed again from the raw rows, with the same code as score.js.
 import fs from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadTaskBank } from '../taskBank.js';
 import { readRawRows } from '../runner/rawRows.js';
-import { createScorer, parseRunArgument, rawFileFor, ROOT } from './score.js';
+import { mulberry32, shuffle } from '../random.js';
+import { manualCheckFile, rawFile } from '../paths.js';
+import { createScorer, parseRunArgument } from './score.js';
 import { expectedAnswer } from './k2.js';
 import { FORMAT_RULES } from './k3.js';
 
 export const SEED = 20261103;
-
-// Small seeded PRNG (mulberry32): the same seed always gives the same sample.
-function mulberry32(seed) {
-  let a = seed >>> 0;
-  return () => {
-    a = (a + 0x6d2b79f5) >>> 0;
-    let t = a;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-function shuffle(items, random) {
-  const a = [...items];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
 
 // items: [{ category, ... }]. Shuffles each category, then takes one from each category in turn.
 export function drawSample(items, n, seed = SEED) {
@@ -142,14 +124,14 @@ function main() {
   }
   const bank = loadTaskBank();
   const scoreAnswer = createScorer(bank);
-  const items = readRawRows(rawFileFor(args.run))
+  const items = readRawRows(rawFile(args.run))
     .filter((raw) => raw.status === 'ok')
     .map((raw) => ({ raw, scored: scoreAnswer(raw.taskId, raw.text) }))
     .filter((x) => x.scored.scoringMethod === 'rules')
     .map((x) => ({ ...x, category: x.scored.task.category }));
   const sample = drawSample(items, Number(args.n));
-  const file = fileURLToPath(new URL(`results/scored/${args.run}.manual_check.md`, ROOT));
-  fs.mkdirSync(new URL('results/scored/', ROOT), { recursive: true });
+  const file = manualCheckFile(args.run);
+  fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, renderManualCheck(args.run, sample, items.length), 'utf8');
   console.log(`${sample.length} scores for the manual check → ${file}`);
 }

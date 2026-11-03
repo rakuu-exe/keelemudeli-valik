@@ -1,6 +1,6 @@
 # Task bank v1.2 → v1.3: change log
 
-**Dates:** 1.11.2026 (content changes, items 1.1–1.10), 2.11.2026 (English structure, item 1.11)
+**Dates:** 1.11.2026 (content changes, items 1.1–1.10), 2.11.2026 (English structure, item 1.11), 3.11.2026 (judge output keys, item 1.12)
 **Files:** `task_bank_v1_2.json` (original, unchanged) → `task_bank_v1_3.json`
 **Check:** `npm run check` (all tests pass)
 
@@ -111,6 +111,12 @@ Field names below are the v1.3 (English) names. The mapping to the v1.2 names is
   | rule `{r, v, lipud, terve_sona}` | `{rule, value, flags, whole_word}` |
   | rules `max_sonu`, `min_sonu`, `sisaldab`, `ei_sisalda`, `keel`, `regex_olemas`, `regex_puudub`, `lausete_arv`, `reavahetusi_max` | `max_words`, `min_words`, `contains`, `not_contains`, `language`, `regex_present`, `regex_absent`, `sentence_count`, `max_line_breaks` |
   | normalizations `trim`, `vaiketahed`, `eemalda_lopupunkt`, `eemalda_koodiplokk`, `eemalda_eessona`, `kuupaev_iso`, `arv_punkt` | `trim`, `lowercase`, `strip_final_punctuation`, `strip_code_fence`, `strip_preamble`, `date_iso`, `decimal_point` |
+
+### 1.12 Judge output keys in English (author's decision 3.11.2026)
+
+- **What:** in `judge_instructions.output_format` the keys of the judge's JSON answer were renamed `skoor` → `score` and `põhjendus` → `justification`, the same names as in `results/judge/scores.jsonl` and in the JSON schema given to the judge. The rest of the Estonian text did not change.
+- **Why:** one set of field names from the judge's answer to the stored score row.
+- **Unchanged:** the 0/1/2 scale, the justification of up to 30 words, the principle and the system rules.
 
 ---
 

@@ -133,7 +133,7 @@
       2
     ],
     "principle": "Hinda ainult ülesande rubriigis kirjeldatud omadusi ja lähtetekstiga kooskõla. Ära lisa oma üldist stiili- või kvaliteedieelistust.",
-    "output_format": "Kohtunik tagastab ainult JSON-objekti kujul {\"skoor\": 0|1|2, \"põhjendus\": \"kuni 30 sõna\"}. Põhjendust kasutatakse inim- ja kohtunikuhinnangu lahknemiste analüüsiks.",
+    "output_format": "Kohtunik tagastab ainult JSON-objekti kujul {\"score\": 0|1|2, \"justification\": \"kuni 30 sõna\"}. Põhjendust (justification) kasutatakse inim- ja kohtunikuhinnangu lahknemiste analüüsiks.",
     "repeatability": "Run the same scoring prompt three separate times and take the median of the three valid scores.",
     "validation": "If the response is not valid JSON or the score is not the integer 0, 1 or 2, the attempt is invalid and is repeated. If three consecutive attempts are invalid, the score is marked missing and the case is reported separately.",
     "system_rules": [

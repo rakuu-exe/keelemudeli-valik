@@ -1,26 +1,26 @@
-// Rule-based scoring (PLAN.md phase 3): every raw row with status ok gets one score row.
+// Scoring (PLAN.md phases 3 and 3b): every raw row with status ok gets one score row.
 //
-//   node src/checkers/score.js --run <runId>
-//     reads  results/raw/<runId>.jsonl
+//   node src/checkers/score.js --run <runId> [--dry-run]
+//     reads  results/raw/<runId>.jsonl and the judge set results/judge/
 //     writes results/scored/<runId>.jsonl
+//     (--dry-run: the same under results/dry-run/)
 //
 // Error rows are not scored (principle 8). The score file is derived data: it is written again from
-// the raw rows on every run (measure once, compute many times). The 8 judge tasks get their format
-// here and correctness null; the judge's correctness is joined in phase 3b.
+// the raw rows and the judge scores on every run (measure once, compute many times). The 8 judge
+// tasks get their format from the rules and their correctness from the judge: the median of the
+// three scores, 0 → 0, 1 → 0.5, 2 → 1 (null while the answer has no judge scores yet).
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { loadTaskBank } from '../taskBank.js';
 import { readRawRows } from '../runner/rawRows.js';
+import { judgeDir, rawFile, scoredFile } from '../paths.js';
+import { judgeCorrectnessByKey } from '../judge/common.js';
 import { createSchemaValidators } from './schemas.js';
 import { scoreK1 } from './k1.js';
 import { scoreK2 } from './k2.js';
 import { scoreK3 } from './k3.js';
-
-export const ROOT = new URL('../../', import.meta.url);
-export const rawFileFor = (runId) => fileURLToPath(new URL(`results/raw/${runId}.jsonl`, ROOT));
-export const scoredFileFor = (runId) => fileURLToPath(new URL(`results/scored/${runId}.jsonl`, ROOT));
 
 // Returns scoreAnswer(taskId, text) →
 //   { task, scoringMethod, format, correctness, nullViolations, details }
@@ -56,19 +56,31 @@ export function buildScoreRow(raw, scored) {
   };
 }
 
-// Returns { rows, skippedErrors }: one score row per ok raw row, in the order of the raw rows.
-export function scoreRawRows(rawRows, scoreAnswer) {
+// judged: raw row key → { correctness, validScores } from the judge set (judgeCorrectnessByKey).
+// Returns { rows, skippedErrors, judgeMissing, judgeIncomplete }: one score row per ok raw row, in the
+// order of the raw rows; judgeMissing = judge-task rows without any judge score yet,
+// judgeIncomplete = judge-task rows with fewer than 3 valid scores.
+export function scoreRawRows(rawRows, scoreAnswer, judged = new Map()) {
   const rows = [];
   let skippedErrors = 0;
+  let judgeMissing = 0;
+  let judgeIncomplete = 0;
   for (const raw of rawRows) {
     if (raw.status === 'error') {
       skippedErrors++;
       continue;
     }
     if (raw.status !== 'ok') throw new Error(`${raw.key}: unknown status "${raw.status}"`);
-    rows.push(buildScoreRow(raw, scoreAnswer(raw.taskId, raw.text)));
+    const scored = scoreAnswer(raw.taskId, raw.text);
+    if (scored.scoringMethod === 'judge') {
+      const j = judged.get(raw.key);
+      scored.correctness = j?.correctness ?? null;
+      if (scored.correctness === null) judgeMissing++;
+      else if (j.validScores < 3) judgeIncomplete++;
+    }
+    rows.push(buildScoreRow(raw, scored));
   }
-  return { rows, skippedErrors };
+  return { rows, skippedErrors, judgeMissing, judgeIncomplete };
 }
 
 export function writeJsonl(file, rows) {
@@ -88,14 +100,14 @@ function summarize(rows) {
     if (!byModel.has(r.modelId)) byModel.set(r.modelId, []);
     byModel.get(r.modelId).push(r);
   }
-  const lines = ['model        rows  format  correctness(rules)  nullViolations'];
+  const lines = ['model        rows  format  correctness  nullViolations'];
   for (const [modelId, rs] of byModel) {
     const correctness = rs.filter((r) => r.correctness !== null).map((r) => r.correctness);
     const counted = rs.filter((r) => r.nullViolations !== null);
     const violations = counted.length ? String(counted.reduce((a, r) => a + r.nullViolations, 0)) : '-';
     lines.push([
       modelId.padEnd(12), String(rs.length).padStart(4), fmt(mean(rs.map((r) => r.format))).padStart(7),
-      fmt(mean(correctness)).padStart(19), violations.padStart(15),
+      fmt(mean(correctness)).padStart(12), violations.padStart(15),
     ].join(' '));
   }
   return lines.join('\n');
@@ -110,18 +122,22 @@ export function parseRunArgument(argv, extraOptions = {}) {
 function main() {
   let args;
   try {
-    args = parseRunArgument(process.argv.slice(2));
+    args = parseRunArgument(process.argv.slice(2), { 'dry-run': { type: 'boolean', default: false } });
   } catch (e) {
     console.error(e.message);
     process.exit(2);
   }
-  const rawFile = rawFileFor(args.run);
-  if (!fs.existsSync(rawFile)) throw new Error(`No raw rows: ${rawFile}`);
+  const options = { dryRun: args['dry-run'] };
+  const input = rawFile(args.run, options);
+  if (!fs.existsSync(input)) throw new Error(`No raw rows: ${input}`);
   const bank = loadTaskBank();
-  const { rows, skippedErrors } = scoreRawRows(readRawRows(rawFile), createScorer(bank));
-  const outputFile = scoredFileFor(args.run);
-  writeJsonl(outputFile, rows);
-  console.log(`${args.run}: ${rows.length} score rows → ${outputFile} (${skippedErrors} error rows skipped)`);
+  const judged = judgeCorrectnessByKey(judgeDir(options));
+  const { rows, skippedErrors, judgeMissing, judgeIncomplete } = scoreRawRows(readRawRows(input), createScorer(bank), judged);
+  const output = scoredFile(args.run, options);
+  writeJsonl(output, rows);
+  console.log(`${args.run}: ${rows.length} score rows → ${output} (${skippedErrors} error rows skipped)`);
+  if (judgeMissing) console.log(`${judgeMissing} judge-task answers have no judge score yet (correctness null)`);
+  if (judgeIncomplete) console.log(`${judgeIncomplete} judge-task answers have fewer than 3 valid judge scores`);
   console.log(summarize(rows));
 }
 

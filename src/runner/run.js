@@ -4,7 +4,7 @@
 //   node src/runner/run.js --config config/run.pilot.json [--dry-run] [--limit N]
 //
 //   --dry-run  every model uses the fake adapter: no API requests and no keys; the rows go to
-//              results/dry-run/<runId>.jsonl, never into results/raw
+//              results/dry-run/raw/<runId>.jsonl, never into results/raw
 //   --limit N  make at most N new requests in this run (rows already stored are not counted)
 //
 // Order: the outer loop is the repeat, the inner loop is tasks × models [M7].
@@ -21,6 +21,7 @@ import { createAdapter } from '../adapters/index.js';
 import { loadTaskBank, buildUserMessage } from '../taskBank.js';
 import { buildRawRow, appendRawRow, existingKeys, rawRowKey } from './rawRows.js';
 import { RETRY_WAITS_MS, sendWithRetry } from './retry.js';
+import { rawFile } from '../paths.js';
 
 export const ROOT = new URL('../../', import.meta.url);
 export const MAX_CONSECUTIVE_ERRORS = 5;
@@ -160,8 +161,7 @@ export function parseCommandLine(argv) {
   };
 }
 
-export const outputFileFor = (runId, { dryRun }) =>
-  fileURLToPath(new URL(`results/${dryRun ? 'dry-run' : 'raw'}/${runId}.jsonl`, ROOT));
+export const outputFileFor = (runId, { dryRun }) => rawFile(runId, { dryRun });
 
 async function main() {
   let args;

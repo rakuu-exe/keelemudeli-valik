@@ -359,12 +359,13 @@ describe('command line', () => {
     assert.throws(() => parseCommandLine(['--config', 'c.json', '--unknown']));
   });
 
-  test('a dry run never writes into results/raw', () => {
+  test('a dry run never writes into results/raw (it uses results/dry-run/raw)', () => {
     const raw = outputFileFor('pilot', { dryRun: false });
     const dry = outputFileFor('pilot', { dryRun: true });
-    assert.equal(path.basename(path.dirname(raw)), 'raw');
-    assert.equal(path.basename(path.dirname(dry)), 'dry-run');
-    assert.equal(path.dirname(path.dirname(dry)), path.dirname(path.dirname(raw)));
+    const results = path.dirname(path.dirname(raw));
+    assert.equal(path.basename(results), 'results');
+    assert.equal(raw, path.join(results, 'raw', 'pilot.jsonl'));
+    assert.equal(dry, path.join(results, 'dry-run', 'raw', 'pilot.jsonl'));
   });
 
   test('results/dry-run is ignored by git', () => {

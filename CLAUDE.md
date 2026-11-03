@@ -67,7 +67,12 @@ The thesis uses Estonian terms; code and docs use the English ones. Keep the map
 - The judge **never sees the model name**: it gets an anonymous file with only the source text, the instruction, the rubric and the answer. The key is kept separately.
 - Each file is a **separate call**, 3 times, median. Never score several answers in one session.
 - `ANTHROPIC_API_KEY` is removed from the child process environment; otherwise Claude Code bills through the API and mixes into the Sonnet cost.
-- Exact flags: `PLAN.md` phase 3b.
+- Exact flags: `PLAN.md` phase 3b (`src/judge/claude.js`). Checked 3.11.2026 with a real call: the judge has only the `StructuredOutput` tool of `--json-schema`, no MCP servers, and the answer comes from `claude-opus-5-5`.
+- An answer from any other model (e.g. an automatic fallback) is an invalid answer, so a score never comes from a compared model.
+- Commands: `node src/judge/prepare.js --run <runId>` (anonymous files), `node src/judge/run.js` (scores), then `node src/checkers/score.js --run <runId>` joins the median. `--dry-run` uses a fake judge under `results/dry-run/judge/`. `--check` uses the check set `results/judge-check/` (one file from the K3-026 sample answer, scored 2, 2, 2 by the real judge on 3.11.2026).
+- Invalid answer (not JSON, no structured output, score not 0/1/2, another model) → a new attempt; 3 invalid in a row → `score: null`. Subscription usage limit → wait until the reset time in the message (15 min if it cannot be read). Other failures of the call → retries after 10/30/60 s, then the run stops without storing that score.
+- Correctness = median of the valid scores / 2 (0 → 0, 1 → 0.5, 2 → 1); with no valid score, `null`.
+- Author's decisions 3.11.2026: the handling of answers from other models, of call failures and of missing scores above; the `invalidAttempts` field; removing `ANTHROPIC_AUTH_TOKEN` too; the check set.
 
 ## Technology
 
@@ -108,17 +113,19 @@ src/
   adapters/          openaiCompatible.js, anthropic.js, google.js, fake.js
   runner/            measurement pipeline
   checkers/          rule-based scoring
-  judge/             prepare.js, run.js
+  judge/             prepare.js, run.js, claude.js (the call), common.js
   cost/              cost calculation
+  paths.js, random.js, csv.js   result paths, seeded randomness, CSV
 test/
 analysis/            Python analysis, run_all.py
 tools/
   apps_script/       creating the Google Form from the sample
 results/
   raw/               raw rows
-  dry-run/           rows of --dry-run (fake adapter; ignored by git)
+  dry-run/           raw/, scored/, judge/ of --dry-run (fake adapter, fake judge; ignored by git)
   scored/            score rows, manual_check.md for the manual check
   judge/             input/, key.csv, scores.jsonl
+  judge-check/       the judge check set (one sample answer, real judge)
   cost/              cost
   human/             sample, key, rater scores
   figures/           tables and figures
@@ -166,7 +173,7 @@ On start, the existing keys are read and skipped (an error row also counts as st
 
 - `node src/runner/run.js --config config/run.<name>.json [--dry-run] [--limit N]`.
 - The runIds `pilot`, `main` and `luna` have no date: the main run and Luna run after the tag `main-run`, when the configuration can no longer be changed, so a planned date in the runId could not be corrected (the pilot follows the same pattern). The date of every request is in `tsStartUtc` (author's decision 3.11.2026).
-- `--dry-run`: the fake adapter for every model, no API requests, no keys; rows go to `results/dry-run/<runId>.jsonl` (ignored by git), never into `results/raw`.
+- `--dry-run`: the fake adapter for every model, no API requests, no keys; rows go to `results/dry-run/raw/<runId>.jsonl` (ignored by git), never into `results/raw`. The scoring and the judge have a `--dry-run` too and use the same layout under `results/dry-run/`.
 - `--limit N`: at most N new requests in this run; rows already stored are not counted.
 - Temporary errors (429, 5xx, timeout, dropped connection) [PK1]: up to 3 retries after 10 s, 30 s and 60 s; the timeout is 10 minutes per attempt, including reading the stream (author's decision 3.11.2026). Other API errors end the request at once.
 - The run stops after 5 error rows in a row, overall or for one model (author's decision 3.11.2026). Fix the cause and run the same command again.
@@ -193,7 +200,10 @@ On start, the existing keys are read and skipped (an error row also counts as st
 
 - `input/H####.json`: `{ "id", "sourceText", "instruction", "rubric", "answer" }`. No model name or key.
 - `key.csv`: `id` → raw row `key`. The judge never sees it.
-- `scores.jsonl`: `{ "id", "repeat" (1–3), "score" (0/1/2 or null), "justification", "model", "claudeCodeVersion", "ts" }`.
+- `scores.jsonl`: `{ "id", "repeat" (1–3), "score" (0/1/2 or null), "justification", "model", "claudeCodeVersion", "ts", "invalidAttempts" }`. Rows are only appended.
+  - `model`: the model(s) in the answer's `modelUsage`; `claudeCodeVersion`: the output of `claude --version`.
+  - `invalidAttempts`: the invalid answers before this score, `[{ "reason", "model" }]`; three of them make `score` null.
+- One judge set for all runs: IDs are unique across runs, and the key names the run. The judge's answer keys are `score` and `justification` (author's decision 3.11.2026; task bank item 1.12).
 
 ### Cost row (`results/cost/<runId>.jsonl`)
 
