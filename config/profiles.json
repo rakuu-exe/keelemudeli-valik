@@ -1,0 +1,20 @@
+{
+  "description": "Usage profiles (E3, PK6): the criterion weights of the weighted sum model; the weights of a profile sum to 1. Annual cost (PK7) = mean costCriterion per task × dailyVolume × daysPerYear, the same volume for both profiles (an assumption; cost is linear in the volume). Fixed before the main run.",
+  "criteria": ["correctness", "format", "stability", "cost", "latency"],
+  "dailyVolume": 10000,
+  "daysPerYear": 365,
+  "profiles": {
+    "A": {
+      "name": "quality first",
+      "nameEt": "kvaliteet ennekõike",
+      "example": "e.g. extracting data from contracts, where an error is costly",
+      "weights": { "correctness": 0.40, "format": 0.25, "stability": 0.15, "cost": 0.10, "latency": 0.10 }
+    },
+    "B": {
+      "name": "cost first",
+      "nameEt": "kulu ennekõike",
+      "example": "e.g. high-volume background processing, classifying documents",
+      "weights": { "correctness": 0.25, "format": 0.10, "stability": 0.10, "cost": 0.40, "latency": 0.15 }
+    }
+  }
+}
