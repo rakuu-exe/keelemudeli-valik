@@ -1,0 +1,7 @@
+{
+  "id": "H3057",
+  "sourceText": "Uus raamatukogu avati Tartus möödunud reedel. Hoone maksumus oli 8,5 miljonit eurot ja ehitus kestis kaks aastat. Avapäeval külastas hoonet üle kolme tuhande inimese.",
+  "instruction": "Võta tekst kokku kuni 30 sõnaga.",
+  "rubric": "0 = kokkuvõte sisaldab väiteid, mida lähtetekstis ei ole (nt arhitekt, rahastaja, hoone nimi). 1 = kõik väited on tekstist tuletatavad, kuid mõni detail on ebatäpne. 2 = kõik väited on lähtetekstiga kaetud.",
+  "answer": "Tartus avati uus raamatukogu, mis maksis 8,5 miljonit eurot ja mille avapäeval käis üle 3000 inimese."
+}

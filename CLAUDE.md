@@ -223,6 +223,13 @@ On start, the existing keys are read and skipped (an error row also counts as st
 - `key.csv`: `answerId` → `key`, scoring method. This file is not given to the raters.
 - `scores_rater1.csv`, `scores_rater2.csv`: `answerId`, `score` (0, 1 or 2), `comment`.
 
+### A run from start to end (pilot run, phase 5; the main run the same with `main`)
+
+1. `node src/runner/run.js --config config/run.pilot.json` (API requests; resumable)
+2. `node src/judge/prepare.js --run pilot`, then `node src/judge/run.js` (judge, Pro subscription)
+3. `node src/checkers/score.js --run pilot` (rules + judge median), `node src/cost/cost.js --run pilot`
+4. Review: `node src/report/pilot.js --run pilot` → `results/pilot/report_data.md` (errors, truncated answers, cost, time, suspicious tasks, judge status); `node src/checkers/sample.js --run pilot` → 20 rule scores; `node src/judge/review.js --run pilot` → 20 judge scores without model names (`results/pilot/judge_check.md`).
+
 ## Models
 
 | id | provider | model | adapter |
