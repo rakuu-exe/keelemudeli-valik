@@ -1,0 +1,11 @@
+profile,criterion,weight,winner,changes,ties,winner_holds_from,winner_holds_to
+A,correctness,0.4,deepseek,none,none,0,1
+A,format,0.25,deepseek,none,"1.00 (google,deepseek,xai)",0,1
+A,stability,0.15,deepseek,none,"1.00 (openai,anthropic,google,deepseek,xai)",0,1
+A,cost,0.1,deepseek,none,none,0,1
+A,latency,0.1,deepseek,0.45: deepseek -> openai,none,0,0.4
+B,correctness,0.25,deepseek,none,none,0,1
+B,format,0.1,deepseek,none,"1.00 (google,deepseek,xai)",0,1
+B,stability,0.1,deepseek,none,"1.00 (openai,anthropic,google,deepseek,xai)",0,1
+B,cost,0.4,deepseek,none,none,0,1
+B,latency,0.15,deepseek,0.40: deepseek -> openai,none,0,0.35

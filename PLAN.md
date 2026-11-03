@@ -143,7 +143,7 @@ All tables and figures with one command: `python analysis/run_all.py`.
 - [ ] **Annual cost** [PK7]: mean `costCriterion` × 10,000 × 365 per model; a table per profile with the difference from the chosen model; the difference between the choices of the two profiles. USD (one exchange rate to euros, stated as an assumption).
 - [ ] **Sensitivity analysis** [M10]: one weight at a time 0…1 in steps of 0.05, the others proportionally (sum 1); a table of the weights at which the winner changes (criterion × profile); 1–2 figures.
 - [ ] **Category comparison** [M11]: criteria and min-max within the category, the same weights; table 3 categories × 2 profiles.
-- [ ] Output `results/figures/wsm_check_input.csv` (criterion values and aggregate scores) for the manual check in `wsm_check.xlsx` [M12].
+- [ ] Output `results/figures/wsm_check_input.csv` (criterion values and aggregate scores) for the manual check in `analysis/wsm_check.xlsx` [M12].
 
 **Done when:** `run_all.py` creates all tables and figures from a clean state.
 
@@ -151,7 +151,7 @@ All tables and figures with one command: `python analysis/run_all.py`.
 
 **1. Correctness of calculations [M12]**
 - [ ] Unit tests with hand-calculated examples (min-max, WSM, stability, cost, annual cost).
-- [ ] The author checks the results of one profile in `wsm_check.xlsx` ("everything matches").
+- [ ] The author checks the results of one profile in `analysis/wsm_check.xlsx` ("everything matches").
 
 **2. Reproducibility [M13]**
 - [ ] `run_all.py` twice with the same data → the hashes of the output files are identical.

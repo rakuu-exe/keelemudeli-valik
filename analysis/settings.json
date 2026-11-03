@@ -1,0 +1,7 @@
+{
+  "description": "Analysis settings (PLAN.md phase 7). The exchange rate converts the annual cost from USD to EUR [PK7, M4]: one rate, stated in the thesis as an assumption; M4 asks for the ECB euro reference rate of the main run day, so replace it then. usdPerEur is the ECB form (1 EUR = usdPerEur USD); null = not set, then the EUR columns are empty.",
+  "usdPerEur": 1.1216,
+  "rateDate": "2026-11-03",
+  "rateSource": "the author's figure of 3.11.2026 (1 EUR = 1.1216 USD, 1 USD = 0.8916 EUR); to be replaced by the ECB reference rate of the main run day",
+  "sensitivityStep": 0.05
+}

@@ -1,0 +1,11 @@
+profile,model,score,rank,chosen,tie
+A,openai,0.9268530522,2,False,False
+A,anthropic,0.3199854451,5,False,False
+A,google,0.791745293,4,False,False
+A,deepseek,0.9890587278,1,True,False
+A,xai,0.8419077842,3,False,False
+B,openai,0.9404479233,2,False,False
+B,anthropic,0.544550737,4,False,False
+B,google,0.6044811719,3,False,False
+B,deepseek,0.9835880917,1,True,False
+B,xai,0.5177227874,5,False,False
