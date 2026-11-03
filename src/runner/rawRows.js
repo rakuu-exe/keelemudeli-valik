@@ -5,7 +5,8 @@ import path from 'node:path';
 export const rawRowKey = ({ runId, taskId, modelId, repeat }) => `${runId}|${taskId}|${modelId}|${repeat}`;
 
 // result = adapter result (status ok) or error = ApiError (status error).
-export function buildRawRow({ runId, taskId, model, repeat, tsStartUtc, result = null, error = null }) {
+// retries = earlier failed attempts of the same request: [{ tsStartUtc, httpStatus, message }].
+export function buildRawRow({ runId, taskId, model, repeat, tsStartUtc, retries = [], result = null, error = null }) {
   if ((result === null) === (error === null)) throw new Error('A raw row needs either a result or an error');
   const base = {
     key: rawRowKey({ runId, taskId, modelId: model.id, repeat }),
@@ -24,6 +25,7 @@ export function buildRawRow({ runId, taskId, model, repeat, tsStartUtc, result =
       totalMs: null,
       status: 'error',
       error: { httpStatus: error.status ?? null, message: error.message },
+      retries,
       finishReason: null,
       usage: null,
       usageRaw: null,
@@ -39,6 +41,7 @@ export function buildRawRow({ runId, taskId, model, repeat, tsStartUtc, result =
     totalMs: result.totalMs,
     status: 'ok',
     error: null,
+    retries,
     finishReason: result.finishReason,
     usage: result.usage,
     usageRaw: result.usageRaw,

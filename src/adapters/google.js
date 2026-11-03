@@ -7,6 +7,8 @@
 //  - automaticContinuation: false: otherwise, on finishReason CONTINUATION, the SDK may make
 //    further billable requests under the same raw row. One raw row = one API request.
 //  - retryOptions.attempts: 1: retries are done by the pipeline (phase 2), not by the SDK.
+//  - abortSignal (client side only): the pipeline aborts the request on timeout. The SDK itself has
+//    no timeout in Node.
 import { ApiError as GenAIApiError, GoogleGenAI } from '@google/genai';
 import { EMPTY_USAGE, clock as defaultClock, getApiKey, intOrNull, toApiError } from './common.js';
 
@@ -24,11 +26,13 @@ export function createGoogle(model, { env = {}, maxOutputTokens, fetch, clock = 
   if (fetch) httpOptions.fetch = fetch;
   const client = new GoogleGenAI({ apiKey: getApiKey(model, env), vertexai: false, httpOptions });
 
-  return async function send(message) {
+  return async function send(message, { signal } = {}) {
+    const config = { maxOutputTokens, automaticContinuation: false };
+    if (signal) config.abortSignal = signal;
     const request = {
       model: model.model,
       contents: [{ role: 'user', parts: [{ text: message }] }],
-      config: { maxOutputTokens, automaticContinuation: false },
+      config,
     };
     let text = '';
     let ttftMs = null;

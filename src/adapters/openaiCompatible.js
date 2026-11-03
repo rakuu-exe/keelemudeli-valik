@@ -5,7 +5,7 @@
 // max_completion_tokens (max_tokens is deprecated there), DeepSeek uses max_tokens.
 // stream_options.include_usage is a non-generative option: without it the stream carries no token counts.
 import OpenAI from 'openai';
-import { EMPTY_USAGE, clock as defaultClock, getApiKey, intOrNull, toApiError } from './common.js';
+import { ApiError, EMPTY_USAGE, clock as defaultClock, getApiKey, intOrNull, toApiError } from './common.js';
 
 const isSdkError = (e) => e instanceof OpenAI.APIError;
 
@@ -21,7 +21,8 @@ export function createOpenAICompatible(model, { env = {}, maxOutputTokens, fetch
     fetch,
   });
 
-  return async function send(message) {
+  // signal (client side only, not sent to the API): the pipeline aborts the request on timeout.
+  return async function send(message, { signal } = {}) {
     const request = {
       model: model.model,
       messages: [{ role: 'user', content: message }],
@@ -36,7 +37,7 @@ export function createOpenAICompatible(model, { env = {}, maxOutputTokens, fetch
     let usageRaw = null;
     const start = clock();
     try {
-      const stream = await client.chat.completions.create(request);
+      const stream = await client.chat.completions.create(request, { signal });
       for await (const chunk of stream) {
         if (chunk.model) modelVersion = chunk.model;
         if (chunk.usage) usageRaw = chunk.usage;
@@ -49,6 +50,9 @@ export function createOpenAICompatible(model, { env = {}, maxOutputTokens, fetch
         }
         if (choice.finish_reason) finishReason = choice.finish_reason;
       }
+      // When the signal aborts the stream, the SDK ends the iteration without an error; the answer
+      // is then incomplete and must not be stored as a normal result.
+      if (signal?.aborted) throw new ApiError('Request aborted', { retryable: true });
     } catch (e) {
       throw toApiError(e, isSdkError);
     }

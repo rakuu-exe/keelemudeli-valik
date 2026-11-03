@@ -1,0 +1,7 @@
+{
+  "runId": "luna",
+  "description": "Reproducibility test (PLAN.md phase 8, [M13]): the sixth model, added only as a row in config/models.json, runs through the whole chain without code changes. Tasks: in every category, the first rule-scored task of each difficulty level (K3-026…028 are judge tasks, so K3-029); 9 tasks × 5 repeats = 45 requests (author's decision 3.11.2026). Not part of the main comparison.",
+  "models": ["luna"],
+  "tasks": ["K1-001", "K1-011", "K1-026", "K2-001", "K2-011", "K2-026", "K3-001", "K3-011", "K3-029"],
+  "repeats": 5
+}

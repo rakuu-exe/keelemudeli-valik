@@ -46,6 +46,16 @@
       "baseURL": "https://api.x.ai/v1",
       "maxTokensParam": "max_completion_tokens",
       "completionIncludesReasoning": false
+    },
+    {
+      "id": "luna",
+      "provider": "OpenAI",
+      "adapter": "openaiCompatible",
+      "model": "gpt-6-luna",
+      "apiKeyEnv": "OPENAI_API_KEY",
+      "baseURL": "https://api.openai.com/v1",
+      "maxTokensParam": "max_completion_tokens",
+      "completionIncludesReasoning": true
     }
   ]
 }

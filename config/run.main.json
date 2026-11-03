@@ -1,0 +1,7 @@
+{
+  "runId": "main",
+  "description": "Main run (PLAN.md phase 6, [PK4, M7]): 5 models × 120 tasks × 5 repeats = 3000 requests, in rounds.",
+  "models": ["openai", "anthropic", "google", "deepseek", "xai"],
+  "tasks": "all",
+  "repeats": 5
+}

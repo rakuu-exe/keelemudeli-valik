@@ -1,6 +1,6 @@
 // Shared adapter code: error class, key lookup and timing.
 //
-// Every adapter returns a function send(message) that resolves to
+// Every adapter returns a function send(message, { signal }) that resolves to
 //   { text, modelVersion, finishReason, usage, usageRaw, ttftMs, totalMs }
 //   usage = { input, cachedInput, output, reasoning }
 //     input       all input tokens (including the part read from cache)
@@ -12,6 +12,8 @@
 //             (reasoning is not counted); null if the answer has no text
 //   totalMs = time from request start to the end of the stream
 // API errors are thrown as ApiError. A refusal, an empty answer or a truncated answer is a normal result.
+// signal is an AbortSignal (client side only, never sent to the API): the pipeline uses it for the
+// request timeout, and it must abort the request also while the stream is being read.
 
 export const clock = () => performance.now();
 

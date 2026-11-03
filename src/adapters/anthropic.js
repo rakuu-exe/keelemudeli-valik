@@ -18,7 +18,8 @@ export function createAnthropic(model, { env = {}, maxOutputTokens, fetch, clock
     fetch,
   });
 
-  return async function send(message) {
+  // signal (client side only, not sent to the API): the pipeline aborts the request on timeout.
+  return async function send(message, { signal } = {}) {
     const request = {
       model: model.model,
       max_tokens: maxOutputTokens,
@@ -28,7 +29,7 @@ export function createAnthropic(model, { env = {}, maxOutputTokens, fetch, clock
     let finalMessage;
     const start = clock();
     try {
-      const stream = client.messages.stream(request);
+      const stream = client.messages.stream(request, { signal });
       for await (const event of stream) {
         if (
           ttftMs === null &&

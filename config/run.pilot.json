@@ -1,0 +1,7 @@
+{
+  "runId": "pilot",
+  "description": "Pilot run (PLAN.md phase 5, [L5, PK3]): 5 models × 120 tasks × 1 repeat = 600 requests. Not used in the main comparison.",
+  "models": ["openai", "anthropic", "google", "deepseek", "xai"],
+  "tasks": "all",
+  "repeats": 1
+}

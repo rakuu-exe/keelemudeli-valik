@@ -355,8 +355,71 @@ describe('createAdapter', () => {
   });
 });
 
+// --- Abort signal (the pipeline's request timeout) ---
+
+// A fetch whose stream sends one chunk and then hangs until the request's signal is aborted,
+// as a real fetch does on a stalled connection.
+function hangingFetch(firstChunk) {
+  const seen = { signal: null, body: null };
+  const fetch = async (url, init = {}) => {
+    seen.signal = init.signal ?? null;
+    seen.body = init.body ? JSON.parse(init.body) : null;
+    const body = new ReadableStream({
+      start(controller) {
+        controller.enqueue(new TextEncoder().encode(firstChunk));
+        init.signal?.addEventListener('abort', () =>
+          controller.error(init.signal.reason ?? new DOMException('The operation was aborted.', 'AbortError')));
+      },
+    });
+    return new Response(body, { status: 200, headers: { 'content-type': 'text/event-stream' } });
+  };
+  return { fetch, seen };
+}
+
+describe('abort signal', () => {
+  const firstChunks = {
+    openai: sse([{
+      id: 'c1', object: 'chat.completion.chunk', created: 1, model: 'gpt-6.1-terra',
+      choices: [{ index: 0, delta: { content: 'Tal' }, finish_reason: null }], usage: null,
+    }]),
+    anthropic: sse([{
+      type: 'message_start',
+      message: {
+        id: 'm', type: 'message', role: 'assistant', model: 'claude-sonnet-5-5', content: [],
+        stop_reason: null, stop_sequence: null, usage: { input_tokens: 1, output_tokens: 1 },
+      },
+    }], { named: true }),
+    google: sse([{ candidates: [{ content: { role: 'model', parts: [{ text: 'Tal' }] }, index: 0 }], modelVersion: 'gemini-3.8-flash' }]),
+  };
+
+  for (const [id, firstChunk] of Object.entries(firstChunks)) {
+    test(`${id}: aborting stops the request also while the stream is being read`, { timeout: 5000 }, async () => {
+      const { fetch, seen } = hangingFetch(firstChunk);
+      const send = createAdapter(MODEL[id], { env: ENV, maxOutputTokens: 16000, fetch });
+      const controller = new AbortController();
+      const pending = send(MESSAGE, { signal: controller.signal });
+      setTimeout(() => controller.abort(), 20);
+      await assert.rejects(pending);
+      assert.ok(seen.signal, 'the SDK passes a signal to fetch');
+    });
+  }
+
+  test('google: abortSignal is client side only and not sent to the API', { timeout: 5000 }, async () => {
+    const { fetch, seen } = hangingFetch(firstChunks.google);
+    const send = createAdapter(MODEL.google, { env: ENV, maxOutputTokens: 16000, fetch });
+    const controller = new AbortController();
+    const pending = send(MESSAGE, { signal: controller.signal });
+    setTimeout(() => controller.abort(), 20);
+    await assert.rejects(pending);
+    assert.deepEqual(seen.body, {
+      contents: [{ role: 'user', parts: [{ text: MESSAGE }] }],
+      generationConfig: { maxOutputTokens: 16000 },
+    });
+  });
+});
+
 describe('config/models.json', () => {
-  test('five models as in the CLAUDE.md table, max output 16,000', () => {
+  test('the five compared models as in the CLAUDE.md table, then Luna (reproducibility test only); max output 16,000', () => {
     assert.equal(CONFIG.maxOutputTokens, 16000);
     assert.deepEqual(
       CONFIG.models.map((m) => [m.id, m.adapter, m.model]),
@@ -366,6 +429,7 @@ describe('config/models.json', () => {
         ['google', 'google', 'gemini-3.8-flash'],
         ['deepseek', 'openaiCompatible', 'deepseek-flash'],
         ['xai', 'openaiCompatible', 'grok-4.7'],
+        ['luna', 'openaiCompatible', 'gpt-6-luna'],
       ],
     );
   });

@@ -95,7 +95,7 @@ config/
   run.probe.json     probe request (1 task × 5 models, phase 1)
   run.pilot.json     pilot run (1 repeat)
   run.main.json      main run (5 repeats)
-  run.luna.json      reproducibility test (sixth model, ~10 tasks)
+  run.luna.json      reproducibility test (sixth model, 9 tasks × 5 repeats)
 data/
   task_bank_v1_3.json
   task_bank_v1_2.json    original v1.2, unchanged
@@ -116,6 +116,7 @@ tools/
   apps_script/       creating the Google Form from the sample
 results/
   raw/               raw rows
+  dry-run/           rows of --dry-run (fake adapter; ignored by git)
   scored/            scores
   judge/             input/, key.csv, scores.jsonl
   cost/              cost
@@ -132,7 +133,7 @@ One row = one API request.
 ```json
 {
   "key": "<runId>|<taskId>|<modelId>|<repeat>",
-  "runId": "2026-11-20-main",
+  "runId": "main",
   "taskId": "K2-026",
   "modelId": "deepseek",
   "modelRequested": "deepseek-flash",
@@ -143,6 +144,7 @@ One row = one API request.
   "totalMs": 1893.4,
   "status": "ok",
   "error": null,
+  "retries": [],
   "finishReason": "stop",
   "usage": { "input": 214, "cachedInput": 192, "output": 57, "reasoning": null },
   "usageRaw": { "<provider usage object, unchanged>": "…" },
@@ -156,8 +158,19 @@ One row = one API request.
 - `usageRaw` (author's decision 2.11.2026): the provider's original usage object. Cost can be recomputed from it if the normalization turns out to be wrong. Raw rows are never changed.
 - `ttftMs`: time from request start to the first non-empty chunk of answer text; reasoning is not counted (author's decision 2.11.2026). `null` if the answer has no text.
 - Error row: `status: "error"`, `error: { "httpStatus", "message" }`; `modelVersion`, the times, `usage`, `usageRaw` and `text` are `null`.
+- `tsStartUtc`, the times and the answer describe the last attempt. `retries` lists the earlier failed attempts of the same request, `[{ "tsStartUtc", "httpStatus", "message" }]`, so that every request made with the key is logged (principle 9). Rows written before phase 2 (the probe) do not have the field; read it as `[]`.
 
-On start, the existing keys are read and skipped.
+On start, the existing keys are read and skipped (an error row also counts as stored).
+
+### Running the measurement pipeline (phase 2)
+
+- `node src/runner/run.js --config config/run.<name>.json [--dry-run] [--limit N]`.
+- The runIds `pilot`, `main` and `luna` have no date: the main run and Luna run after the tag `main-run`, when the configuration can no longer be changed, so a planned date in the runId could not be corrected (the pilot follows the same pattern). The date of every request is in `tsStartUtc`.
+- `--dry-run`: the fake adapter for every model, no API requests, no keys; rows go to `results/dry-run/<runId>.jsonl` (ignored by git), never into `results/raw`.
+- `--limit N`: at most N new requests in this run; rows already stored are not counted.
+- Temporary errors (429, 5xx, timeout, dropped connection) [PK1]: up to 3 retries after 10 s, 30 s and 60 s; the timeout is 10 minutes per attempt, including reading the stream (author's decision 3.11.2026). Other API errors end the request at once.
+- The run stops after 5 error rows in a row, overall or for one model (author's decision 3.11.2026). Fix the cause and run the same command again.
+- Ctrl+C stops after the current request, so that it is still logged; a second Ctrl+C stops at once.
 
 ### Score row (`results/scored/<runId>.jsonl`)
 

@@ -9,6 +9,9 @@ node_modules/
 __pycache__/
 *.pyc
 
+# Dry runs of the measurement pipeline (fake adapter, not data)
+results/dry-run/
+
 # Claude Code worktrees
 .claude/worktrees/
 
