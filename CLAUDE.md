@@ -158,19 +158,19 @@ One row = one API request.
 - `usageRaw` (author's decision 2.11.2026): the provider's original usage object. Cost can be recomputed from it if the normalization turns out to be wrong. Raw rows are never changed.
 - `ttftMs`: time from request start to the first non-empty chunk of answer text; reasoning is not counted (author's decision 2.11.2026). `null` if the answer has no text.
 - Error row: `status: "error"`, `error: { "httpStatus", "message" }`; `modelVersion`, the times, `usage`, `usageRaw` and `text` are `null`.
-- `tsStartUtc`, the times and the answer describe the last attempt. `retries` lists the earlier failed attempts of the same request, `[{ "tsStartUtc", "httpStatus", "message" }]`, so that every request made with the key is logged (principle 9). Rows written before phase 2 (the probe) do not have the field; read it as `[]`.
+- `tsStartUtc`, the times and the answer describe the last attempt. `retries` lists the earlier failed attempts of the same request, `[{ "tsStartUtc", "httpStatus", "message" }]`, so that every request made with the key is logged (principle 9; author's decision 3.11.2026). Rows written before phase 2 (the probe) do not have the field; read it as `[]`.
 
 On start, the existing keys are read and skipped (an error row also counts as stored).
 
 ### Running the measurement pipeline (phase 2)
 
 - `node src/runner/run.js --config config/run.<name>.json [--dry-run] [--limit N]`.
-- The runIds `pilot`, `main` and `luna` have no date: the main run and Luna run after the tag `main-run`, when the configuration can no longer be changed, so a planned date in the runId could not be corrected (the pilot follows the same pattern). The date of every request is in `tsStartUtc`.
+- The runIds `pilot`, `main` and `luna` have no date: the main run and Luna run after the tag `main-run`, when the configuration can no longer be changed, so a planned date in the runId could not be corrected (the pilot follows the same pattern). The date of every request is in `tsStartUtc` (author's decision 3.11.2026).
 - `--dry-run`: the fake adapter for every model, no API requests, no keys; rows go to `results/dry-run/<runId>.jsonl` (ignored by git), never into `results/raw`.
 - `--limit N`: at most N new requests in this run; rows already stored are not counted.
 - Temporary errors (429, 5xx, timeout, dropped connection) [PK1]: up to 3 retries after 10 s, 30 s and 60 s; the timeout is 10 minutes per attempt, including reading the stream (author's decision 3.11.2026). Other API errors end the request at once.
 - The run stops after 5 error rows in a row, overall or for one model (author's decision 3.11.2026). Fix the cause and run the same command again.
-- Ctrl+C stops after the current request, so that it is still logged; a second Ctrl+C stops at once.
+- Ctrl+C stops after the current request, so that it is still logged; a second Ctrl+C stops at once (author's decision 3.11.2026).
 
 ### Score row (`results/scored/<runId>.jsonl`)
 
