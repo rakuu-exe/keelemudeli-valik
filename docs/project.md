@@ -1,0 +1,30 @@
+# Project files (the root)
+
+## `AGENTS.md`
+Rules for every agent and contributor that changes the repository: each change updates the docs in the same commit (see [README](README.md)). It points to `CLAUDE.md` for everything else.
+
+## `CLAUDE.md`
+The project instructions, read by Claude Code at the start of every session: what is built, the principles (measure once, raw data is never changed, the same task text for every model, provider defaults, …), the LLM judge rules, the terminology, the data formats (raw row, score row, judge, cost row, human evaluation), the scoring and cost rules, the commands of a run, the analysis rules and the author's decisions with their dates. A change of a rule, a format or a decision goes here.
+
+## `PLAN.md`
+The work plan of the author: "before starting" tasks, the confirmed choices, the phases 0–9 with their "done when" criteria, and the schedule. Only what is in the plan is built (CLAUDE.md). Tags in brackets (e.g. [M4]) refer to the rows of the author's `kavandi_tooplaan.xlsx`, which is not in the repository.
+
+## `package.json`
+The Node package (ESM, Node 24). Dependencies with exact versions: `openai`, `@anthropic-ai/sdk`, `@google/genai`, `ajv`, `franc`, `dotenv`.
+- `npm test`: all Node tests, `node --test "test/**/*.test.js"` (only `*.test.js`, so that the fixtures are not run).
+- `npm run check`: the task bank check script (`test/taskBank.test.js`).
+
+## `package-lock.json`
+The exact dependency tree that `npm ci` installs.
+
+## `.env.example`
+Template of `.env`: one variable per provider (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GEMINI_API_KEY`, `DEEPSEEK_API_KEY`, `XAI_API_KEY`). The real `.env` is never committed; the pipeline reads the keys only from it, not from the system environment.
+
+## `.gitignore`
+Ignored by git: `.env`, `node_modules/`, `.venv/`, Python caches, `results/dry-run/`, Claude Code worktrees, and the author's personal source files (`Rand_Ragnar_kavand.pdf`, `kavandi_tooplaan.xlsx`, `ulesandepank_v1_2.zip`).
+
+## `.gitattributes`
+All text files with LF line endings (the reproducibility test compares file hashes); PDF, XLSX and PNG are binary.
+
+## `docs/*.md`
+This documentation: [README](README.md) (overview and the file map) and one doc per part of the repository.

@@ -6,6 +6,8 @@ It is based on the signed thesis proposal and the author's decisions in `kavandi
 
 The thesis text is not in the scope of this repository. The author writes it.
 
+**Documentation:** every change updates `docs/` (the file map in `docs/README.md` and the doc of the changed file) in the same commit; the rules are in `AGENTS.md`, and `npm test` checks the file map (`test/docs.test.js`). Author's decision 3.11.2026.
+
 ---
 
 ## Language
@@ -92,7 +94,11 @@ Before using any provider SDK or Claude Code flag, check its current documentati
 
 ## Folder structure
 
+Every file is described in `docs/` (file map: `docs/README.md`).
+
 ```
+AGENTS.md            rules for agents: update the docs with every change
+docs/                documentation of every file (README.md = overview and file map)
 config/
   models.json        models and the maximum output length
   pricing.json       prices (USD), price list date
@@ -115,9 +121,10 @@ src/
   checkers/          rule-based scoring
   judge/             prepare.js, run.js, claude.js (the call), common.js
   cost/              cost calculation
+  report/            pilot run report data
   paths.js, random.js, csv.js   result paths, seeded randomness, CSV
-test/
-analysis/            Python analysis, run_all.py
+test/                Node tests (fixtures/ = sample answers, a stand-in for claude)
+analysis/            Python analysis: run_all.py, criteria, decision model, figures, tests/
 tools/
   apps_script/       creating the Google Form from the sample
 results/
@@ -128,7 +135,9 @@ results/
   judge-check/       the judge check set (one sample answer, real judge)
   cost/              cost
   human/             sample, key, rater scores
-  figures/           tables and figures
+  figures/           tables and figures of the analysis (main run; figures/pilot/ = preview)
+  pilot/             the pilot run report and the author's review files
+  prices/            price list screenshots of a measurement day
 ```
 
 ## Data formats
@@ -229,6 +238,18 @@ On start, the existing keys are read and skipped (an error row also counts as st
 2. `node src/judge/prepare.js --run pilot`, then `node src/judge/run.js` (judge, Pro subscription)
 3. `node src/checkers/score.js --run pilot` (rules + judge median), `node src/cost/cost.js --run pilot`
 4. Review: `node src/report/pilot.js --run pilot` → `results/pilot/report_data.md` (errors, truncated answers, cost, time, suspicious tasks, judge status); `node src/checkers/sample.js --run pilot` → 20 rule scores; `node src/judge/review.js --run pilot` → 20 judge scores without model names (`results/pilot/judge_check.md`).
+5. Analysis: `.venv/Scripts/python analysis/run_all.py` (the main run → `results/figures/`; `--run pilot` → `results/figures/pilot/`, a preview only).
+
+### Analysis (phase 7, Python)
+
+- Setup: `python -m venv .venv`, then `.venv/Scripts/pip install -r analysis/requirements.txt` (pinned versions). Tests: `.venv/Scripts/python -m unittest discover -s analysis/tests` (hand-calculated examples [M12]).
+- `analysis/run_all.py` reads only the stored rows (raw, scored, cost) and writes all tables (CSV, decimal point, LF), the two sensitivity figures and `summary.md`. The same data gives byte-identical files [M13] (PNG without the software version in the metadata). Everything is in English (author's decision 3.11.2026).
+- Criteria [M2–M6]: correctness and format = means over the answers (a missing judge correctness is left out and counted); cost = mean `costCriterion`; latency = median `totalMs` (TTFT median as additional information); stability = per task the population standard deviation (ddof=0) of the correctness of the answered repeats (a repeat that is an error row is left out: author's decision 3.11.2026), mean over the tasks. Errors and truncated answers are counted [PK1].
+- Min-max [M8] with max = min → 1 for all (tolerance 1e-12); WSM [M9]; rank 1 = highest score; a tie keeps the model order of `config/models.json` and is reported (`tie`).
+- Sensitivity [M10]: one weight from 0 to 1 in steps of 0.05, the others in proportion. A tie at the top that includes the previous winner is not a change of the winner; ties are listed separately (`ties`), and the original winner "holds" where it is first or shares the first place.
+- Annual cost [PK7]: mean `costCriterion` × 10,000 × 365 (`config/profiles.json`), USD; EUR with one rate, `usdPerEur` in `analysis/settings.json` (now 1.1216, the author's figure of 3.11.2026; replace it with the ECB rate of the main run day [M4]).
+- Categories [M11]: criteria and min-max within each category, the same weights. `wsm_check_input.csv` [M12] starts with the columns of the "Sisend" sheet of `analysis/wsm_check.xlsx` (correctness, format, cost, latency in s, stability, the Python scores), then the normalized values.
+- Figure colours: the categorical order of the dataviz reference palette by the model's position in `config/models.json` (never by rank); every model also has its own marker, and the exact values are in `sensitivity.csv`.
 
 ## Models
 
