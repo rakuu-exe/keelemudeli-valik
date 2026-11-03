@@ -6,7 +6,7 @@ It is based on the signed thesis proposal and the author's decisions in `kavandi
 
 The thesis text is not in the scope of this repository. The author writes it.
 
-**Documentation:** every change updates `docs/` (the file map in `docs/README.md` and the doc of the changed file) in the same commit; the rules are in `AGENTS.md`, and `npm test` checks the file map (`test/docs.test.js`). Author's decision 3.11.2026.
+**Change log and documentation:** every change gets a row in `CHANGELOG.md` (I + the next number for an implementation, U + the next number for an update; the commit message starts with the IDs) and updates `docs/` (the file map in `docs/README.md` and the doc of the changed file) in the same commit. The rules are in `AGENTS.md`; `npm test` checks both (`test/changelog.test.js`, `test/docs.test.js`). Author's decisions 3.11.2026.
 
 ---
 
@@ -97,7 +97,8 @@ Before using any provider SDK or Claude Code flag, check its current documentati
 Every file is described in `docs/` (file map: `docs/README.md`).
 
 ```
-AGENTS.md            rules for agents: update the docs with every change
+AGENTS.md            rules for agents: a change log row and the docs with every change
+CHANGELOG.md         every implementation (I1, I2, …) and update (U1, U2, …)
 docs/                documentation of every file (README.md = overview and file map)
 config/
   models.json        models and the maximum output length
@@ -246,7 +247,7 @@ On start, the existing keys are read and skipped (an error row also counts as st
 - `analysis/run_all.py` reads only the stored rows (raw, scored, cost) and writes all tables (CSV, decimal point, LF), the two sensitivity figures and `summary.md`. The same data gives byte-identical files [M13] (PNG without the software version in the metadata). Everything is in English (author's decision 3.11.2026).
 - Criteria [M2–M6]: correctness and format = means over the answers (a missing judge correctness is left out and counted); cost = mean `costCriterion`; latency = median `totalMs` (TTFT median as additional information); stability = per task the population standard deviation (ddof=0) of the correctness of the answered repeats (a repeat that is an error row is left out: author's decision 3.11.2026), mean over the tasks. Errors and truncated answers are counted [PK1].
 - Min-max [M8] with max = min → 1 for all (tolerance 1e-12); WSM [M9]; rank 1 = highest score; a tie keeps the model order of `config/models.json` and is reported (`tie`).
-- Sensitivity [M10]: one weight from 0 to 1 in steps of 0.05, the others in proportion. A tie at the top that includes the previous winner is not a change of the winner; ties are listed separately (`ties`), and the original winner "holds" where it is first or shares the first place.
+- Sensitivity [M10]: one weight from 0 to 1 in steps of 0.05, the others in proportion. A tie at the top that includes the previous winner is not a change of the winner (author's decision 3.11.2026); ties are listed separately (`ties`), and the original winner "holds" where it is first or shares the first place.
 - Annual cost [PK7]: mean `costCriterion` × 10,000 × 365 (`config/profiles.json`), USD; EUR with one rate, `usdPerEur` in `analysis/settings.json` (now 1.1216, the author's figure of 3.11.2026; replace it with the ECB rate of the main run day [M4]).
 - Categories [M11]: criteria and min-max within each category, the same weights. `wsm_check_input.csv` [M12] starts with the columns of the "Sisend" sheet of `analysis/wsm_check.xlsx` (correctness, format, cost, latency in s, stability, the Python scores), then the normalized values.
 - Figure colours: the categorical order of the dataviz reference palette by the model's position in `config/models.json` (never by rank); every model also has its own marker, and the exact values are in `sensitivity.csv`.

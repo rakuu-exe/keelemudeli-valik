@@ -1,7 +1,10 @@
 # Project files (the root)
 
 ## `AGENTS.md`
-Rules for every agent and contributor that changes the repository: each change updates the docs in the same commit (see [README](README.md)). It points to `CLAUDE.md` for everything else.
+Rules for every agent and contributor that changes the repository: each change gets a row in `CHANGELOG.md` and updates the docs (and `CLAUDE.md` for rules and decisions) in the same commit; the commit message starts with the change's IDs. It points to `CLAUDE.md` for everything else.
+
+## `CHANGELOG.md`
+Every implementation and every change, one row each: `I` + number for something new, `U` + number for a change of something that exists; the numbers of each letter run without gaps, new rows at the end. Columns: ID, date, what (with the decision tag or the author's decision and, for the rows written from the history, the commit), files. Checked by `test/changelog.test.js`.
 
 ## `CLAUDE.md`
 The project instructions, read by Claude Code at the start of every session: what is built, the principles (measure once, raw data is never changed, the same task text for every model, provider defaults, …), the LLM judge rules, the terminology, the data formats (raw row, score row, judge, cost row, human evaluation), the scoring and cost rules, the commands of a run, the analysis rules and the author's decisions with their dates. A change of a rule, a format or a decision goes here.

@@ -20,6 +20,7 @@ npm run check                                              # the task bank check
 | `test/report.test.js` | the pilot report data (errors, truncated, suspicious tasks, Markdown in K1, cost estimate) and the blind judge review |
 | `test/profiles.test.js` | `config/profiles.json`: five criteria, weights of E3, sums of 1, 10,000 a day |
 | `test/docs.test.js` | the file map of `docs/README.md`: every file of the repository matches a row, every literal row exists, every row's doc names it |
+| `test/changelog.test.js` | `CHANGELOG.md`: the I and U numbers run 1, 2, 3 … without gaps in the order of the rows, dates never go back, every row has a description and files |
 | `analysis/tests/test_analysis.py` | hand-calculated examples [M12]: min-max (incl. all equal), WSM, ranking and ties, reweighting, the grid, switch points and ties in the sensitivity analysis, the criteria (stability, missing values, errors, truncated), annual cost |
 
 ## Fixtures

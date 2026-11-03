@@ -2,7 +2,7 @@
 
 The software part of the thesis "Keelemudeli valiku mitmekriteeriumiline metoodika tarkvaraarenduses". The rules of the project are in [`CLAUDE.md`](../CLAUDE.md) and the work plan in [`PLAN.md`](../PLAN.md); these docs describe the files. Every file of the repository is in the file map below, with the doc that describes it.
 
-**Keep the docs up to date with every change** ([`AGENTS.md`](../AGENTS.md)). `npm test` checks the file map (`test/docs.test.js`): every file must match a row, every row must still exist, and the doc of a row must name its file.
+**Keep the docs up to date with every change, and record every change in [`CHANGELOG.md`](../CHANGELOG.md)** as I (implementation) or U (update) with the next number ([`AGENTS.md`](../AGENTS.md)). `npm test` checks the file map (`test/docs.test.js`: every file must match a row, every row must still exist, and the doc of a row must name its file) and the change log (`test/changelog.test.js`: numbers without gaps, in order).
 
 ## How the parts fit together
 
@@ -45,7 +45,8 @@ A `*` stands for any characters except `/` (one file name part).
 
 | file | doc | purpose |
 |---|---|---|
-| `AGENTS.md` | [project](project.md) | rules for agents and contributors: update the docs with every change |
+| `AGENTS.md` | [project](project.md) | rules for agents and contributors: a change log row and the docs with every change |
+| `CHANGELOG.md` | [project](project.md) | every implementation (I1, I2, …) and update (U1, U2, …) |
 | `CLAUDE.md` | [project](project.md) | project instructions: principles, formats, decisions |
 | `PLAN.md` | [project](project.md) | the work plan, phase by phase |
 | `package.json` | [project](project.md) | Node package: dependencies and npm scripts |
@@ -116,6 +117,7 @@ A `*` stands for any characters except `/` (one file name part).
 | `test/taskBank.test.js` | [tests](tests.md) | the task bank check script (phase 0) |
 | `test/text.test.js` | [tests](tests.md) | word and sentence counting, language check |
 | `test/docs.test.js` | [tests](tests.md) | this file map against the files of the repository |
+| `test/changelog.test.js` | [tests](tests.md) | the I and U numbers of the change log |
 | `test/fixtures/k3_sample_answers.json` | [tests](tests.md) | a sample answer for every K3 task |
 | `test/fixtures/fake_claude.mjs` | [tests](tests.md) | a stand-in for `claude` in the judge tests |
 | `results/raw/*.jsonl` | [results](results.md) | raw rows: one API request per row (only appended) |
