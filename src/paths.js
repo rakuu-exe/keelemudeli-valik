@@ -11,6 +11,7 @@ export const resultsDir = ({ dryRun = false } = {}) => (dryRun ? path.join(RESUL
 export const rawFile = (runId, options) => path.join(resultsDir(options), 'raw', `${runId}.jsonl`);
 export const scoredFile = (runId, options) => path.join(resultsDir(options), 'scored', `${runId}.jsonl`);
 export const manualCheckFile = (runId, options) => path.join(resultsDir(options), 'scored', `${runId}.manual_check.md`);
+export const costFile = (runId, options) => path.join(resultsDir(options), 'cost', `${runId}.jsonl`);
 // The judge set: input/H####.json, key.csv, scores.jsonl. One set for all runs (the key names the run).
 export const judgeDir = (options) => path.join(resultsDir(options), 'judge');
 // The judge check set (PLAN.md phase 3b, "the score of one real file is stored"): one file built

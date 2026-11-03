@@ -209,6 +209,14 @@ On start, the existing keys are read and skipped (an error row also counts as st
 
 `key`, `costCriterion`, `costBilled` (USD).
 
+- `node src/cost/cost.js --run <runId> [--dry-run]` writes the file again from the raw rows and `config/pricing.json`. Error rows get no cost row; an ok row without usage gets `null` in both.
+- `costCriterion` = all input × input price + all output (reasoning included) × output price, as if every request were new → WSM.
+- `costBilled` = (input − cached − written to cache) × input price + cached × cache price + written × cache write price + output × output price → billing check. Cache writes: Anthropic `cache_creation_input_tokens` (5 min / 1 h by `cache_creation`), OpenAI `prompt_tokens_details.cache_write_tokens` (30-minute price).
+- DeepSeek: peak or off-peak by `tsStartUtc` (Mon–Fri 01:00–04:00 and 06:00–10:00 UTC, start included, end excluded; `offPeakDates` for Chinese public holidays), in both sums.
+- A price that does not apply is an error, not a wrong number: Gemini after `validUntil` (31.12.2026), a prompt above `maxInputTokens` (OpenAI 272K, xAI from 200K), a non-standard `service_tier` / `serviceTier` / `speed`, or `inference_geo` other than `global`.
+- Checked on the probe of 3.11.2026: the xAI `costBilled` equals xAI's own `cost_in_usd_ticks` (1 tick = 1e-10 USD).
+- Prices: `config/pricing.json`, checked on the official price lists on 3.11.2026 (`priceListDate`, a `source` URL per model). Check again on the day of measurement and save the price lists.
+
 ### Human evaluation (`results/human/`)
 
 - `sample.csv`: `answerId`, source text, task, answer. No model name.

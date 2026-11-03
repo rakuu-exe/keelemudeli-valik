@@ -1,0 +1,68 @@
+{
+  "currency": "USD",
+  "unit": "per 1M tokens",
+  "priceListDate": "2026-11-03",
+  "description": "Prices of the standard tier (PLAN.md phase 4, [M4]), checked on the providers' official price lists on 3.11.2026; the values of 1.11.2026 in PLAN.md did not change. Check again on the day of measurement and save the price lists. Reasoning tokens are billed as output. cachedInput = input read from cache; cacheWrite = input written to cache, only where the provider bills it separately.",
+  "models": {
+    "openai": {
+      "model": "gpt-6.1-terra",
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "input": 1.00,
+      "cachedInput": 0.05,
+      "cacheWrite": 1.25,
+      "output": 5.00,
+      "maxInputTokens": 272000,
+      "note": "Short context (up to 272K input tokens). cacheWrite is the 30-minute cache write (12 h: 2.50). No temporary discount for this model on 3.11.2026."
+    },
+    "anthropic": {
+      "model": "claude-sonnet-5-5",
+      "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "input": 2.00,
+      "cachedInput": 0.10,
+      "cacheWrite5m": 2.50,
+      "cacheWrite1h": 4.00,
+      "output": 10.00,
+      "note": "Cache hits are 0.05x the base input price on Sonnet 5.5. The full 1M context is at standard pricing. Global inference (inference_geo us costs 1.1x)."
+    },
+    "google": {
+      "model": "gemini-3.8-flash",
+      "source": "https://ai.google.dev/gemini-api/docs/pricing",
+      "input": 0.75,
+      "cachedInput": 0.075,
+      "output": 3.75,
+      "validUntil": "2026-12-31",
+      "note": "Introductory prices through 31.12.2026; from 1.1.2027 input 1.50, cache 0.15, output 7.50. Output includes thinking tokens. Implicit caching has no write or storage cost."
+    },
+    "deepseek": {
+      "model": "deepseek-flash",
+      "source": "https://api-docs.deepseek.com/quick_start/pricing",
+      "peak": { "input": 0.30, "cachedInput": 0.006, "output": 1.20 },
+      "offPeak": { "input": 0.15, "cachedInput": 0.003, "output": 0.60 },
+      "peakHoursUtc": {
+        "weekdays": [1, 2, 3, 4, 5],
+        "hours": [[1, 4], [6, 10]]
+      },
+      "offPeakDates": [],
+      "note": "Peak hours Mon–Fri 01:00–04:00 and 06:00–10:00 UTC (start included, end excluded); all other hours off-peak at half price. Chinese public holidays are off-peak in full: list their dates (UTC) in offPeakDates; none in November 2026. deepseek-flash is DeepSeek-V4.1-Flash-1017."
+    },
+    "xai": {
+      "model": "grok-4.7",
+      "source": "https://docs.x.ai/docs/models",
+      "input": 2.00,
+      "cachedInput": 0.50,
+      "output": 6.00,
+      "maxInputTokens": 199999,
+      "note": "A request whose prompt reaches 200K tokens is billed at the higher rate (4 / 1 / 12) for all its tokens."
+    },
+    "luna": {
+      "model": "gpt-6-luna",
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "input": 0.10,
+      "cachedInput": 0.01,
+      "cacheWrite": 0.125,
+      "output": 0.50,
+      "maxInputTokens": 272000,
+      "note": "Reproducibility test only. Short context (up to 272K input tokens); cacheWrite is the 30-minute cache write (12 h: 0.25)."
+    }
+  }
+}

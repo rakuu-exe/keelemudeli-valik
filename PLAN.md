@@ -103,10 +103,10 @@ Every answer gets **format** (0/1) and **correctness** (0…1). Raw rows with er
 
 ## Phase 4 – Cost [M4]
 
-- [ ] `config/pricing.json`: each model's input, cache and output price per 1M tokens (USD) and the price list date. For DeepSeek, peak and off-peak prices (peak hours Mon–Fri 01–04 and 06–10 UTC). Prices on 1.11.2026: Terra 1/5 (cache 0.05); Sonnet 5.5 2/10; Gemini 3.8 Flash 0.75/3.75; DeepSeek flash peak 0.30/1.20 (cache 0.006), off-peak half of that; grok-4.7 2/6. Other cache prices from the price lists; check all prices again on the day of measurement.
+- [ ] `config/pricing.json`: each model's input, cache and output price per 1M tokens (USD) and the price list date. For DeepSeek, peak and off-peak prices (peak hours Mon–Fri 01–04 and 06–10 UTC). Prices on 1.11.2026: Terra 1/5 (cache 0.05); Sonnet 5.5 2/10; Gemini 3.8 Flash 0.75/3.75; DeepSeek flash peak 0.30/1.20 (cache 0.006), off-peak half of that; grok-4.7 2/6. Cache prices from the official price lists (checked 3.11.2026, the other prices unchanged): Sonnet 5.5 0.10 (0.05× input; cache writes 2.50 for 5 min, 4.00 for 1 h); Gemini 3.8 Flash 0.075; grok-4.7 0.50; Terra cache write 1.25 (30 min). Check all prices again on the day of measurement.
 - [ ] Two sums for every raw row:
   - `costCriterion`: all input at full price (as if every request were new) + output (reasoning tokens as output) → used in the WSM;
-  - `costBilled`: input read from cache at the cache price → used in the billing check.
+  - `costBilled`: input read from cache at the cache price (and input written to cache at the cache write price, where the provider bills it) → used in the billing check.
 - [ ] The DeepSeek price is chosen by `tsStartUtc`.
 
 **Done when:** the tests pass (incl. the peak hour boundary and the cache).
@@ -187,7 +187,7 @@ All tables and figures with one command: `python analysis/run_all.py`.
 | 02.11–08.11 | "Before starting", 0, 1, 2 | 1. Background and related work |
 | 09.11–15.11 | 3, 3b, 4 | 2. Methodology (incl. the E2 criterion before the main run) |
 | 16.11–18.11 | 5; meeting with Lepikult | 3. Carrying out the study |
-| 19.11–22.11 | 6 (the OpenAI discount is valid until 21.11, check billing) | |
+| 19.11–22.11 | 6 (the date 21.11 in the OpenAI price list is for GPT-5.6 Sol, not for Terra: Terra has no temporary discount, checked 3.11.2026) | |
 | 23.11–28.11 | 7, 8 (human evaluation ~24.–27.11) | 4. Results, 5. Discussion, introduction, summary |
 | **30.11** | **thesis for pre-defence** | |
 | 01.12–05.01 | 9; corrections | final version |
