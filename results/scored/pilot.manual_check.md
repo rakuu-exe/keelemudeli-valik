@@ -30,7 +30,7 @@ ei
 **Score:** format 1 · correctness 1
 - answer after normalization: `ei`
 
-**Check:** 
+**Check:**  OK
 
 ## 2. K2-034 (K2, difficulty 5)
 
@@ -65,7 +65,7 @@ Saadetis: 5 kasti, igas 12 pakki, iga pakk 250 g.
 - wrong fields: none
 - nullViolations: 0
 
-**Check:** 
+**Check:** OK
 
 ## 3. K3-006 (K3, difficulty 1)
 
@@ -95,7 +95,7 @@ Tallinna tehnoloogiakonverents tõi kokku osalejad 14 riigist
 | max_words | `8` | format | yes |
 | language | `"et"` | correctness | yes |
 
-**Check:** 
+**Check:** OK
 
 ## 4. K1-018 (K1, difficulty 3)
 
@@ -124,7 +124,7 @@ NEGATIIVNE
 **Score:** format 1 · correctness 1
 - answer after normalization: `negatiivne`
 
-**Check:** 
+**Check:** OK
 
 ## 5. K2-031 (K2, difficulty 5)
 
@@ -175,7 +175,7 @@ Tellija Kaire Lepp, e-post kaire@naidis.ee. Tarneaadress Tartu mnt 12, 10145 Tal
 - wrong fields: none
 - nullViolations: 0
 
-**Check:** 
+**Check:** OK
 
 ## 6. K3-034 (K3, difficulty 5)
 
@@ -209,7 +209,7 @@ Tarkvara versioon 4.2 parandas 17 viga ja lisas kaks uut funktsiooni. Uuendus on
 | contains | `["2026"]` | correctness | yes |
 | language | `"et"` | correctness | yes |
 
-**Check:** 
+**Check:**  OK
 
 ## 7. K1-034 (K1, difficulty 5)
 
@@ -238,7 +238,7 @@ ei
 **Score:** format 1 · correctness 1
 - answer after normalization: `ei`
 
-**Check:** 
+**Check:** OK
 
 ## 8. K2-004 (K2, difficulty 1)
 
@@ -277,7 +277,7 @@ Koosolek toimub neljapäeval kell 10.30 ruumis ICO-316.
 - wrong fields: none
 - nullViolations: 0
 
-**Check:** 
+**Check:** OK
 
 ## 9. K3-004 (K3, difficulty 1)
 
@@ -307,7 +307,7 @@ Tartus avati möödunud reedel 8,5 miljonit eurot maksnud ja kaks aastat ehitatu
 | sentence_count | `1` | format | yes |
 | language | `"et"` | correctness | yes |
 
-**Check:** 
+**Check:** OK
 
 ## 10. K1-039 (K1, difficulty 5)
 
@@ -336,7 +336,7 @@ Meeskonnas on Anu, Peeter, Kadi ja Rain. Puhkusel on kõik peale Kadi. Rain naas
 **Score:** format 1 · correctness 1
 - answer after normalization: `3`
 
-**Check:** 
+**Check:** OK
 
 ## 11. K2-024 (K2, difficulty 3)
 
@@ -371,7 +371,7 @@ Kliendi nimi: Rein Tamm. Telefon: -. E-post: rein@naidis.ee
 - wrong fields: none
 - nullViolations: 0
 
-**Check:** 
+**Check:** OK
 
 ## 12. K3-015 (K3, difficulty 3)
 
@@ -403,7 +403,7 @@ Tarkvara versioon 4.2 parandas 17 viga ja lisas kaks uut funktsiooni. Uuendus on
 | regex_present | `^[-*•] (flags: -)` | correctness | yes |
 | language | `"et"` | correctness | yes |
 
-**Check:** 
+**Check:** OK
 
 ## 13. K1-033 (K1, difficulty 5)
 
@@ -432,7 +432,7 @@ Litsents maksab 40 eurot kuus kasutaja kohta. Kümnest kasutajast alates kehtib 
 **Score:** format 1 · correctness 1
 - answer after normalization: `408`
 
-**Check:** 
+**Check:** OK
 
 ## 14. K2-040 (K2, difficulty 5)
 
@@ -478,7 +478,7 @@ Kohtumised: Kaiale 3. märtsil, Reinule 17. märtsil ja Maarjale 2. aprillil 202
 - wrong fields: none
 - nullViolations: 0
 
-**Check:** 
+**Check:** OK
 
 ## 15. K3-038 (K3, difficulty 5)
 
@@ -510,7 +510,7 @@ Koosoleku märkmed: meeskond otsustas andmebaasi üle viia järgmises sprindis. 
 | regex_absent | `(meeting\|migrate\|database\|deadline\|sprint) (flags: i)` | correctness | yes |
 | contains | `["12"]` | correctness | yes |
 
-**Check:** 
+**Check:** OK
 
 ## 16. K1-036 (K1, difficulty 5)
 
@@ -539,7 +539,7 @@ POSITIIVNE
 **Score:** format 1 · correctness 1
 - answer after normalization: `positiivne`
 
-**Check:** 
+**Check:** OK
 
 ## 17. K2-014 (K2, difficulty 3)
 
@@ -572,7 +572,7 @@ Helista numbril 5123 4567 või rahvusvaheliselt +372 5123 4567.
 - wrong fields: none
 - nullViolations: 0
 
-**Check:** 
+**Check:** OK
 
 ## 18. K3-021 (K3, difficulty 3)
 
@@ -603,7 +603,7 @@ Tarkvara uus versioon 4.2 parandab 17 viga ja toob kaks uut võimalust. Uuendus 
 | language | `"et"` | correctness | yes |
 | regex_absent | `(release\|update\|bugfix\|feature) (flags: i)` | correctness | yes |
 
-**Check:** 
+**Check:** OK
 
 ## 19. K1-032 (K1, difficulty 5)
 
@@ -632,7 +632,7 @@ Marti
 **Score:** format 1 · correctness 1
 - answer after normalization: `marti`
 
-**Check:** 
+**Check:** OK
 
 ## 20. K2-002 (K2, difficulty 1)
 
@@ -667,4 +667,4 @@ Palun lisage kasutaja: Kadri Ilves, e-post kadri.ilves@naidis.ee, telefon 5123 4
 - wrong fields: none
 - nullViolations: 0
 
-**Check:** 
+**Check:** OK

@@ -29,9 +29,9 @@ Teises kvartalis kasvas müük 8 protsenti ning samal perioodil käivitati uus r
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 2. H7165
 
@@ -59,9 +59,9 @@ Ettevõte väidab pressiteates, et uus mudel on turu kiireim, kuid sõltumatuid 
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 3. H1089
 
@@ -89,9 +89,9 @@ Uuring ei leidnud kohvitarbimise ja unehäirete vahel statistiliselt olulist seo
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 4. H8493
 
@@ -119,9 +119,9 @@ Teises kvartalis kasvas müük 8 protsenti ning käivitati uus reklaamikampaania
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 5. H1632
 
@@ -149,9 +149,9 @@ Tarkvara versioon 4.2 parandas 17 viga ja lisas kaks uut funktsiooni. Uuendus on
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 6. H8478
 
@@ -179,9 +179,9 @@ Kahjuks ei saanud me teie taotlust rahuldada, sest esitatud dokumendid ei vastan
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 7. H3057
 
@@ -209,9 +209,9 @@ Tartus avati uus raamatukogu, mis maksis 8,5 miljonit eurot ja mille avapäeval 
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 8. H8399
 
@@ -239,9 +239,9 @@ Ettevõtte väitel on uus mudel turu kiireim, kuid sõltumatud mõõtmised puudu
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 9. H7575
 
@@ -269,9 +269,9 @@ Versioon 4.2 parandab 17 viga, lisab kaks funktsiooni ja on olemasolevatele klie
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 10. H5001
 
@@ -299,9 +299,9 @@ Tallinna tehnoloogiakonverentsil osales 127 inimest 14 riigist. Peaesineja oli S
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 11. H2307
 
@@ -329,9 +329,9 @@ Märtsis e-posti teel korraldatud kliendiküsitlusel osales üheksa klienti, kel
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 12. H2661
 
@@ -359,9 +359,9 @@ Tallinnas toimunud tehnoloogiakonverentsil osales 127 inimest 14 riigist; järgm
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 13. H3666
 
@@ -389,9 +389,9 @@ Tartus avati reedel uus raamatukogu, mis maksis 8,5 miljonit eurot ja ehitati ka
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 14. H6303
 
@@ -419,9 +419,9 @@ Kuigi ettevõtte teatel on nende uus mudel turu kiireim, pole selle kohta veel s
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 15. H6132
 
@@ -449,9 +449,9 @@ Tartus avati möödunud reedel kahe aastaga valminud uus raamatukogu, mis läks 
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 16. H2067
 
@@ -479,9 +479,9 @@ Tarkvara versioon 4.2 toob olemasolevatele klientidele tasuta veaparandused ja k
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 17. H6854
 
@@ -509,9 +509,9 @@ Tartus avati möödunud reedel uus raamatukogu, mille ehitus maksis 8,5 miljonit
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 18. H5708
 
@@ -539,9 +539,9 @@ Teises kvartalis kasvas müük 8 protsenti ning samal ajal käivitati uus reklaa
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 19. H2247
 
@@ -569,9 +569,9 @@ Tallinna tehnoloogiakonverentsil osales 127 inimest 14 riigist; peaesineja oli S
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK
 
 ## 20. H9807
 
@@ -599,6 +599,6 @@ Ettevõte viis läbi kliendiküsitluse, milles osales üheksa klienti. Kolm neis
 
 Median 2 → correctness 1
 
-**Your score (0/1/2):** 
+**Your score (0/1/2):** 2
 
-**Check:** 
+**Check:** OK

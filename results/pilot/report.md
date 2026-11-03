@@ -70,3 +70,16 @@ PLAN.md phase 5 allows changing only faulty tasks, faulty code and the judge lev
 6. **Review:** the author checks the 20 rule scores (`results/scored/pilot.manual_check.md`) and the 20 judge scores (`judge_check.md`).
 
 Before the main run also, according to `kavandi_tooplaan.xlsx`: confirm the stability metric with the supervisor [M6] and write the usability criterion into the methodology chapter [E2].
+
+## 5. The author's decisions (3.11.2026)
+
+- **F1:** K1-011 stays as it is, reference "ei": the customer did not receive the parcel personally, it had to be collected from the parcel machine, which someone else (e.g. an acquaintance) may also have done. All five models answering "ei selgu" is kept as an example for the discussion and the defence (asked from the supervisor).
+- **F2:** the K1 format definition of M3 stays; the methodology chapter says that K1 format includes correctness.
+- **F3:** the strict comparison stays. Sonnet's Markdown and explanations are a result of format compliance, not a scoring fault.
+- **F4:** a topic for the discussion chapter.
+- **F5:** no change (provider default). The hidden input makes xAI more expensive and so lowers its aggregate score; described in the thesis (asked from the supervisor).
+- **F6, F7:** no change.
+- **F8:** the output limit stays 16,000 [L3]; truncated answers in the main run are normal answers and are counted separately [PK1].
+- **Judge:** effort medium stays.
+- **Review (3.11.2026):** the author checked the 20 rule scores (`results/scored/pilot.manual_check.md`): all 20 correct. The author scored the 20 judge files blind (`judge_check.md`): own score 2 in all 20, the same as the judge's median, and the judge's scores were right in all 20. Because of the ceiling effect (F4) the random samples held only full scores, so they confirm that full scores were deserved; the low scores are discussed in F1–F3 and F7.
+- **Still open before the tag `main-run`:** the supervisor's answer on the stability metric [M6] and the research questions [S1]; the usability criterion in the methodology chapter [E2].
