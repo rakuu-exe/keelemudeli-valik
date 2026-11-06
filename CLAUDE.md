@@ -47,6 +47,7 @@ The thesis uses Estonian terms; code and docs use the English ones. Keep the map
 - **Decision model:** min-max normalization and the weighted sum model (WSM), two usage profiles, annual cost.
 - **Sensitivity analysis** and **comparison by task category.**
 - **Validation:** correctness of calculations, reproducibility (incl. a sixth model without code changes), billing check, human evaluation with two raters (linearly weighted Cohen's kappa).
+- **Usability criterion [E2]:** four conditions, fixed before the main run in `docs/usability_criterion.md` (author's decisions 6.11.2026: the Excel check is part of condition 2, the 5% limit per provider, values at the threshold compared as reported).
 
 ## Principles
 

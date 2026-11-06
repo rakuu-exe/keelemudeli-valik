@@ -38,6 +38,7 @@ The order of one run is in CLAUDE.md, "A run from start to end".
 | [analysis.md](analysis.md) | `analysis/`: criteria, min-max, WSM, sensitivity, figures |
 | [tests.md](tests.md) | `test/` and `analysis/tests/` |
 | [results.md](results.md) | `results/`: every kind of stored and derived data |
+| [usability_criterion.md](usability_criterion.md) | the usability criterion [E2], fixed before the main run |
 
 ## File map
 
