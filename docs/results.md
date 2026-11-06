@@ -37,6 +37,12 @@ Raw data (raw rows, judge scores) is only appended to, never changed (principle 
 | `results/prices/*/*.png` | screenshots of the five official price lists on a measurement day (folder = date) [M4] |
 | `results/prices/*/README.md` | which screenshot is which provider, with the sources |
 
+## Provider dashboards
+| file | content |
+|---|---|
+| `results/billing/*/*.png` | screenshots of the five providers' usage and spend pages on a day (folder = date), for the billing check [PK9]; the main run's spend = a later screenshot minus the one before it |
+| `results/billing/*/README.md` | which screenshot is which provider, what it shows and the computed `costBilled` at that time |
+
 ## Analysis
 | file | content |
 |---|---|

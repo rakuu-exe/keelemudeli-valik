@@ -136,6 +136,8 @@ A `*` stands for any characters except `/` (one file name part).
 | `results/pilot/judge_check.md` | [results](results.md) | 20 judge scores with the author's blind scores |
 | `results/prices/*/README.md` | [results](results.md) | what the price list screenshots of a day show |
 | `results/prices/*/*.png` | [results](results.md) | price list screenshots of a measurement day |
+| `results/billing/*/README.md` | [results](results.md) | what the dashboard screenshots of a day show |
+| `results/billing/*/*.png` | [results](results.md) | provider dashboard screenshots for the billing check |
 | `results/figures/*.csv` | [results](results.md) | tables of the analysis (main run) |
 | `results/figures/*.png` | [results](results.md) | figures of the analysis (main run) |
 | `results/figures/*.md` | [results](results.md) | `summary.md`: the main tables of the analysis (main run) |
