@@ -83,3 +83,11 @@ Before the main run also, according to `kavandi_tooplaan.xlsx`: confirm the stab
 - **Judge:** effort medium stays.
 - **Review (3.11.2026):** the author checked the 20 rule scores (`results/scored/pilot.manual_check.md`): all 20 correct. The author scored the 20 judge files blind (`judge_check.md`): own score 2 in all 20, the same as the judge's median, and the judge's scores were right in all 20. Because of the ceiling effect (F4) the random samples held only full scores, so they confirm that full scores were deserved; the low scores are discussed in F1–F3 and F7.
 - **Still open before the tag `main-run`:** the supervisor's answer on the stability metric [M6] and the research questions [S1]; the usability criterion in the methodology chapter [E2].
+
+## 6. The supervisor's answer and the changed decision (6.11.2026)
+
+- **M6:** the standard deviation suits as the measure of spread (and so of stability); no change.
+- **S1:** the research questions are written into the thesis (the problem statement chapter or the introduction).
+- **F5:** explaining xAI's hidden input in the right place is enough; no change.
+- **F1 changed:** the supervisor found "ei selgu" defensible and suggested rewording the question. The author's decision: the K1-011 instruction is now "Kas kuller andis paki kliendile isiklikult üle? Vasta: jah / ei / ei selgu", the reference stays "ei" (`data/CHANGES_v1_3.md`, item 1.13). The pilot answers to the old question remain an example for the discussion chapter.
+- The supervisor confirmed that the conditions are not changed after they are fixed, and that faulty tasks are discussed in the discussion chapter.

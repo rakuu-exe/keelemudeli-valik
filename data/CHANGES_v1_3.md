@@ -1,6 +1,6 @@
 # Task bank v1.2 → v1.3: change log
 
-**Dates:** 1.11.2026 (content changes, items 1.1–1.10), 2.11.2026 (English structure, item 1.11), 3.11.2026 (judge output keys, item 1.12)
+**Dates:** 1.11.2026 (content changes, items 1.1–1.10), 2.11.2026 (English structure, item 1.11), 3.11.2026 (judge output keys, item 1.12), 6.11.2026 (K1-011 question, item 1.13)
 **Files:** `task_bank_v1_2.json` (original, unchanged) → `task_bank_v1_3.json`
 **Check:** `npm run check` (all tests pass)
 
@@ -117,6 +117,12 @@ Field names below are the v1.3 (English) names. The mapping to the v1.2 names is
 - **What:** in `judge_instructions.output_format` the keys of the judge's JSON answer were renamed `skoor` → `score` and `põhjendus` → `justification`, the same names as in `results/judge/scores.jsonl` and in the JSON schema given to the judge. The rest of the Estonian text did not change.
 - **Why:** one set of field names from the judge's answer to the stored score row.
 - **Unchanged:** the 0/1/2 scale, the justification of up to 30 words, the principle and the system rules.
+
+### 1.13 K1-011: the question asks about the courier (author's decision 6.11.2026, after the supervisor's answer)
+
+- **What:** the instruction "Kas klient sai paki isiklikult kätte? Vasta: jah / ei / ei selgu" was replaced by "Kas kuller andis paki kliendile isiklikult üle? Vasta: jah / ei / ei selgu".
+- **Why:** in the pilot run (3.11.2026) all five models answered "ei selgu" to the old question: the customer may have collected the parcel from the parcel machine personally. The supervisor (T. Lepikult) agreed that "ei selgu" is a defensible answer and that the question leaves room for interpretation, and suggested rewording it. The new question asks what the text states: the courier did not hand the parcel over, it was taken to a parcel machine. The answer is therefore clearly "ei" (pilot report F1; PLAN.md phase 5 allows changing a faulty task).
+- **Unchanged:** the input, the answer options, the reference `allowed: ["ei"]`, the normalization and the tag `negation`. The pilot run rows were made with the old question and are not changed.
 
 ---
 

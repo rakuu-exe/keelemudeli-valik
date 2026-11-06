@@ -23,7 +23,7 @@ A task's `check`: K1 `allowed` + `normalize`; K2 `reference`, `expected_null`, `
 The original v1.2 task bank as delivered (Estonian keys). Kept unchanged for reference; not used by the code.
 
 ## `data/CHANGES_v1_3.md`
-Every change from v1.2 to v1.3 with what, why and the decision tag (system prompt removed, user message template, language code `ekk`, regex flags, word boundaries, judge instructions, English structure, judge answer keys in English, …), and what was found but not changed.
+Every change from v1.2 to v1.3 with what, why and the decision tag (system prompt removed, user message template, language code `ekk`, regex flags, word boundaries, judge instructions, English structure, judge answer keys in English, the reworded K1-011 question, …), and what was found but not changed.
 
 ## `data/category2_schemas.json`
 The register of the K2 JSON schemas: `conventions` and `schemas` (task id → file under `data/`).

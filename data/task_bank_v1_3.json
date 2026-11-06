@@ -370,7 +370,7 @@
         "negation"
       ],
       "input": "Tellimus saadeti välja esmaspäeval. Klient ei olnud kodus, mistõttu pakk viidi pakiautomaati.",
-      "instruction": "Kas klient sai paki isiklikult kätte? Vasta: jah / ei / ei selgu",
+      "instruction": "Kas kuller andis paki kliendile isiklikult üle? Vasta: jah / ei / ei selgu",
       "check": {
         "type": "exact_match",
         "allowed": [
