@@ -1,0 +1,7 @@
+category,profile,winner,tie,ranking,same_as_overall
+K1,A,deepseek,False,deepseek > openai > google > xai > anthropic,False
+K1,B,deepseek,False,deepseek > openai > google > xai > anthropic,True
+K2,A,deepseek,False,deepseek > xai > anthropic > openai > google,False
+K2,B,deepseek,False,deepseek > anthropic > openai > xai > google,False
+K3,A,openai,False,openai > xai > anthropic > deepseek > google,False
+K3,B,openai,False,openai > anthropic > deepseek > xai > google,False

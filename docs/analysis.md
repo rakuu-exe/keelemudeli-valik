@@ -26,7 +26,7 @@ Runs everything and writes the outputs (see [results](results.md)): `criteria.cs
 `sensitivity_figure`: one figure per profile, five small multiples (one per criterion), one line per model, a dashed line at the profile's weight. Colours: the dataviz reference palette in its fixed order by the model's position in `config/models.json`, plus one marker shape per model; PNG without the software version in its metadata.
 
 ## `analysis/settings.json`
-`usdPerEur` (1 EUR = `usdPerEur` USD; now 1.1216, the author's figure of 3.11.2026, to be replaced by the ECB rate of the main run day [M4]; `null` = EUR columns empty), `rateDate`, `rateSource`, `sensitivityStep` (0.05).
+`usdPerEur` (1 EUR = `usdPerEur` USD; 1.1165, the ECB reference rate of 6.11.2026, the main run day [M4]; 7.11 is a Saturday without a rate; `null` = EUR columns empty), `rateDate`, `rateSource`, `sensitivityStep` (0.05).
 
 ## `analysis/wsm_check.xlsx`
 The author's independent check of the calculation [M12], made on 1.11.2026 (in Estonian; formerly `wsm_kontroll.xlsx`). Sheet "Sisend": the yellow cells take each model's five criterion values (correctness, format, cost $ per task, latency s, stability) and the Python scores A and B; sheet "Arvutus" computes min-max and the WSM with Excel formulas and compares them with Python (tolerance 0.000001, "Kõik klapivad" when everything matches). A sixth row is for the Luna test [M13]. Copy the values from `wsm_check_input.csv`, whose first columns are in the same order and units. It holds sample data until the main run.

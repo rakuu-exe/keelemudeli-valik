@@ -4,7 +4,7 @@
 
 With one repeat, stability is 0 for every model, so it does not separate them here.
 
-Profiles: A (quality first), B (cost first). Annual cost: 10,000 tasks a day × 365 days, costCriterion, USD; EUR at 1.1216 USD per EUR (2026-11-03, the author's figure of 3.11.2026 (1 EUR = 1.1216 USD, 1 USD = 0.8916 EUR); to be replaced by the ECB reference rate of the main run day).
+Profiles: A (quality first), B (cost first). Annual cost: 10,000 tasks a day × 365 days, costCriterion, USD; EUR at 1.1165 USD per EUR (2026-11-06, the ECB euro reference rate of 6.11.2026 (1 EUR = 1.1165 USD), https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml; the main run ran 6.11.2026 23:25 - 7.11.2026 02:52 UTC, and 7.11.2026 is a Saturday without a reference rate).
 
 ## Criteria per model
 
@@ -42,11 +42,11 @@ Weights: correctness 0.40, format 0.25, stability 0.15, cost 0.10, latency 0.10.
 
 | model | annual_usd | difference_from_chosen_usd | annual_eur |
 |---|---|---|---|
-| openai | 2,173 | +1,028 | 1,937 |
-| anthropic | 5,841 | +4,696 | 5,207 |
-| google | 11,383 | +10,238 | 10,149 |
-| deepseek | 1,145 | +0 | 1,021 |
-| xai | 20,573 | +19,428 | 18,342 |
+| openai | 2,173 | +1,028 | 1,946 |
+| anthropic | 5,841 | +4,696 | 5,231 |
+| google | 11,383 | +10,238 | 10,195 |
+| deepseek | 1,145 | +0 | 1,025 |
+| xai | 20,573 | +19,428 | 18,426 |
 
 Sensitivity (where the winner changes):
 
@@ -72,11 +72,11 @@ Weights: correctness 0.25, format 0.10, stability 0.10, cost 0.40, latency 0.15.
 
 | model | annual_usd | difference_from_chosen_usd | annual_eur |
 |---|---|---|---|
-| openai | 2,173 | +1,028 | 1,937 |
-| anthropic | 5,841 | +4,696 | 5,207 |
-| google | 11,383 | +10,238 | 10,149 |
-| deepseek | 1,145 | +0 | 1,021 |
-| xai | 20,573 | +19,428 | 18,342 |
+| openai | 2,173 | +1,028 | 1,946 |
+| anthropic | 5,841 | +4,696 | 5,231 |
+| google | 11,383 | +10,238 | 10,195 |
+| deepseek | 1,145 | +0 | 1,025 |
+| xai | 20,573 | +19,428 | 18,426 |
 
 Sensitivity (where the winner changes):
 

@@ -1,0 +1,5 @@
+{"key":"2026-11-03-probe|K1-001|openai|1","costCriterion":0.000089,"costBilled":0.000089}
+{"key":"2026-11-03-probe|K1-001|anthropic|1","costCriterion":0.000258,"costBilled":0.000258}
+{"key":"2026-11-03-probe|K1-001|google|1","costCriterion":0.00194925,"costBilled":0.00194925}
+{"key":"2026-11-03-probe|K1-001|deepseek|1","costCriterion":0.00006795,"costBilled":0.00006795}
+{"key":"2026-11-03-probe|K1-001|xai|1","costCriterion":0.004586,"costBilled":0.002858}
