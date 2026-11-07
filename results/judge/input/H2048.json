@@ -1,0 +1,7 @@
+{
+  "id": "H2048",
+  "sourceText": "Tarkvara versioon 4.2 parandas 17 viga ja lisas kaks uut funktsiooni. Uuendus on tasuta kõigile olemasolevatele klientidele. Vanemate versioonide tugi lõpeb 1. juunil 2026.",
+  "instruction": "Võta kokku kuni 30 sõnaga.",
+  "rubric": "0 = kokkuvõte väidab või vihjab, et vanemate versioonide tugi on juba lõppenud. 1 = ajaline suhe on ebaselge. 2 = tulevikuline tähtaeg on selgelt edasi antud.",
+  "answer": "Tarkvara versioon 4.2 parandas 17 viga, lisas kaks uut funktsiooni ja on olemasolevatele klientidele tasuta. Vanemate versioonide tugi lõpeb 1. juunil 2026."
+}

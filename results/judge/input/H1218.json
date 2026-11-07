@@ -1,0 +1,7 @@
+{
+  "id": "H1218",
+  "sourceText": "Uuring ei leidnud statistiliselt olulist seost kohvitarbimise ja unehäirete vahel.",
+  "instruction": "Võta leid kokku ühe lausega.",
+  "rubric": "0 = kokkuvõte väidab, et seos leiti, või et seose puudumine on tõestatud. 1 = eitus säilib, kuid 'statistiliselt oluline' on kadunud. 2 = eitus ja määratlus mõlemad säilivad.",
+  "answer": "Uuringu kohaselt ei leitud kohvitarbimise ja unehäirete vahel statistiliselt olulist seost."
+}

@@ -1,0 +1,7 @@
+{
+  "id": "H8619",
+  "sourceText": "Ettevõtte pressiteate kohaselt on uus mudel turu kiireim. Sõltumatuid mõõtmisi ei ole veel avaldatud.",
+  "instruction": "Võta kokku ühe lausega.",
+  "rubric": "0 = kokkuvõte esitab kiireima staatuse faktina. 1 = allikas on mainitud, kuid mõõtmiste puudumine on kadunud. 2 = nii väite allikas kui sõltumatute mõõtmiste puudumine säilivad.",
+  "answer": "Ettevõte väidab pressiteates, et uus mudel on turu kiireim, kuid sõltumatuid mõõtmisi ei ole veel avaldatud."
+}

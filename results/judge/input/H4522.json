@@ -1,0 +1,7 @@
+{
+  "id": "H4522",
+  "sourceText": "Tallinnas toimunud tehnoloogiakonverentsil osales 127 inimest 14 riigist. Korraldajad teatasid, et järgmise aasta eelarve on 2,4 miljonit eurot. Konverentsi peaesineja oli Soome ettevõtte tehnoloogiajuht.",
+  "instruction": "Võta tekst kokku kuni 25 sõnaga.",
+  "rubric": "0 = mõni arv on kokkuvõttes muudetud või juurde leiutatud. 1 = arvud on õiged, kuid üks on kontekstist välja rebitud. 2 = kõik esitatud arvud vastavad lähtetekstile.",
+  "answer": "Tallinna tehnoloogiakonverentsil osales 127 inimest 14 riigist. Peaesineja oli Soome ettevõtte tehnoloogiajuht ning järgmise aasta eelarve on 2,4 miljonit eurot."
+}

@@ -1,0 +1,7 @@
+{
+  "id": "H5540",
+  "sourceText": "Müük kasvas teises kvartalis 8 protsenti. Samal perioodil käivitati uus reklaamikampaania.",
+  "instruction": "Võta kokku ühe lausega.",
+  "rubric": "0 = kokkuvõte väidab, et kampaania põhjustas kasvu. 1 = põhjuslikkust vihjatakse, kuid ei väideta otse. 2 = mõlemad faktid on esitatud ilma põhjusliku seoseta.",
+  "answer": "Teises kvartalis kasvas müük 8 protsenti ning samal ajal käivitati uus reklaamikampaania."
+}

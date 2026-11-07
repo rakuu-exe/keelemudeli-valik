@@ -1,0 +1,7 @@
+{
+  "id": "H4136",
+  "sourceText": "Ettevõte viis läbi kliendiküsitluse, milles osales üheksa klienti. Kolm neist andis teenusele negatiivse hinnangu, viis positiivse ja üks jättis vastamata. Küsitlus viidi läbi e-posti teel märtsis.",
+  "instruction": "Võta küsitluse tulemused kokku ühe lausega.",
+  "rubric": "0 = kokkuvõte üldistab valesti, väites või vihjates, et enamik või suur osa klientidest oli rahulolematu. 1 = arvud on õiged, kuid sõnastus jätab proportsioonist eksitava mulje. 2 = proportsioon on edasi antud korrektselt (vähemus oli negatiivne).",
+  "answer": "Märtsis e-posti teel läbi viidud kliendiküsitluses hindas üheksast kliendist viis teenust positiivselt, kolm negatiivselt ja üks jättis vastamata."
+}

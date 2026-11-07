@@ -1,0 +1,7 @@
+{
+  "id": "H4967",
+  "sourceText": "Teie taotlus jäeti rahuldamata, kuna esitatud dokumendid ei vastanud nõuetele ja tähtaeg on möödunud.",
+  "instruction": "Sõnasta sama otsus kliendisõbralikumalt, kuid ära muuda otsuse sisu. Kuni 40 sõna.",
+  "rubric": "0 = otsuse sisu on muutunud (nt jäetakse mulje, et taotlust saab veel esitada või et otsus pole lõplik). 1 = sisu säilib, kuid üks kahest põhjusest on kadunud. 2 = otsus ja mõlemad põhjused säilivad, toon on viisakam.",
+  "answer": "Kahjuks ei saanud me teie taotlust rahuldada, sest esitatud dokumendid ei vastanud kehtestatud nõuetele ja taotluse esitamise tähtaeg oli juba möödunud. Täname teid pöördumise eest ning vastame hea meelega kõigile teie küsimustele."
+}

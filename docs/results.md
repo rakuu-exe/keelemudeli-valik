@@ -5,7 +5,7 @@ Raw data (raw rows, judge scores) is only appended to, never changed (principle 
 ## Raw data
 | file | content |
 |---|---|
-| `results/raw/*.jsonl` | one row per API request: key, run, task, model, model version, repeat, start time, TTFT, total time, status, error, earlier failed attempts (`retries`), finish reason, normalized and original usage, the exact answer. Written by `src/runner/run.js`. Runs: `2026-11-03-probe`, `pilot`; later `main`, `luna` |
+| `results/raw/*.jsonl` | one row per API request: key, run, task, model, model version, repeat, start time, TTFT, total time, status, error, earlier failed attempts (`retries`), finish reason, normalized and original usage, the exact answer. Written by `src/runner/run.js`. Runs: `2026-11-03-probe`, `pilot`, `main` (6.–7.11.2026); later `luna` |
 | `results/judge/input/H*.json` | anonymous judge files (source text, instruction, rubric, answer; no model name or key); `src/judge/prepare.js` |
 | `results/judge/key.csv` | `id,key`: judge file → raw row key; never shown to the judge |
 | `results/judge/scores.jsonl` | one row per judge score: id, repeat 1–3, score (0/1/2 or null), justification, model, Claude Code version, time, invalid attempts; `src/judge/run.js` |
