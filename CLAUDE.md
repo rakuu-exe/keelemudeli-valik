@@ -139,6 +139,7 @@ results/
   human/             sample, key, rater scores
   figures/           tables and figures of the analysis (main run; figures/pilot/ = preview)
   pilot/             the pilot run report and the author's review files
+  main/              the main run report
   prices/            price list screenshots of a measurement day
   billing/           provider dashboard screenshots for the billing check (2026-11-06 = before the main run)
 ```
