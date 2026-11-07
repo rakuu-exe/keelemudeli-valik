@@ -70,17 +70,17 @@ Computed `costBilled` of all requests made with the experiment keys (probe reque
 
 | provider | computed | dashboard | difference | status |
 |---|---|---|---|---|
-| OpenAI (Terra + Luna) | $0.4117; 766 requests | $0.41; 729 requests | 0.4% | taken one minute after Luna: only 8 of the 45 Luna requests had arrived → take again |
+| OpenAI (Terra + Luna) | $0.4117; 766 requests | $0.41; 729 requests | 0.4% | only 8 of the 45 Luna requests had arrived, at 11:41 and still at 11:49 → take again later |
 | Anthropic | $1.1448 | $1.14 spend this month | 0.4% | final |
 | Google | $2.3681 = €2.1210 at 1.1165 | spend cap €2.12; cost report €1.14 | 0.05% (spend cap) | the cost report lags ("might take longer than 24 hours") → take again on 8.11 or later; the conversion of the euros is not decided yet |
 | DeepSeek | $0.1815; 721 requests; 424,570 tokens | $0.18; 721 requests; 424,570 tokens | 0.8% | final; requests and tokens match exactly |
-| xAI | $2.6981 | credit balance $2.34 (= $2.66 spent of $5.00) | (1.4%) | only the billing page; the usage page (as on 6.11) is needed → take again |
+| xAI | $2.6981; 1,331,037 tokens | $2.70; 1,331,037 tokens (usage page, 11:50) | 0.07% | final; every token type matches exactly; "2,882 requests" = requests counted per token type (721 + 719 + 721 + 721) |
 
 The Anthropic figure also shows that the judge (Claude Code on the Pro subscription) is not in the API bill.
 
 ## 8. Still open
 
-- Dashboards again: OpenAI (766 requests), xAI usage page, Google on 8.11 or later; the date range from 3.11 or earlier.
+- Dashboards again: OpenAI (766 requests) and the Google spend page, on 8.11 or later; the date range from 3.11 or earlier.
 - How the Google euros are converted (suggested: the computed USD at the same ECB rate of 6.11.2026).
 - The author's check in `analysis/wsm_check.xlsx` [M12].
 - Human evaluation [M14]: sample of 60, the Google Form, two raters, kappa.
