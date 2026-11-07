@@ -1,0 +1,11 @@
+profile,criterion,weight,winner,changes,ties,winner_holds_from,winner_holds_to
+A,correctness,0.4,luna,none,none,0,1
+A,format,0.25,luna,none,none,0,1
+A,stability,0.15,luna,none,none,0,1
+A,cost,0.1,luna,none,none,0,1
+A,latency,0.1,luna,none,none,0,1
+B,correctness,0.25,luna,none,none,0,1
+B,format,0.1,luna,none,none,0,1
+B,stability,0.1,luna,none,none,0,1
+B,cost,0.4,luna,none,none,0,1
+B,latency,0.15,luna,none,none,0,1

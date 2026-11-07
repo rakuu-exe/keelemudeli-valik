@@ -1,0 +1,2 @@
+model,answers,correctness,format,stability,cost,latency,ttft,correctness_missing,cost_missing,truncated,errors
+luna,45,0.9814814815,1,0.02842309116,7.595555556e-05,1463.8856,1209.7496,0,0,0,0

@@ -1,0 +1,4 @@
+category,model,answers,correctness,format,stability,cost,latency,ttft,correctness_missing,cost_missing,truncated,errors
+1,luna,15,1,1,0,2.273333333e-05,1131.9174,1106.4702,0,0,0,0
+2,luna,15,0.9444444444,1,0.08526927349,7.02e-05,1412.9238,1132.274,0,0,0,0
+3,luna,15,1,1,0,0.0001349333333,1954.6948,1642.0499,0,0,0,0
