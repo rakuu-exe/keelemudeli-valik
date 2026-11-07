@@ -36,6 +36,7 @@ The order of one run is in CLAUDE.md, "A run from start to end".
 | [cost.md](cost.md) | `src/cost/`: costCriterion and costBilled |
 | [reports.md](reports.md) | `src/report/`: the pilot run report data |
 | [analysis.md](analysis.md) | `analysis/`: criteria, min-max, WSM, sensitivity, figures |
+| [human.md](human.md) | `src/human/`, `tools/apps_script/`, `analysis/human_eval.py`: the human evaluation |
 | [tests.md](tests.md) | `test/` and `analysis/tests/` |
 | [results.md](results.md) | `results/`: every kind of stored and derived data |
 | [usability_criterion.md](usability_criterion.md) | the usability criterion [E2], fixed before the main run |
@@ -108,6 +109,12 @@ A `*` stands for any characters except `/` (one file name part).
 | `analysis/settings.json` | [analysis](analysis.md) | exchange rate and sensitivity step |
 | `analysis/requirements.txt` | [analysis](analysis.md) | pinned Python packages |
 | `analysis/tests/test_analysis.py` | [tests](tests.md) | Python unit tests with hand-calculated examples |
+| `analysis/tests/test_human_eval.py` | [tests](tests.md) | Python unit tests of the human evaluation agreement |
+| `analysis/human_eval.py` | [human](human.md) | the automatic score on 0/1/2 and the weighted kappa |
+| `src/human/sample.js` | [human](human.md) | the sample of 60 answers for the raters |
+| `src/human/import.js` | [human](human.md) | the form responses into the rater score files |
+| `tools/apps_script/create_form.gs` | [human](human.md) | Apps Script: the Google Form from the sample |
+| `tools/apps_script/rater_guide.txt` | [human](human.md) | the rater guide (Estonian) |
 | `test/adapters.test.js` | [tests](tests.md) | adapters against fake streams; abort signal; models.json |
 | `test/runner.test.js` | [tests](tests.md) | pipeline: raw rows, rounds, resume, retries, stop rules, run configs |
 | `test/scoring.test.js` | [tests](tests.md) | scoring rules; every reference gets the maximum score |
@@ -115,6 +122,7 @@ A `*` stands for any characters except `/` (one file name part).
 | `test/cost.test.js` | [tests](tests.md) | cost sums, peak hours, cache, probe rows |
 | `test/report.test.js` | [tests](tests.md) | pilot report data and the judge review |
 | `test/profiles.test.js` | [tests](tests.md) | the usage profiles |
+| `test/human.test.js` | [tests](tests.md) | the human evaluation sample and the import of the responses |
 | `test/taskBank.test.js` | [tests](tests.md) | the task bank check script (phase 0) |
 | `test/text.test.js` | [tests](tests.md) | word and sentence counting, language check |
 | `test/docs.test.js` | [tests](tests.md) | this file map against the files of the repository |
@@ -135,6 +143,9 @@ A `*` stands for any characters except `/` (one file name part).
 | `results/pilot/report_data.md` | [results](results.md) | generated data of the pilot run report |
 | `results/pilot/judge_check.md` | [results](results.md) | 20 judge scores with the author's blind scores |
 | `results/main/report.md` | [results](results.md) | the main run report |
+| `results/human/sample.csv` | [results](results.md) | the 60 answers for the raters, without model names |
+| `results/human/key.csv` | [results](results.md) | answer ID → raw row key and scoring method (not for the raters) |
+| `results/human/scores_rater*.csv` | [results](results.md) | the raters' scores |
 | `results/prices/*/README.md` | [results](results.md) | what the price list screenshots of a day show |
 | `results/prices/*/*.png` | [results](results.md) | price list screenshots of a measurement day |
 | `results/billing/*/README.md` | [results](results.md) | what the dashboard screenshots of a day show |

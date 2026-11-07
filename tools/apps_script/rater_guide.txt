@@ -1,0 +1,40 @@
+HINDAMISJUHEND
+
+Aitäh, et hindad! Vormis on 60 keelemudeli vastust eestikeelsetele tekstitöötlusülesannetele. Iga vastuse juures on lähtetekst, ülesanne (täpselt see, mille mudel sai) ja mudeli vastus täpselt sellisena, nagu mudel selle andis. Mudeli nime ei näidata. Hinda iga vastust iseseisvalt ja ära aruta hindamist teise hindajaga.
+
+Hinda iga vastuse korrektsust skaalal 0–2:
+
+2 – õige: vastus täidab ülesande sisuliselt täielikult. Kõik nõutud andmed või faktid on olemas ja õiged ning midagi ei ole moonutatud ega juurde mõeldud.
+1 – osaliselt õige: vastus on osaliselt õige, kuid midagi on puudu, vale või ebatäpne (nt üks väli on vale, üks nõutud fakt puudub, mõni oluline täpsustus on kadunud).
+0 – vale: vastus on sisuliselt vale või eksitav, ei vasta küsimusele, on tühi või mudel keeldus vastamast.
+
+Mida arvestada
+• Võrdle vastust ainult lähtetekstiga. Kui vastus lisab fakte, mida tekstis ei ole, või muudab teksti tähendust, on see viga.
+• Hinda sisu, mitte vormistust. Vormistust (nt rasvane kiri **47**, koodiploki märgised ```, lõpupunkt, selgitus vastuse järel) ning pikkuse ja lausete arvu piiranguid mõõdetakse eraldi, seega need hinnet ei mõjuta.
+• Vastus peab olema eesti keeles.
+• Kui sa ei ole kindel, vali hinne, mis kirjeldab vastust kõige paremini, ja kirjuta põhjus kommentaari. Kommentaar ei ole kohustuslik.
+
+Näited (neid ülesandeid hinnatavate hulgas ei ole)
+
+Näide 1
+Lähtetekst: Ujula on avatud esmaspäevast reedeni kella 7–21 ja laupäeval kella 9–17. Pühapäeval on ujula suletud.
+Ülesanne: Kas ujula on pühapäeval avatud? Vasta: jah / ei.
+„ei“ → 2
+„**Ei.** Pühapäeval on ujula suletud.“ → 2 (sisu on õige; vormistust ei hinnata)
+„jah“ → 0
+
+Näide 2
+Lähtetekst: Lend TK123 väljub Tallinnast 5. juulil 2026 kell 14.30.
+Ülesanne: Eralda lennu number, väljumise kuupäev (AAAA-KK-PP) ja lähtelinn JSON-objektina.
+{"lend": "TK123", "kuupäev": "2026-07-05", "lähtelinn": "Tallinn"} → 2
+{"lend": "TK123", "kuupäev": "2026-05-07", "lähtelinn": "Tallinn"} → 1 (kuupäev on vale)
+{"lend": null, "kuupäev": null, "lähtelinn": null} → 0
+
+Näide 3
+Lähtetekst: Kooli jõulukontsert toimub 18. detsembril aulas. Esinevad koor ja orkester. Pääs on tasuta.
+Ülesanne: Võta tekst kokku ühe lausega.
+„Kooli tasuta jõulukontsert, kus esinevad koor ja orkester, toimub 18. detsembril aulas.“ → 2
+„Kooli jõulukontsert, kus esinevad koor ja orkester, toimub 18. novembril aulas.“ → 1 (üks fakt on vale)
+„Kooli jõulukontsert jääb sel aastal ära.“ → 0 (tähendus on muutunud)
+
+Kõigepealt vali oma hindaja number ja seejärel hinda vastused ükshaaval.

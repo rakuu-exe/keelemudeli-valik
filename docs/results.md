@@ -25,6 +25,13 @@ Raw data (raw rows, judge scores) is only appended to, never changed (principle 
 | `results/pilot/judge_check.md` | 20 judge scores without model names, with the author's blind scores; `src/judge/review.js` |
 | `results/main/report.md` | the main run report: measurement, judge, criteria, findings, decision model, reproducibility, the preliminary billing check and what is still open (written by hand) |
 
+## Human evaluation
+| file | content |
+|---|---|
+| `results/human/sample.csv` | the human evaluation sample [M14]: `answerId`, `sourceText`, `task`, `answer`; 60 answers of the main run, shuffled, without model names; `src/human/sample.js` (see [human](human.md)) |
+| `results/human/key.csv` | `answerId` → raw row `key` and `scoringMethod`; not given to the raters |
+| `results/human/scores_rater*.csv` | the raters' scores: `answerId`, `score` (0/1/2), `comment`; `src/human/import.js`; never overwritten |
+
 ## Judge check set
 | file | content |
 |---|---|

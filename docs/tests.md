@@ -19,8 +19,10 @@ npm run check                                              # the task bank check
 | `test/cost.test.js` | pricing.json against models.json and PLAN.md, the DeepSeek peak hour boundaries, the two sums, cache reads and writes, prices that do not apply, the real probe rows (xAI equals its own reported cost) |
 | `test/report.test.js` | the pilot report data (errors, truncated, suspicious tasks, Markdown in K1, cost estimate) and the blind judge review |
 | `test/profiles.test.js` | `config/profiles.json`: five criteria, weights of E3, sums of 1, 10,000 a day |
+| `test/human.test.js` | the human evaluation sample: 60 answers, 4 per category and model, K3 2 + 2, different tasks, the fixed seed, the four columns, the task as the model saw it, never overwritten; the import of the form responses: one file per rater, the score from the choice text, comments, duplicates and missing raters, never overwritten |
 | `test/docs.test.js` | the file map of `docs/README.md`: every file of the repository matches a row, every literal row exists, every row's doc names it |
 | `test/changelog.test.js` | `CHANGELOG.md`: the I and U numbers run 1, 2, 3 … without gaps in the order of the rows, dates never go back, every row has a description and files |
+| `analysis/tests/test_human_eval.py` | the automatic score on 0/1/2 (rules and judge), a hand-calculated linear kappa (3/7), full agreement, kappa not defined, the score table and the kappa table |
 | `analysis/tests/test_analysis.py` | hand-calculated examples [M12]: min-max (incl. all equal), WSM, ranking and ties, reweighting, the grid, switch points and ties in the sensitivity analysis, the criteria (stability, missing values, errors, truncated), annual cost |
 
 ## Fixtures

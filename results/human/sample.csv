@@ -1,0 +1,336 @@
+answerId,sourceText,task,answer
+A01,Tarkvara versioon 4.2 parandas 17 viga ja lisas kaks uut funktsiooni. Uuendus on tasuta kõigile olemasolevatele klientidele. Vanemate versioonide tugi lõpeb 1. juunil 2026.,Võta kokku kuni 30 sõnaga.,Tarkvara versioon 4.2 parandas 17 viga ja lisas kaks uut funktsiooni. Uuendus on olemasolevatele klientidele tasuta. Vanemate versioonide tugi lõpeb 1. juunil 2026.
+A02,"Uus raamatukogu avati Tartus möödunud reedel. Hoone maksumus oli 8,5 miljonit eurot ja ehitus kestis kaks aastat. Avapäeval külastas hoonet üle kolme tuhande inimese.",Võta tekst kokku täpselt viie sõnaga.,Tartus avati reedel uus raamatukogu.
+A03,Tarkvara versioon 4.2 parandas 17 viga ja lisas kaks uut funktsiooni. Uuendus on tasuta kõigile olemasolevatele klientidele. Vanemate versioonide tugi lõpeb 1. juunil 2026.,Võta kokku kuni 30 sõnaga.,"Versioon 4.2 parandas 17 viga, lisas kaks funktsiooni ja on olemasolevatele klientidele tasuta. Vanemate versioonide tugi lõpeb 1. juunil 2026."
+A04,Müük kasvas teises kvartalis 8 protsenti. Samal perioodil käivitati uus reklaamikampaania.,Võta kokku ühe lausega.,Teises kvartalis kasvas müük 8 protsenti ning käivitati uus reklaamikampaania.
+A05,Uuring ei leidnud statistiliselt olulist seost kohvitarbimise ja unehäirete vahel.,Võta leid kokku ühe lausega.,Uuringus ei selgunud kohvitarbimise ja unehäirete vahel statistiliselt olulist seost.
+A06,Ettevõtte pressiteate kohaselt on uus mudel turu kiireim. Sõltumatuid mõõtmisi ei ole veel avaldatud.,Võta kokku ühe lausega.,"Kuigi ettevõtte pressiteate kohaselt on uus mudel turu kiireim, puuduvad selle väite kohta veel sõltumatud mõõtmised."
+A07,"Osalejad: Anu Lill, Peeter Kask, Anu Lill, Mari Saar. Palun koosta unikaalne nimekiri.","Skeem:
+{
+  ""osalejad"": ""massiiv unikaalsetest nimedest"",
+  ""arv"": ""number""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""osalejad"":[""Anu Lill"",""Peeter Kask"",""Mari Saar""],""arv"":3}"
+A08,Tellime kakskümmend viis pakki ja maksame kokku nelisada eurot.,"Skeem:
+{
+  ""kogus"": ""number"",
+  ""summa"": ""number""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""kogus"":25,""summa"":400}"
+A09,"Ostja: Mari Kuusk, isikukood 48501234215. Müüja: Kuusk OÜ, registrikood 11223344.","Skeem:
+{
+  ""ostja_isikukood"": ""string"",
+  ""müüja_registrikood"": ""string""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""ostja_isikukood"": ""48501234215"", ""müüja_registrikood"": ""11223344""}"
+A10,Tootenimetus: juhtmevaba klaviatuur. Hind 49 eurot.,"Skeem:
+{
+  ""toode"": ""string"",
+  ""hind"": ""number""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""toode"":""juhtmevaba klaviatuur"",""hind"":49}"
+A11,Tarkvara versioon 4.2 parandas 17 viga ja lisas kaks uut funktsiooni. Uuendus on tasuta kõigile olemasolevatele klientidele. Vanemate versioonide tugi lõpeb 1. juunil 2026.,Võta kokku kuni 30 sõnaga.,"Versioon 4.2 parandab 17 viga, lisab kaks funktsiooni ja on olemasolevatele klientidele tasuta. Vanemate versioonide tugi lõpeb 1. juunil 2026."
+A12,Tarkvara versioon 4.2 parandas 17 viga ja lisas kaks uut funktsiooni. Uuendus on tasuta kõigile olemasolevatele klientidele. Vanemate versioonide tugi lõpeb 1. juunil 2026.,Võta kokku kuni 30 sõnaga. Toe lõppemise kuupäev peab säilima.,"Versioon 4.2 parandab 17 viga, lisab kaks funktsiooni ja on olemasolevatele klientidele tasuta. Vanemate versioonide tugi lõpeb 1. juunil 2026."
+A13,Kampaania ajal langes hind 80 eurolt 60 eurole.,Mitu protsenti hind langes? Vasta ainult arvuga.,25
+A14,Suurendasime serverite arvu neljalt kuuele. Jõudlus paranes märgatavalt ja tõrked vähenesid.,"Mitu protsenti jõudlus paranes? Kui tekstist ei selgu, vasta täpselt: EI SELGU",EI SELGU
+A15,Kohtume homme pool kolm pärastlõunal Vabaduse väljakul.,"Skeem:
+{
+  ""kellaaeg"": ""string kujul HH.MM"",
+  ""koht"": ""string""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""kellaaeg"": ""14.30"", ""koht"": ""Vabaduse väljak""}"
+A16,"Palun saada arved: kliendile A 500 eurot, kliendile B 750 eurot ja kliendile C 1200 eurot.","Skeem:
+{
+  ""arved"": ""massiiv objektidest {klient: string, summa: number}""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""arved"":[{""klient"":""klient A"",""summa"":500},{""klient"":""klient B"",""summa"":750},{""klient"":""klient C"",""summa"":1200}]}"
+A17,"Tallinnas toimunud tehnoloogiakonverentsil osales 127 inimest 14 riigist. Korraldajad teatasid, et järgmise aasta eelarve on 2,4 miljonit eurot. Konverentsi peaesineja oli Soome ettevõtte tehnoloogiajuht.","Võta tekst kokku kuni 30 sõnaga, kuid ÄRA maini ühtegi arvu.",Tallinna tehnoloogiakonverentsil osales rahvusvaheline publik ning peaesineja oli Soome ettevõtte tehnoloogiajuht. Korraldajad avalikustasid järgmise aasta eelarve.
+A18,Litsents maksab 40 eurot kuus kasutaja kohta. Kümnest kasutajast alates kehtib 15% soodustus kogu summalt. Ettevõttes on 12 kasutajat.,Kui suur on kuutasu eurodes? Vasta ainult arvuga.,408
+A19,Tasuta tarne kehtib tellimustele alates 50 eurost. Suursaartele kehtib piir 80 eurot.,Kas 60-eurone tellimus Saaremaale saab tasuta tarne? Vasta: jah / ei,Ei
+A20,"Kreeditarve nr K-88 summas -240,00 eurot, kuupäev 09.09.2025. Seotud arve 2025/402.","Skeem:
+{
+  ""arve_nr"": ""string"",
+  ""summa"": ""number"",
+  ""kuupäev"": ""string (AAAA-KK-PP)"",
+  ""seotud_arve"": ""string"",
+  ""tüüp"": ""string: ARVE või KREEDITARVE""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""arve_nr"": ""K-88"", ""summa"": -240, ""kuupäev"": ""2025-09-09"", ""seotud_arve"": ""2025/402"", ""tüüp"": ""KREEDITARVE""}"
+A21,Ettevõtte pressiteate kohaselt on uus mudel turu kiireim. Sõltumatuid mõõtmisi ei ole veel avaldatud.,Võta kokku ühe lausega.,"Ettevõte väidab, et uus mudel on turu kiireim, kuid sõltumatuid mõõtmisi pole veel avaldatud."
+A22,Server A taaskäivitati kell 3.00 ja server B kell 5.00. Tõrkekatkestus lõppes pärast teise taaskäivitust.,Mis kell tõrkekatkestus lõppes? Vasta kujul HH.MM,05.00
+A23,"Pakend kaalub 2,5 kg ja sisaldab 12 tk tooteid.","Skeem:
+{
+  ""kaal_kg"": ""number"",
+  ""kogus_tk"": ""number""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""kaal_kg"": 2.5, ""kogus_tk"": 12}"
+A24,Hind ilma käibemaksuta on 100 eurot. Käibemaksumäär 22%.,"Skeem:
+{
+  ""summa_km_ta"": ""number"",
+  ""km_summa"": ""number"",
+  ""summa_kokku"": ""number""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{
+  ""summa_km_ta"": 100,
+  ""km_summa"": null,
+  ""summa_kokku"": null
+}"
+A25,Koosolek algab kell 14.00 ja kestab poolteist tundi.,Mis kell koosolek lõpeb? Vasta kujul HH.MM,15.30
+A26,Meeskonnas on 8 arendajat ja 2 disainerit. Testijate arvu on plaanis sel aastal suurendada.,"Mitu testijat meeskonnas praegu on? Kui tekstist ei selgu, vasta täpselt: EI SELGU",EI SELGU
+A27,Mari sõitis Tartusse esmaspäeval. Tema kolleeg jõudis sinna kaks päeva hiljem.,Mis nädalapäeval jõudis kolleeg Tartusse? Vasta ühe sõnaga.,Kolmapäeval.
+A28,"Ei saa öelda, et oleksin ostuga pettunud – pigem vastupidi.",Klassifitseeri tagasiside. Vasta täpselt ühega: POSITIIVNE / NEGATIIVNE / NEUTRAALNE,POSITIIVNE
+A29,Müük kasvas teises kvartalis 8 protsenti. Samal perioodil käivitati uus reklaamikampaania.,Võta kokku ühe lausega.,"Teises kvartalis kasvas müük 8%, samal perioodil käivitati ka uus reklaamikampaania."
+A30,"Ettevõte viis läbi kliendiküsitluse, milles osales üheksa klienti. Kolm neist andis teenusele negatiivse hinnangu, viis positiivse ja üks jättis vastamata. Küsitlus viidi läbi e-posti teel märtsis.",Kirjelda küsitluse metoodikat ühe lausega. Ära maini tulemusi.,"Ettevõte viis märtsis e-posti teel läbi kliendiküsitluse, milles osales üheksa klienti."
+A31,Juhataja andis raamatupidajale aruande üle. Too lubas selle reedeks kontrollida.,Kes lubas aruande kontrollida? Vasta ühe sõnaga nimetavas käändes.,raamatupidaja
+A32,Koosolek toimub 12. juunil 2025. Palun broneeri ruum 13. juuniks 2025.,"Skeem:
+{
+  ""koosoleku_kuupäev"": ""string (AAAA-KK-PP)"",
+  ""broneeringu_kuupäev"": ""string (AAAA-KK-PP)"",
+  ""vastuolu"": ""tõeväärtus""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{
+  ""koosoleku_kuupäev"": ""2025-06-12"",
+  ""broneeringu_kuupäev"": ""2025-06-13"",
+  ""vastuolu"": true
+}"
+A33,"Tallinnas toimunud tehnoloogiakonverentsil osales 127 inimest 14 riigist. Korraldajad teatasid, et järgmise aasta eelarve on 2,4 miljonit eurot. Konverentsi peaesineja oli Soome ettevõtte tehnoloogiajuht.",Kirjelda teksti sisu vähemalt 15 ja maksimaalselt 30 sõnaga.,"Tallinna tehnoloogiakonverentsil osales 127 inimest 14 riigist; järgmise aasta eelarve on 2,4 miljonit eurot ja peaesineja oli Soome ettevõtte tehnoloogiajuht."
+A34,Server A taaskäivitati kell 3.00 ja server B kell 5.00. Tõrkekatkestus lõppes pärast teise taaskäivitust.,Mis kell tõrkekatkestus lõppes? Vasta kujul HH.MM,"**05.00**
+
+Tekst ei anna täpset lõppemise aega, vaid ainult seda, et katkestus lõppes pärast teise serveri (B) taaskäivitust. Seega on lähim võimalik vastus 05.00 ja tegelik lõppemise aeg oli sellest veidi hilisem."
+A35,"Ei saa öelda, et oleksin ostuga pettunud – pigem vastupidi.",Klassifitseeri tagasiside. Vasta täpselt ühega: POSITIIVNE / NEGATIIVNE / NEUTRAALNE,POSITIIVNE
+A36,Ametnik vaatab taotlust parajasti läbi.,"Skeem:
+{
+  ""staatus"": ""string, lubatud väärtused: UUS, MENETLUSES, KINNITATUD, TAGASI_LÜKATUD""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""staatus"": ""MENETLUSES""}"
+A37,"Arve kuupäev 05.06.2025, maksetähtaeg 30 päeva.","Skeem:
+{
+  ""arve_kuupäev"": ""string (AAAA-KK-PP)"",
+  ""maksetähtaeg"": ""string (AAAA-KK-PP)""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{
+  ""arve_kuupäev"": ""2025-06-05"",
+  ""maksetähtaeg"": ""2025-07-05""
+}"
+A38,Uus versioon parandas mitu viga ja muutis liidese kiiremaks. Kasutajate tagasiside on olnud positiivne.,"Mitu viga parandati? Kui tekstist ei selgu, vasta täpselt: EI SELGU",EI SELGU
+A39,Ettevõte avas uue lao Tartus 2024. aasta märtsis. Peakontor jäi endiselt Tallinnasse.,Millises linnas asub peakontor? Vasta ühe sõnaga.,Tallinnas
+A40,"Palume teavitada, et menetlusdokumendi esitamise tähtaeg on möödunud ning täiendavaid materjale ei ole võimalik arvesse võtta.","Kirjuta sama sisu lihtsas, arusaadavas eesti keeles. Kuni 25 sõna.","Teatame, et dokumendi esitamise tähtaeg on läbi. Seetõttu ei saa me uusi materjale enam arvesse võtta."
+A41,"Palun saada arved: kliendile A 500 eurot, kliendile B 750 eurot ja kliendile C 1200 eurot.","Skeem:
+{
+  ""arved"": ""massiiv objektidest {klient: string, summa: number}""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""arved"":[{""klient"":""A"",""summa"":500},{""klient"":""B"",""summa"":750},{""klient"":""C"",""summa"":1200}]}"
+A42,"Avalikus ruumis on palju tegevusi, mida märgatakse alles siis, kui need mõneks ajaks katkestada. Jalakäijale on oluline, et kõnnitee oleks ühtlane, valgustus toimiks ja ülekäigukoht oleks hästi nähtav. Sama kehtib väikeste väljakute, parkide ja ühistranspordipeatuste kohta. Hästi toimiv keskkond ei pea tingimata olema silmatorkav. Sageli piisab sellest, et erinevad osad sobivad omavahel ja inimene saab oma tavapärase liikumise teha ilma liigse pingutuseta. Keskkonna kujundamisel tuleb arvestada eri kasutajatega, sest sama ruumi kasutavad lapsed, eakad, ratturid, lapsevankriga liikujad ja inimesed, kelle liikumine on aeglasem. Praktiline lahendus on tavaliselt selline, mis vähendab ootamatuid takistusi ning muudab liikumise etteaimatavaks. Seetõttu on hooldus ja järjepidevus sama tähtsad kui esmane kujundus.
+
+Raamatukogus sõltub hea kasutajakogemus paljudest väikestest korralduslikest otsustest. Lugemisala peab olema piisavalt rahulik, kuid samal ajal kergesti leitav. Teeninduskoht peaks võimaldama töötajal küsimustele vastata ning külastajal kiiresti järge pidada. Riiulite paigutus mõjutab seda, kui mugavalt inimene materjali leiab, ning tähistused peavad olema selged ka neile, kes majaga varem kokku puutunud ei ole. Digitaalsete kataloogide kõrval on endiselt oluline füüsilise kogu loogiline ülesehitus. Kui süsteem on järjekindel, väheneb vajadus korduvalt samu juhiseid küsida. Hästi korraldatud ruum toetab ka töötajaid, sest igal esemel on oma koht ja tavapärased toimingud järgivad sarnast järjestust. Lisaks aitab regulaarne korrastamine vältida olukorda, kus vananenud teave jääb aktiivse info kõrvale seisma ning tekitab kasutajas ebakindlust.
+
+Linnaliiklus on näide valdkonnast, kus ühe väikese muudatuse mõju võib ulatuda paljude inimesteni. Peatuses olev teave peab olema loetav, sõidukid peavad saabuma mõistliku korrapäraga ja ümberistumise võimalused peavad olema arusaadavad. Kui inimene saab enne teele asumist aru, kuidas liikumine toimub, väheneb ebakindlus. Selleks ei ole alati vaja rohkem infot, vaid paremini järjestatud infot. Oluline on eristada põhiteavet lisateabest ja paigutada kõige vajalikumad juhised nähtavale kohale. Sama põhimõte kehtib ka digikeskkonnas, kus liiga pikk valikute loetelu võib kasutaja hoopis aeglustada. Lihtsad nimetused, ühtlane ülesehitus ja arusaadav navigeerimine aitavad hoida tähelepanu olulisel. Seetõttu on liikuvuskeskkonna arendamisel kasulik mõelda kogu teekonnale, mitte ainult ühele sõidukile või ühele peatusele.
+
+Harjumuste kujunemisel on oluline keskkond, milles tegevus toimub. Kui vajalikud vahendid on käeulatuses ja tööpind on korras, alustatakse tegevust väiksema vaevaga. Sama võib märgata õppimisel, kirjutamisel, käsitöös või toidu valmistamisel. Segadus ei tähenda alati korratust, sest mõnes tegevuses on ajutiselt palju asju korraga kasutuses. Oluline on, et inimene teaks, mida ta parasjagu vajab ning kuhu kasutatud ese pärast tegevust tagasi läheb. Rutiinide loomine ei pea olema range. Piisab mõnest lihtsast kokkuleppest, mida on kerge meeles pidada. Kui reegleid on liiga palju, hakkavad need ise takistama. Mõistlik korraldus jätab ruumi kohanemiseks, kuid loob samal ajal selge põhiraamistiku. Selle tulemusena kulub vähem aega ümberkorraldamisele ning rohkem aega tegevusele endale.
+
+Muuseumis on külastuskogemus seotud nii esemete kui ka nende esitamise viisiga. Sama ese võib tunduda täiesti erinev sõltuvalt sellest, millise taustaga seda kirjeldatakse. Selged tekstid aitavad mõista, mida vaadata, kuid liigne seletamine võib tähelepanu hajutada. Hea näituse puhul tekib külastajal võimalus liikuda omas tempos ning peatuda seal, kus miski rohkem huvi pakub. Ruumis on tähtis ka liikumise loogika. Kui ekspositsioon sunnib pidevalt tagasi pöörduma, võib vaatamine muutuda väsitavaks. Kui järjestus on loomulik, saab inimene keskenduda sisule. Näituse ettevalmistamisel peab arvestama ka esemete säilitamise tingimustega, sest valgus, temperatuur ja niiskus võivad mõjutada tundlikke materjale. Nii kujuneb külastajale nähtav kogemus paljude taustal tehtud praktiliste otsuste tulemusena.
+
+Kontoritöös mõjutab sujuvust sageli see, kuidas informatsioon liigub ühe inimese juurest teiseni. Kui ülesanded on kirjeldatud üheselt, on väiksem võimalus, et järgmine tegutseja peab puuduva tausta kohta eraldi küsima. Selged pealkirjad, lühikesed juhised ja ühtne failinimetamise loogika aitavad vähendada korduvat tööd. Samas ei ole mõistlik kirjutada iga väikese tegevuse kohta pikka õpetust. Juhis peaks keskenduma neile sammudele, kus eksimus on tõenäolisem või mille järel on tehtut keeruline tagasi võtta. Teiste tegevuste puhul võib piisata lühikesest meeldetuletusest. Hea töökorraldus ei tähenda seega võimalikult paljude reeglite loomist, vaid nende reeglite valimist, mis toetavad tegelikku tegevust. Kui töö muutub, tuleb ka juhised üle vaadata, sest vana kirjeldus võib hakata uut tööviisi segama.
+
+Looduses liikumisel aitab tähelepanelikkus märgata väikseid muutusi. Sama rada võib eri tingimustes tunduda täiesti erinev, sest valgus, tuul, pinnas ja taimestik mõjutavad seda, mida inimene näeb ja kuuleb. Rahulik kõndimine annab aega märgata mustreid, mis kiirel liikumisel jäävad tähelepanuta. Näiteks võib metsas eristada erinevaid helisid, jälgida taimede paiknemist või märgata, kuidas vesi liigub pärast vihma. Selline vaatlemine ei nõua erivarustust, vaid valmisolekut mõnda aega aeglasemalt tegutseda. Ka linnalähedases rohealal on võimalik näha hooajalisi muutusi, kuigi keskkond võib esmapilgul tunduda tuttav. Mõtestatud tähelepanu muudab tavalise jalutuskäigu sisukamaks ning aitab paremini mõista, millised tegurid mõjutavad ümbritsevat ruumi.
+
+Kodus on paljude ülesannete juures kasulik eristada hooldust parandamisest. Hooldus aitab olemasoleval kauem hästi töötada, parandamine tegeleb juba tekkinud probleemiga. Näiteks saab pinda regulaarselt puhastada, liikuvaid osi õigesti kasutada ja hoiukohti korrastada. Kui mõni detail hakkab kuluma, on mõistlik probleem varakult tähele panna, sest väike korrastus võib hiljem vältida suuremat sekkumist. Samuti tasub hoida alles seadmete ja esemete põhiteave, et vajaduse korral oleks lihtsam kindlaks teha, millist varuosa või töövõtet kasutada. Korrastamise eesmärk ei ole muuta kodu pidevalt muutuvaks näituseruumiks. Pigem aitab mõistlik süsteem vähendada otsimisele kuluvat aega ning teeb tavapärased toimingud rahulikumaks. Väikeste harjumuste mõju muutub aja jooksul märgatavaks eriti siis, kui neid järgitakse järjepidevalt.
+
+Õppimisel võib olla kasulik vaheldada keskendumist ja vaheldusrikast tegevust. Pikk järjestikune pingutus ei pruugi anda paremat tulemust kui läbimõeldud pausidega töö. Pausi mõte ei ole ainult puhata, vaid katkestada ühetaoline tegevus nii, et tähelepanu saaks uuesti koonduda. Materjali kordamisel on oluline ka aktiivne meenutamine. Kui inimene proovib enne märkmete vaatamist ise selgitada, mida ta mäletab, muutub selgemaks, millised kohad vajavad täiendavat tähelepanu. Õppimise korraldus sõltub muidugi eesmärgist. Mõne ülesande puhul on oluline täpsus, teise puhul seoste loomine või oskus rakendada õpitut uues olukorras. Seetõttu ei ole üht universaalset meetodit. Kasulikum on valida võte, mis sobib konkreetse materjali ja soovitud tulemusega ning mida on võimalik järjepidevalt kasutada.
+
+Avaliku hoone külastamisel mõjutavad inimese kogemust ka sellised asjad, millele ta teadlikult tähelepanu ei pööra. Ukse avamine, ruumi temperatuur, trepi nähtavus ja võimalus leida istekoht kujundavad üldist tunnetust. Kui mõni neist toimingutest nõuab ootamatult palju pingutust, muutub ka ülejäänud külastus keerulisemaks. Seetõttu on kasutatavuse hindamisel mõistlik liikuda kogu teekond sammhaaval läbi. Külastaja ei pea teadma hoone sisemist töökorraldust, et selles hästi hakkama saada. Juhised peavad olema kirjutatud tavakasutaja vaatenurgast ning olulised otsustuskohad peaksid olema selgelt tähistatud. Samal ajal tuleb vältida olukorda, kus iga pinna kohta lisatakse eraldi juhis. Liigne tähistamine võib muuta keskkonna visuaalselt raskeks ja vähendada kõige tähtsama info märgatavust.
+
+Digitaalse faili korrashoid sõltub rohkem järjepidevusest kui ühest ideaalsest süsteemist. Kui nimed on arusaadavad ja kaustad on paigutatud loogiliselt, leiab vajaliku materjali tavaliselt kiiresti. Segadus tekib siis, kui sama asja kohta on mitu peaaegu ühesuguse nimega koopiat või kui eri inimesed kasutavad erinevaid nimetamisviise. Ühiselt kasutatavas keskkonnas tasub seega kokku leppida vähemalt põhireeglid. Näiteks võib otsustada, et nimi algab teema, tööetapi või muu sisulise tunnusega. Oluline on, et valitud reeglit oleks lihtne järgida ka kiire töö käigus. Kui süsteem nõuab iga faili kohta liiga palju käsitsi otsustamist, hakkab kasutaja sellest varem või hiljem mööda minema. Hea korraldus vähendab otsimisele kuluvat aega ilma uut liigset halduskoormust tekitamata.
+
+Toidu valmistamisel annab tööjaotus sageli hea näite sellest, kuidas tegevusi saab järjestada. Enne küpsetamist või kuumutamist on mugav vajalikud koostisosad välja panna, tööpind puhastada ja vahendid käeulatusse seada. Nii ei pea tegevuse keskel katkestama selleks, et otsida sobivat eset või lugeda juhist. Samal ajal tasub arvestada sellega, millised tegevused võivad toimuda paralleelselt. Mõnda ettevalmistust saab teha siis, kui teine osa juba valmib, kuid kõike ei ole mõistlik korraga juhtida. Kui järjekord muutub liiga keeruliseks, suureneb eksimise võimalus. Seetõttu on lihtne ja rahulik töövoog sageli tõhusam kui pidev kiirustamine. Sama põhimõtet saab rakendada ka paljudele muudele tegevustele, kus sisendi ettevalmistus, põhitegevus ja lõppviimistlus moodustavad loomuliku ahela.
+
+Kogukonnaaias sõltub hea tulemus sageli väikestest kokkulepetest. Taimede hooldus, kastmise korraldus ja töövahendite ühine kasutamine vajavad selget arusaama sellest, kes mida teeb. Kui rollid on täiesti ebamäärased, võivad mõned tegevused jääda tegemata või teha mitu inimest sama asja. Kui kokkuleppeid on liiga palju, muutub osalemine aga tülikaks. Kasulik on hoida põhimõtted lühikesed ja nähtavad ning jätta ruumi olukorra järgi kohanemiseks. Aia puhul on oluline ka keskkonna vaatlemine, sest pinnas, valgus ja niiskus võivad eri kohtades erineda. Kõik taimed ei vaja sama hoolt ning ühtlane lähenemine ei pruugi anda head tulemust. Õppimine tuleb sageli tegevuse enda käigus, kui märgatakse, milline võte konkreetses kohas kõige paremini töötab.
+
+Heli kandub ruumis erinevalt sõltuvalt pindadest ja materjalidest. Pehme sisustus neelab osa helist, kõvad pinnad peegeldavad seda ning avatud ruumis võib kõne muutuda hajusaks. Seetõttu ei ole müratase alati ainult inimeste arvu küsimus. Ka toolide liigutamine, uste sulgumine või tehniliste seadmete pidev töö võivad kujundada taustamüra. Tööruumi kavandamisel on mõistlik mõelda sellele, milliseid tegevusi seal tehakse. Vaikseks keskendumiseks mõeldud ala vajab teistsugust lahendust kui koht, kus inimesed arutavad aktiivselt. Mõnikord aitab lihtne ruumijaotus rohkem kui kallis tehniline sekkumine. Kui eri tegevustega inimesed on paigutatud läbimõeldult, saab vähendada häiriva heli levikut ning parandada keskendumise võimalust ilma kõiki kasutajaid piiramatta.
+
+Teabe esitamisel on tähtis eristada fakti, tõlgendust ja soovitust. Fakti saab üldjuhul kontrollida lähtematerjali põhjal, tõlgendus seob nähtut mingi järeldusega ning soovitus ütleb, mida võiks edasi teha. Kui need kolm tasandit segunevad, võib lugejal olla raske aru saada, milline osa on otsene kirjeldus ja milline osa on autori hinnang. Selge teksti puhul võib iga väite puhul küsida, kas sellel on olemas toetav alus. Samuti tasub tähele panna sõnu, mis väljendavad kindlust, võimalikkust või oletust. Üksikasjade lisamine võib teksti rikastada, kuid ainult siis, kui need on põhjendatud. Kui vajalik teave puudub, on täpsem seda tunnistada kui täita lünka oletusega. Selline põhimõte aitab hoida kokkuvõtted ja märkmed usaldusväärsed ka siis, kui algmaterjal on lühike.
+
+Kokkuleppe kohaselt tasub tellija ettemaksu 1 500 eurot hiljemalt 10. septembriks 2025, viitenumber 7712445.
+
+Meeskonnatöös muutub koostöö lihtsamaks siis, kui inimesed saavad aru, milline töö on juba tehtud ja milline alles ootab tegutsemist. Väikesed märgid, selged olekud ja ühine terminoloogia vähendavad vajadust küsida sama asja mitu korda. Samas peab töövahendi olek olema piisavalt lihtne, et seda jõutaks päriselt uuendada. Kui süsteemis on liiga palju staatusi, ei pruugi keegi teada, millal ühest olekust teise liikuda. Töökorraldus peaks toetama tegelikku tegevust, mitte muutuma eraldi haldusülesandeks. Abiks on ka kokkulepe selle kohta, millal töö loetakse lõpetatuks ja millal vajab see veel teise inimese tähelepanu. Kui need piirid on selged, saab meeskond keskenduda sisule ning vähendada olukordi, kus sama tulemust hinnatakse mitu korda erinevate arusaamade järgi.
+
+Korrastatud arhiiv ei pea olema täiuslik selleks, et olla kasulik. Piisab, kui materjalid on leitavad ning nende seosed on võimalikult hästi säilinud. Paberdokumentide puhul mõjutavad leitavust kaustade nimetused, paigutus ja märksõnad. Digitaalses keskkonnas lisanduvad failivorming, metaandmed ja otsinguvõimalused. Mõlemal juhul aitab järjepidevus. Kui sama tüüpi materjalid on eri kohtades täiesti erinevate põhimõtete järgi kirjeldatud, muutub otsimine aeglaseks. Arhiivitöö juures on kasulik mõelda ka sellele, milline info on tulevase kasutaja jaoks vajalik. Kõike ei ole vaja kirjeldada sama üksikasjalikult, kuid oluline taust peaks olema säilitatud. Nii saab vana materjali kasutada uues olukorras ilma, et iga väikese detaili tähenduse taastamiseks tuleks teha ulatuslikku uurimist.
+
+Kõndimine tuttavas ümbruses võib olla omamoodi vaatlusülesanne. Inimene märkab sageli samu kohti, kuid harvem mõtestab, miks mõni tänavanurk tundub mugav ja teine ebameeldiv. Mõju võivad avaldada valgus, taimestik, liikluse kiirus, istumisvõimalused või see, kui hästi on nähtav järgmine sihtpunkt. Selliste tähelepanekute kirjeldamisel aitab konkreetne keel. Selle asemel et öelda, et koht on hea, võib kirjeldada, mis seal täpselt toimib. Nii muutub hinnang kontrollitavamaks ja teistega võrreldavaks. Sama lähenemist saab kasutada ka tööruumide, teeninduskohtade ja õppimispaikade vaatlemisel. Konkreetsete tunnuste märkimine aitab hiljem eristada esmast muljet tegelikust kasutuskogemusest ning näha, millised omadused korduvad eri olukordades.
+
+Töötoa või koolituse kavandamisel on oluline mõelda osaleja teekonnale. Enne põhitegevust peab inimene aru saama, mida temalt oodatakse ja milliseid vahendeid ta vajab. Tegevuse ajal aitab selge ülesehitus hoida tähelepanu õigel kohal. Lõpus on kasulik teha kokkuvõte sellest, mida prooviti ja mida saab edasi kasutada. Kui sissejuhatus on liiga pikk, väheneb aeg praktiliseks tegevuseks. Kui juhised on liiga napid, kulub aega segaduse lahendamisele. Hea tasakaal sõltub teemast ja osalejate varasemast kogemusest. Juhendaja jaoks võib tuttav tegevus tunduda iseenesestmõistetav, kuid uue osaleja jaoks võib just väike vaheaste olla oluline. Seetõttu tasub juhised läbi proovida inimese pilguga, kes ei tunne tööprotsessi veel hästi.
+
+Mõõtmise ja vaatlemisega seotud tegevustes on tähtis eristada seda, mida tegelikult nähti, sellest, mida nähtust järeldati. Näiteks võib ruumis olla tavapärasest rohkem inimesi, kuid see ei tõesta iseenesest, et teenuse kasutus on püsivalt suurenenud. Samuti ei tähenda ühe päeva eripära automaatselt üldist suundumust. Tähelepanekud muutuvad kasulikumaks siis, kui nende taust ja piirangud on kirja pandud. See ei pea tähendama pikka metodoloogilist kirjeldust. Piisab, kui lugejale on arusaadav, mida vaadeldi, millistes tingimustes ja mida sellest saab mõistlikult järeldada. Selline ettevaatlikkus aitab vältida liigseid üldistusi. Samuti muudab see hilisema võrdluse lihtsamaks, sest erinevaid tähelepanekuid saab kõrvutada võimalikult sarnase tähendusega.
+
+Ühistranspordipeatuse kujundamisel tuleb arvestada sellega, et inimesed ei tegutse alati sama kiirusega. Mõni inimene jõuab varakult, teine tuleb viimasel hetkel, kolmas vajab rohkem aega teabe lugemiseks. Ootamise ajal võib olla oluline kaitse tuule ja vihma eest, kuid nähtavus peab säilima ka sõiduki saabumisel. Teave liinide, suundade ja ümberistumise kohta peaks olema leitav ilma, et kasutaja peaks süvenema pika teksti sisse. Kui mitu teavet on paigutatud ühte kohta, tasub erinevused visuaalselt eristada. Nii on lihtsam leida just see rida, mis puudutab oma teekonda. Kasutajasõbralikkus tähendab siin eelkõige võimalust teha õige otsus kiiresti ja vähese pingutusega.
+
+Lugemisharjumus võib toetuda väga lihtsale põhimõttele: valida materjal, mille juurde on kerge tagasi tulla. Kui lugemiskoht on mugav ja segajaid on vähe, muutub alustamine lihtsamaks. Kõik tekstid ei nõua sama tempot. Mõnda saab lugeda kiiresti, mõne puhul on kasulik peatuda, teha märkmeid või vaadata mõni mõiste üle. Seetõttu ei pruugi eesmärk olla võimalikult suur läbitud maht. Olulisem võib olla see, et materjalist midagi meelde jääks või tekiks uus küsimus, mida hiljem edasi uurida. Lugemise käigus aitab keskendumist ka see, kui telefon ja muud segajad ei ole pidevalt käeulatuses. Väike muutus keskkonnas võib muuta tegevuse märgatavalt rahulikumaks ning anda rohkem ruumi mõtlemiseks.
+
+Ilm mõjutab igapäevast tegevust rohkem, kui esmapilgul tundub. Vihm muudab liikumise tempot, tuul mõjutab rattasõitu ja ere päike võib muuta ekraani lugemise keerulisemaks. Seetõttu kohandavad inimesed tegevusi sageli ilma seda eraldi teadvustamata. Ka hoonete ja avalike alade puhul saab ilmastikuga arvestada ette. Varjualused, kuivenduse lahendused, sobivad pinnad ja piisav varjestus vähendavad olukordi, kus tavapärane kasutus muutub ebamugavaks. Oluline on ka hooldus, sest hästi kavandatud lahendus võib halveneda, kui ummistunud rennid, libedad pinnad või kulunud märgistus jäävad tähelepanuta. Keskkonna toimivus sõltub seega nii planeerimisest kui järjepidevast tähelepanust.
+
+Teenuse kasutamise juures on usaldus sageli seotud sellega, kui etteaimatav on protsess. Kui inimene teab, milline on järgmine samm ja mida temalt oodatakse, on ebamäärasust vähem. Ootamatud muutused või segased juhised võivad seevastu tekitada küsimusi isegi siis, kui teenuse sisu ise on hea. Sel põhjusel on kasulik kontrollida ka kõige lihtsamate protsesside kirjeldusi. Kas algusest lõpuni on arusaadav, kuhu pöörduda, millist infot esitada ja mida pärast esitamist oodata? Kas sõnavara on kogu protsessi vältel sama? Väikesed vastuolud võivad sundida kasutajat oletama, mida tegelikult mõeldi. Järjepidev keelekasutus ja loogiline järjestus aitavad vähendada seda lisatööd ning muudavad teenuse kogemuse rahulikumaks.
+
+Korrastatud töölaud ei tähenda tingimata tühja töölauda. Loomulik on, et käimasoleva tegevuse ajal on nähtaval mitu eset korraga. Oluline on, et tööks vajalikud asjad oleksid eristatavad neist asjadest, mida enam ei kasutata. Kui tegevus lõpeb, aitab lühike korrastus muuta järgmise alustamise lihtsamaks. Sama põhimõtet saab rakendada ka digitaalses töökeskkonnas, kus avatud dokumendid, ajutised koopiad ja märkmed võivad kuhjuda. Regulaarne väike korrastus on sageli vähem koormav kui harva tehtav suur puhastus. Selle eesmärk ei ole saavutada ideaalset korda, vaid vähendada hõõrdumist järgmise tegevuse alguses. Kui tööriistade ja materjalide asukoht on etteaimatav, jääb rohkem tähelepanu sisulisele tööle.
+
+Naabruskonna ühistegevustes on oluline, et osalemine oleks võimalikult lihtne. Ürituse või tööpäeva kirjeldus võiks öelda selgelt, mida tehakse, kus kokku saadakse ja mida osalejalt oodatakse. Liiga üldine kutse jätab liiga palju lahtisi küsimusi, liiga detailne tekst võib aga põhiinfo ära peita. Sama tasakaal kehtib ka registreerimisel. Kui küsitakse ainult vajalikku infot, on alustamine lihtsam. Kui vorm sisaldab tarbetuid välju, võib huviline loobuda enne lõpetamist. Ühise tegevuse õnnestumisel on oma roll ka tagasisidel. Pärast tegevust võib lühidalt vaadata, mis töötas, mis tekitas küsimusi ja mida võiks järgmine kord muuta. Selline korduv kohandamine on tavaliselt tõhusam kui ühe korraga kõike ette planeerida.
+
+Teksti toimetamisel on kasulik alustada sisust ja alles seejärel vaadata stiili. Kõigepealt tuleb kontrollida, kas väited on õiged, järjestus arusaadav ja viited üheselt mõistetavad. Alles seejärel tasub mõelda sõnastuse sujuvusele, korduste vähendamisele ja lause pikkusele. Kui stiili parandatakse enne sisu, võib juhtuda, et väga ladus lause peidab endiselt ebaselget mõtet. Samuti tasub vältida liigset enesekindlust olukorras, kus lähtematerjal ei anna piisavalt infot. Täpne tekst võib olla lühem kui umbkaudne seletus, sest selles ei ole tarbetuid oletusi. Hea toimetamine tähendab seega mitte ainult ilusamat keelt, vaid ka selgemat seost selle vahel, mida allikas ütleb ja mida lugejale edasi antakse.
+
+Ajalooallikate kasutamisel on oluline pidada meeles, et säilinud materjal ei pruugi katta kogu varasemat tegevust. Mõni dokument on alles, teine on kadunud ja kolmas võib olla säilinud ainult osaliselt. Seetõttu tuleb allika põhjal tehtud järeldusi sõnastada vastavalt sellele, kui kindel alus tegelikult olemas on. Kui tekst ütleb midagi otseselt, saab seda kirjeldada otsese väitena. Kui sama info põhjal tehakse laiem järeldus, tasub eristada allika sisu ja tõlgendust. Ka nimede puhul on oluline säilitada algallika kuju, kui ülesanne ei nõua teisiti. Tarbetu parandamine võib viia selleni, et algne tähendus või isiku tuvastatavus muutub. Hoolikas töö tähendab seega sageli seda, et nähtavale jäävad ka teadmise piirid.
+
+Igapäevases suhtluses aitavad selged küsimused vältida olukorda, kus vastaja peab aimama, mida temalt tegelikult oodatakse. Hea küsimus määratleb nii teema kui ka soovitud vastuse vormi. Mõnikord on vaja ainult üht sõna, mõnikord struktureeritud andmeid ja mõnikord lühikest põhjendust. Vorminõue ei ole pelgalt tehniline detail, sest see mõjutab ka hindamist. Kui vastuse piirid on selged, saab kontrollida eelkõige sisu, mitte oletada autori kavatsust. Sama põhimõte kehtib andmete korrastamisel: väljade tähendus peaks olema üheselt arusaadav ning puuduva info puhul peab olema teada, mida teha. Selline täpsus teeb tööprotsessi etteaimatavamaks ja vähendab eri kasutajate vahel tekkivaid tõlgenduserinevusi.
+
+Teenuse või dokumendi üleandmisel on kasulik teha lühike kontroll, mis kinnitab, et vajalik sisu on alles ja järgmine kasutaja saab jätkata ilma lisaselgituseta. Kontroll ei pea olema pikk ega kordama kogu tööd. Mõistlik on keskenduda kohtadele, kus väike viga võib hiljem põhjustada suurema segaduse. Näiteks võib üle vaadata nimed, kontaktandmed, kuupäevad, summad või muu kriitilise sisu, kuid iga töö puhul sõltub kontrollnimekiri tegelikust eesmärgist. Kui protsess kordub sageli, tasub kontroll teha võimalikult ühtseks. Nii väheneb võimalus, et mõni oluline samm ununeb kiiremal hetkel.","Skeem:
+{
+  ""ettemaks"": ""number"",
+  ""tähtaeg"": ""string (AAAA-KK-PP)"",
+  ""viitenumber"": ""string""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""ettemaks"":1500,""tähtaeg"":""2025-09-10"",""viitenumber"":""7712445""}"
+A43,"Tallinnas toimunud tehnoloogiakonverentsil osales 127 inimest 14 riigist. Korraldajad teatasid, et järgmise aasta eelarve on 2,4 miljonit eurot. Konverentsi peaesineja oli Soome ettevõtte tehnoloogiajuht.",Kirjelda teksti sisu vähemalt 15 ja maksimaalselt 30 sõnaga.,"Tallinnas toimunud tehnoloogiakonverentsil osales 127 inimest 14 riigist. Peaesinejaks oli Soome tehnoloogiajuht ning korraldajad avalikustasid järgmise aasta eelarveks 2,4 miljonit eurot."
+A44,Koosolek toimub 12. juunil 2025. Palun broneeri ruum 13. juuniks 2025.,"Skeem:
+{
+  ""koosoleku_kuupäev"": ""string (AAAA-KK-PP)"",
+  ""broneeringu_kuupäev"": ""string (AAAA-KK-PP)"",
+  ""vastuolu"": ""tõeväärtus""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{
+  ""koosoleku_kuupäev"": ""2025-06-12"",
+  ""broneeringu_kuupäev"": ""2025-06-13"",
+  ""vastuolu"": true
+}"
+A45,Vastame päringutele kahe tööpäeva jooksul. Päring saabus reede õhtul.,Mis nädalapäevaks hiljemalt vastatakse? Vasta ühe sõnaga.,Teisipäevaks
+A46,"Avalikus ruumis on palju tegevusi, mida märgatakse alles siis, kui need mõneks ajaks katkestada. Jalakäijale on oluline, et kõnnitee oleks ühtlane, valgustus toimiks ja ülekäigukoht oleks hästi nähtav. Sama kehtib väikeste väljakute, parkide ja ühistranspordipeatuste kohta. Hästi toimiv keskkond ei pea tingimata olema silmatorkav. Sageli piisab sellest, et erinevad osad sobivad omavahel ja inimene saab oma tavapärase liikumise teha ilma liigse pingutuseta. Keskkonna kujundamisel tuleb arvestada eri kasutajatega, sest sama ruumi kasutavad lapsed, eakad, ratturid, lapsevankriga liikujad ja inimesed, kelle liikumine on aeglasem. Praktiline lahendus on tavaliselt selline, mis vähendab ootamatuid takistusi ning muudab liikumise etteaimatavaks. Seetõttu on hooldus ja järjepidevus sama tähtsad kui esmane kujundus.
+
+Raamatukogus sõltub hea kasutajakogemus paljudest väikestest korralduslikest otsustest. Lugemisala peab olema piisavalt rahulik, kuid samal ajal kergesti leitav. Teeninduskoht peaks võimaldama töötajal küsimustele vastata ning külastajal kiiresti järge pidada. Riiulite paigutus mõjutab seda, kui mugavalt inimene materjali leiab, ning tähistused peavad olema selged ka neile, kes majaga varem kokku puutunud ei ole. Digitaalsete kataloogide kõrval on endiselt oluline füüsilise kogu loogiline ülesehitus. Kui süsteem on järjekindel, väheneb vajadus korduvalt samu juhiseid küsida. Hästi korraldatud ruum toetab ka töötajaid, sest igal esemel on oma koht ja tavapärased toimingud järgivad sarnast järjestust. Lisaks aitab regulaarne korrastamine vältida olukorda, kus vananenud teave jääb aktiivse info kõrvale seisma ning tekitab kasutajas ebakindlust.
+
+Linnaliiklus on näide valdkonnast, kus ühe väikese muudatuse mõju võib ulatuda paljude inimesteni. Peatuses olev teave peab olema loetav, sõidukid peavad saabuma mõistliku korrapäraga ja ümberistumise võimalused peavad olema arusaadavad. Kui inimene saab enne teele asumist aru, kuidas liikumine toimub, väheneb ebakindlus. Selleks ei ole alati vaja rohkem infot, vaid paremini järjestatud infot. Oluline on eristada põhiteavet lisateabest ja paigutada kõige vajalikumad juhised nähtavale kohale. Sama põhimõte kehtib ka digikeskkonnas, kus liiga pikk valikute loetelu võib kasutaja hoopis aeglustada. Lihtsad nimetused, ühtlane ülesehitus ja arusaadav navigeerimine aitavad hoida tähelepanu olulisel. Seetõttu on liikuvuskeskkonna arendamisel kasulik mõelda kogu teekonnale, mitte ainult ühele sõidukile või ühele peatusele.
+
+Harjumuste kujunemisel on oluline keskkond, milles tegevus toimub. Kui vajalikud vahendid on käeulatuses ja tööpind on korras, alustatakse tegevust väiksema vaevaga. Sama võib märgata õppimisel, kirjutamisel, käsitöös või toidu valmistamisel. Segadus ei tähenda alati korratust, sest mõnes tegevuses on ajutiselt palju asju korraga kasutuses. Oluline on, et inimene teaks, mida ta parasjagu vajab ning kuhu kasutatud ese pärast tegevust tagasi läheb. Rutiinide loomine ei pea olema range. Piisab mõnest lihtsast kokkuleppest, mida on kerge meeles pidada. Kui reegleid on liiga palju, hakkavad need ise takistama. Mõistlik korraldus jätab ruumi kohanemiseks, kuid loob samal ajal selge põhiraamistiku. Selle tulemusena kulub vähem aega ümberkorraldamisele ning rohkem aega tegevusele endale.
+
+Muuseumis on külastuskogemus seotud nii esemete kui ka nende esitamise viisiga. Sama ese võib tunduda täiesti erinev sõltuvalt sellest, millise taustaga seda kirjeldatakse. Selged tekstid aitavad mõista, mida vaadata, kuid liigne seletamine võib tähelepanu hajutada. Hea näituse puhul tekib külastajal võimalus liikuda omas tempos ning peatuda seal, kus miski rohkem huvi pakub. Ruumis on tähtis ka liikumise loogika. Kui ekspositsioon sunnib pidevalt tagasi pöörduma, võib vaatamine muutuda väsitavaks. Kui järjestus on loomulik, saab inimene keskenduda sisule. Näituse ettevalmistamisel peab arvestama ka esemete säilitamise tingimustega, sest valgus, temperatuur ja niiskus võivad mõjutada tundlikke materjale. Nii kujuneb külastajale nähtav kogemus paljude taustal tehtud praktiliste otsuste tulemusena.
+
+Kontoritöös mõjutab sujuvust sageli see, kuidas informatsioon liigub ühe inimese juurest teiseni. Kui ülesanded on kirjeldatud üheselt, on väiksem võimalus, et järgmine tegutseja peab puuduva tausta kohta eraldi küsima. Selged pealkirjad, lühikesed juhised ja ühtne failinimetamise loogika aitavad vähendada korduvat tööd. Samas ei ole mõistlik kirjutada iga väikese tegevuse kohta pikka õpetust. Juhis peaks keskenduma neile sammudele, kus eksimus on tõenäolisem või mille järel on tehtut keeruline tagasi võtta. Teiste tegevuste puhul võib piisata lühikesest meeldetuletusest. Hea töökorraldus ei tähenda seega võimalikult paljude reeglite loomist, vaid nende reeglite valimist, mis toetavad tegelikku tegevust. Kui töö muutub, tuleb ka juhised üle vaadata, sest vana kirjeldus võib hakata uut tööviisi segama.
+
+Looduses liikumisel aitab tähelepanelikkus märgata väikseid muutusi. Sama rada võib eri tingimustes tunduda täiesti erinev, sest valgus, tuul, pinnas ja taimestik mõjutavad seda, mida inimene näeb ja kuuleb. Rahulik kõndimine annab aega märgata mustreid, mis kiirel liikumisel jäävad tähelepanuta. Näiteks võib metsas eristada erinevaid helisid, jälgida taimede paiknemist või märgata, kuidas vesi liigub pärast vihma. Selline vaatlemine ei nõua erivarustust, vaid valmisolekut mõnda aega aeglasemalt tegutseda. Ka linnalähedases rohealal on võimalik näha hooajalisi muutusi, kuigi keskkond võib esmapilgul tunduda tuttav. Mõtestatud tähelepanu muudab tavalise jalutuskäigu sisukamaks ning aitab paremini mõista, millised tegurid mõjutavad ümbritsevat ruumi.
+
+Kodus on paljude ülesannete juures kasulik eristada hooldust parandamisest. Hooldus aitab olemasoleval kauem hästi töötada, parandamine tegeleb juba tekkinud probleemiga. Näiteks saab pinda regulaarselt puhastada, liikuvaid osi õigesti kasutada ja hoiukohti korrastada. Kui mõni detail hakkab kuluma, on mõistlik probleem varakult tähele panna, sest väike korrastus võib hiljem vältida suuremat sekkumist. Samuti tasub hoida alles seadmete ja esemete põhiteave, et vajaduse korral oleks lihtsam kindlaks teha, millist varuosa või töövõtet kasutada. Korrastamise eesmärk ei ole muuta kodu pidevalt muutuvaks näituseruumiks. Pigem aitab mõistlik süsteem vähendada otsimisele kuluvat aega ning teeb tavapärased toimingud rahulikumaks. Väikeste harjumuste mõju muutub aja jooksul märgatavaks eriti siis, kui neid järgitakse järjepidevalt.
+
+Õppimisel võib olla kasulik vaheldada keskendumist ja vaheldusrikast tegevust. Pikk järjestikune pingutus ei pruugi anda paremat tulemust kui läbimõeldud pausidega töö. Pausi mõte ei ole ainult puhata, vaid katkestada ühetaoline tegevus nii, et tähelepanu saaks uuesti koonduda. Materjali kordamisel on oluline ka aktiivne meenutamine. Kui inimene proovib enne märkmete vaatamist ise selgitada, mida ta mäletab, muutub selgemaks, millised kohad vajavad täiendavat tähelepanu. Õppimise korraldus sõltub muidugi eesmärgist. Mõne ülesande puhul on oluline täpsus, teise puhul seoste loomine või oskus rakendada õpitut uues olukorras. Seetõttu ei ole üht universaalset meetodit. Kasulikum on valida võte, mis sobib konkreetse materjali ja soovitud tulemusega ning mida on võimalik järjepidevalt kasutada.
+
+Avaliku hoone külastamisel mõjutavad inimese kogemust ka sellised asjad, millele ta teadlikult tähelepanu ei pööra. Ukse avamine, ruumi temperatuur, trepi nähtavus ja võimalus leida istekoht kujundavad üldist tunnetust. Kui mõni neist toimingutest nõuab ootamatult palju pingutust, muutub ka ülejäänud külastus keerulisemaks. Seetõttu on kasutatavuse hindamisel mõistlik liikuda kogu teekond sammhaaval läbi. Külastaja ei pea teadma hoone sisemist töökorraldust, et selles hästi hakkama saada. Juhised peavad olema kirjutatud tavakasutaja vaatenurgast ning olulised otsustuskohad peaksid olema selgelt tähistatud. Samal ajal tuleb vältida olukorda, kus iga pinna kohta lisatakse eraldi juhis. Liigne tähistamine võib muuta keskkonna visuaalselt raskeks ja vähendada kõige tähtsama info märgatavust.
+
+Digitaalse faili korrashoid sõltub rohkem järjepidevusest kui ühest ideaalsest süsteemist. Kui nimed on arusaadavad ja kaustad on paigutatud loogiliselt, leiab vajaliku materjali tavaliselt kiiresti. Segadus tekib siis, kui sama asja kohta on mitu peaaegu ühesuguse nimega koopiat või kui eri inimesed kasutavad erinevaid nimetamisviise. Ühiselt kasutatavas keskkonnas tasub seega kokku leppida vähemalt põhireeglid. Näiteks võib otsustada, et nimi algab teema, tööetapi või muu sisulise tunnusega. Oluline on, et valitud reeglit oleks lihtne järgida ka kiire töö käigus. Kui süsteem nõuab iga faili kohta liiga palju käsitsi otsustamist, hakkab kasutaja sellest varem või hiljem mööda minema. Hea korraldus vähendab otsimisele kuluvat aega ilma uut liigset halduskoormust tekitamata.
+
+Toidu valmistamisel annab tööjaotus sageli hea näite sellest, kuidas tegevusi saab järjestada. Enne küpsetamist või kuumutamist on mugav vajalikud koostisosad välja panna, tööpind puhastada ja vahendid käeulatusse seada. Nii ei pea tegevuse keskel katkestama selleks, et otsida sobivat eset või lugeda juhist. Samal ajal tasub arvestada sellega, millised tegevused võivad toimuda paralleelselt. Mõnda ettevalmistust saab teha siis, kui teine osa juba valmib, kuid kõike ei ole mõistlik korraga juhtida. Kui järjekord muutub liiga keeruliseks, suureneb eksimise võimalus. Seetõttu on lihtne ja rahulik töövoog sageli tõhusam kui pidev kiirustamine. Sama põhimõtet saab rakendada ka paljudele muudele tegevustele, kus sisendi ettevalmistus, põhitegevus ja lõppviimistlus moodustavad loomuliku ahela.
+
+Kogukonnaaias sõltub hea tulemus sageli väikestest kokkulepetest. Taimede hooldus, kastmise korraldus ja töövahendite ühine kasutamine vajavad selget arusaama sellest, kes mida teeb. Kui rollid on täiesti ebamäärased, võivad mõned tegevused jääda tegemata või teha mitu inimest sama asja. Kui kokkuleppeid on liiga palju, muutub osalemine aga tülikaks. Kasulik on hoida põhimõtted lühikesed ja nähtavad ning jätta ruumi olukorra järgi kohanemiseks. Aia puhul on oluline ka keskkonna vaatlemine, sest pinnas, valgus ja niiskus võivad eri kohtades erineda. Kõik taimed ei vaja sama hoolt ning ühtlane lähenemine ei pruugi anda head tulemust. Õppimine tuleb sageli tegevuse enda käigus, kui märgatakse, milline võte konkreetses kohas kõige paremini töötab.
+
+Heli kandub ruumis erinevalt sõltuvalt pindadest ja materjalidest. Pehme sisustus neelab osa helist, kõvad pinnad peegeldavad seda ning avatud ruumis võib kõne muutuda hajusaks. Seetõttu ei ole müratase alati ainult inimeste arvu küsimus. Ka toolide liigutamine, uste sulgumine või tehniliste seadmete pidev töö võivad kujundada taustamüra. Tööruumi kavandamisel on mõistlik mõelda sellele, milliseid tegevusi seal tehakse. Vaikseks keskendumiseks mõeldud ala vajab teistsugust lahendust kui koht, kus inimesed arutavad aktiivselt. Mõnikord aitab lihtne ruumijaotus rohkem kui kallis tehniline sekkumine. Kui eri tegevustega inimesed on paigutatud läbimõeldult, saab vähendada häiriva heli levikut ning parandada keskendumise võimalust ilma kõiki kasutajaid piiramatta.
+
+Teabe esitamisel on tähtis eristada fakti, tõlgendust ja soovitust. Fakti saab üldjuhul kontrollida lähtematerjali põhjal, tõlgendus seob nähtut mingi järeldusega ning soovitus ütleb, mida võiks edasi teha. Kui need kolm tasandit segunevad, võib lugejal olla raske aru saada, milline osa on otsene kirjeldus ja milline osa on autori hinnang. Selge teksti puhul võib iga väite puhul küsida, kas sellel on olemas toetav alus. Samuti tasub tähele panna sõnu, mis väljendavad kindlust, võimalikkust või oletust. Üksikasjade lisamine võib teksti rikastada, kuid ainult siis, kui need on põhjendatud. Kui vajalik teave puudub, on täpsem seda tunnistada kui täita lünka oletusega. Selline põhimõte aitab hoida kokkuvõtted ja märkmed usaldusväärsed ka siis, kui algmaterjal on lühike.
+
+Kokkuleppe kohaselt tasub tellija ettemaksu 1 500 eurot hiljemalt 10. septembriks 2025, viitenumber 7712445.
+
+Meeskonnatöös muutub koostöö lihtsamaks siis, kui inimesed saavad aru, milline töö on juba tehtud ja milline alles ootab tegutsemist. Väikesed märgid, selged olekud ja ühine terminoloogia vähendavad vajadust küsida sama asja mitu korda. Samas peab töövahendi olek olema piisavalt lihtne, et seda jõutaks päriselt uuendada. Kui süsteemis on liiga palju staatusi, ei pruugi keegi teada, millal ühest olekust teise liikuda. Töökorraldus peaks toetama tegelikku tegevust, mitte muutuma eraldi haldusülesandeks. Abiks on ka kokkulepe selle kohta, millal töö loetakse lõpetatuks ja millal vajab see veel teise inimese tähelepanu. Kui need piirid on selged, saab meeskond keskenduda sisule ning vähendada olukordi, kus sama tulemust hinnatakse mitu korda erinevate arusaamade järgi.
+
+Korrastatud arhiiv ei pea olema täiuslik selleks, et olla kasulik. Piisab, kui materjalid on leitavad ning nende seosed on võimalikult hästi säilinud. Paberdokumentide puhul mõjutavad leitavust kaustade nimetused, paigutus ja märksõnad. Digitaalses keskkonnas lisanduvad failivorming, metaandmed ja otsinguvõimalused. Mõlemal juhul aitab järjepidevus. Kui sama tüüpi materjalid on eri kohtades täiesti erinevate põhimõtete järgi kirjeldatud, muutub otsimine aeglaseks. Arhiivitöö juures on kasulik mõelda ka sellele, milline info on tulevase kasutaja jaoks vajalik. Kõike ei ole vaja kirjeldada sama üksikasjalikult, kuid oluline taust peaks olema säilitatud. Nii saab vana materjali kasutada uues olukorras ilma, et iga väikese detaili tähenduse taastamiseks tuleks teha ulatuslikku uurimist.
+
+Kõndimine tuttavas ümbruses võib olla omamoodi vaatlusülesanne. Inimene märkab sageli samu kohti, kuid harvem mõtestab, miks mõni tänavanurk tundub mugav ja teine ebameeldiv. Mõju võivad avaldada valgus, taimestik, liikluse kiirus, istumisvõimalused või see, kui hästi on nähtav järgmine sihtpunkt. Selliste tähelepanekute kirjeldamisel aitab konkreetne keel. Selle asemel et öelda, et koht on hea, võib kirjeldada, mis seal täpselt toimib. Nii muutub hinnang kontrollitavamaks ja teistega võrreldavaks. Sama lähenemist saab kasutada ka tööruumide, teeninduskohtade ja õppimispaikade vaatlemisel. Konkreetsete tunnuste märkimine aitab hiljem eristada esmast muljet tegelikust kasutuskogemusest ning näha, millised omadused korduvad eri olukordades.
+
+Töötoa või koolituse kavandamisel on oluline mõelda osaleja teekonnale. Enne põhitegevust peab inimene aru saama, mida temalt oodatakse ja milliseid vahendeid ta vajab. Tegevuse ajal aitab selge ülesehitus hoida tähelepanu õigel kohal. Lõpus on kasulik teha kokkuvõte sellest, mida prooviti ja mida saab edasi kasutada. Kui sissejuhatus on liiga pikk, väheneb aeg praktiliseks tegevuseks. Kui juhised on liiga napid, kulub aega segaduse lahendamisele. Hea tasakaal sõltub teemast ja osalejate varasemast kogemusest. Juhendaja jaoks võib tuttav tegevus tunduda iseenesestmõistetav, kuid uue osaleja jaoks võib just väike vaheaste olla oluline. Seetõttu tasub juhised läbi proovida inimese pilguga, kes ei tunne tööprotsessi veel hästi.
+
+Mõõtmise ja vaatlemisega seotud tegevustes on tähtis eristada seda, mida tegelikult nähti, sellest, mida nähtust järeldati. Näiteks võib ruumis olla tavapärasest rohkem inimesi, kuid see ei tõesta iseenesest, et teenuse kasutus on püsivalt suurenenud. Samuti ei tähenda ühe päeva eripära automaatselt üldist suundumust. Tähelepanekud muutuvad kasulikumaks siis, kui nende taust ja piirangud on kirja pandud. See ei pea tähendama pikka metodoloogilist kirjeldust. Piisab, kui lugejale on arusaadav, mida vaadeldi, millistes tingimustes ja mida sellest saab mõistlikult järeldada. Selline ettevaatlikkus aitab vältida liigseid üldistusi. Samuti muudab see hilisema võrdluse lihtsamaks, sest erinevaid tähelepanekuid saab kõrvutada võimalikult sarnase tähendusega.
+
+Ühistranspordipeatuse kujundamisel tuleb arvestada sellega, et inimesed ei tegutse alati sama kiirusega. Mõni inimene jõuab varakult, teine tuleb viimasel hetkel, kolmas vajab rohkem aega teabe lugemiseks. Ootamise ajal võib olla oluline kaitse tuule ja vihma eest, kuid nähtavus peab säilima ka sõiduki saabumisel. Teave liinide, suundade ja ümberistumise kohta peaks olema leitav ilma, et kasutaja peaks süvenema pika teksti sisse. Kui mitu teavet on paigutatud ühte kohta, tasub erinevused visuaalselt eristada. Nii on lihtsam leida just see rida, mis puudutab oma teekonda. Kasutajasõbralikkus tähendab siin eelkõige võimalust teha õige otsus kiiresti ja vähese pingutusega.
+
+Lugemisharjumus võib toetuda väga lihtsale põhimõttele: valida materjal, mille juurde on kerge tagasi tulla. Kui lugemiskoht on mugav ja segajaid on vähe, muutub alustamine lihtsamaks. Kõik tekstid ei nõua sama tempot. Mõnda saab lugeda kiiresti, mõne puhul on kasulik peatuda, teha märkmeid või vaadata mõni mõiste üle. Seetõttu ei pruugi eesmärk olla võimalikult suur läbitud maht. Olulisem võib olla see, et materjalist midagi meelde jääks või tekiks uus küsimus, mida hiljem edasi uurida. Lugemise käigus aitab keskendumist ka see, kui telefon ja muud segajad ei ole pidevalt käeulatuses. Väike muutus keskkonnas võib muuta tegevuse märgatavalt rahulikumaks ning anda rohkem ruumi mõtlemiseks.
+
+Ilm mõjutab igapäevast tegevust rohkem, kui esmapilgul tundub. Vihm muudab liikumise tempot, tuul mõjutab rattasõitu ja ere päike võib muuta ekraani lugemise keerulisemaks. Seetõttu kohandavad inimesed tegevusi sageli ilma seda eraldi teadvustamata. Ka hoonete ja avalike alade puhul saab ilmastikuga arvestada ette. Varjualused, kuivenduse lahendused, sobivad pinnad ja piisav varjestus vähendavad olukordi, kus tavapärane kasutus muutub ebamugavaks. Oluline on ka hooldus, sest hästi kavandatud lahendus võib halveneda, kui ummistunud rennid, libedad pinnad või kulunud märgistus jäävad tähelepanuta. Keskkonna toimivus sõltub seega nii planeerimisest kui järjepidevast tähelepanust.
+
+Teenuse kasutamise juures on usaldus sageli seotud sellega, kui etteaimatav on protsess. Kui inimene teab, milline on järgmine samm ja mida temalt oodatakse, on ebamäärasust vähem. Ootamatud muutused või segased juhised võivad seevastu tekitada küsimusi isegi siis, kui teenuse sisu ise on hea. Sel põhjusel on kasulik kontrollida ka kõige lihtsamate protsesside kirjeldusi. Kas algusest lõpuni on arusaadav, kuhu pöörduda, millist infot esitada ja mida pärast esitamist oodata? Kas sõnavara on kogu protsessi vältel sama? Väikesed vastuolud võivad sundida kasutajat oletama, mida tegelikult mõeldi. Järjepidev keelekasutus ja loogiline järjestus aitavad vähendada seda lisatööd ning muudavad teenuse kogemuse rahulikumaks.
+
+Korrastatud töölaud ei tähenda tingimata tühja töölauda. Loomulik on, et käimasoleva tegevuse ajal on nähtaval mitu eset korraga. Oluline on, et tööks vajalikud asjad oleksid eristatavad neist asjadest, mida enam ei kasutata. Kui tegevus lõpeb, aitab lühike korrastus muuta järgmise alustamise lihtsamaks. Sama põhimõtet saab rakendada ka digitaalses töökeskkonnas, kus avatud dokumendid, ajutised koopiad ja märkmed võivad kuhjuda. Regulaarne väike korrastus on sageli vähem koormav kui harva tehtav suur puhastus. Selle eesmärk ei ole saavutada ideaalset korda, vaid vähendada hõõrdumist järgmise tegevuse alguses. Kui tööriistade ja materjalide asukoht on etteaimatav, jääb rohkem tähelepanu sisulisele tööle.
+
+Naabruskonna ühistegevustes on oluline, et osalemine oleks võimalikult lihtne. Ürituse või tööpäeva kirjeldus võiks öelda selgelt, mida tehakse, kus kokku saadakse ja mida osalejalt oodatakse. Liiga üldine kutse jätab liiga palju lahtisi küsimusi, liiga detailne tekst võib aga põhiinfo ära peita. Sama tasakaal kehtib ka registreerimisel. Kui küsitakse ainult vajalikku infot, on alustamine lihtsam. Kui vorm sisaldab tarbetuid välju, võib huviline loobuda enne lõpetamist. Ühise tegevuse õnnestumisel on oma roll ka tagasisidel. Pärast tegevust võib lühidalt vaadata, mis töötas, mis tekitas küsimusi ja mida võiks järgmine kord muuta. Selline korduv kohandamine on tavaliselt tõhusam kui ühe korraga kõike ette planeerida.
+
+Teksti toimetamisel on kasulik alustada sisust ja alles seejärel vaadata stiili. Kõigepealt tuleb kontrollida, kas väited on õiged, järjestus arusaadav ja viited üheselt mõistetavad. Alles seejärel tasub mõelda sõnastuse sujuvusele, korduste vähendamisele ja lause pikkusele. Kui stiili parandatakse enne sisu, võib juhtuda, et väga ladus lause peidab endiselt ebaselget mõtet. Samuti tasub vältida liigset enesekindlust olukorras, kus lähtematerjal ei anna piisavalt infot. Täpne tekst võib olla lühem kui umbkaudne seletus, sest selles ei ole tarbetuid oletusi. Hea toimetamine tähendab seega mitte ainult ilusamat keelt, vaid ka selgemat seost selle vahel, mida allikas ütleb ja mida lugejale edasi antakse.
+
+Ajalooallikate kasutamisel on oluline pidada meeles, et säilinud materjal ei pruugi katta kogu varasemat tegevust. Mõni dokument on alles, teine on kadunud ja kolmas võib olla säilinud ainult osaliselt. Seetõttu tuleb allika põhjal tehtud järeldusi sõnastada vastavalt sellele, kui kindel alus tegelikult olemas on. Kui tekst ütleb midagi otseselt, saab seda kirjeldada otsese väitena. Kui sama info põhjal tehakse laiem järeldus, tasub eristada allika sisu ja tõlgendust. Ka nimede puhul on oluline säilitada algallika kuju, kui ülesanne ei nõua teisiti. Tarbetu parandamine võib viia selleni, et algne tähendus või isiku tuvastatavus muutub. Hoolikas töö tähendab seega sageli seda, et nähtavale jäävad ka teadmise piirid.
+
+Igapäevases suhtluses aitavad selged küsimused vältida olukorda, kus vastaja peab aimama, mida temalt tegelikult oodatakse. Hea küsimus määratleb nii teema kui ka soovitud vastuse vormi. Mõnikord on vaja ainult üht sõna, mõnikord struktureeritud andmeid ja mõnikord lühikest põhjendust. Vorminõue ei ole pelgalt tehniline detail, sest see mõjutab ka hindamist. Kui vastuse piirid on selged, saab kontrollida eelkõige sisu, mitte oletada autori kavatsust. Sama põhimõte kehtib andmete korrastamisel: väljade tähendus peaks olema üheselt arusaadav ning puuduva info puhul peab olema teada, mida teha. Selline täpsus teeb tööprotsessi etteaimatavamaks ja vähendab eri kasutajate vahel tekkivaid tõlgenduserinevusi.
+
+Teenuse või dokumendi üleandmisel on kasulik teha lühike kontroll, mis kinnitab, et vajalik sisu on alles ja järgmine kasutaja saab jätkata ilma lisaselgituseta. Kontroll ei pea olema pikk ega kordama kogu tööd. Mõistlik on keskenduda kohtadele, kus väike viga võib hiljem põhjustada suurema segaduse. Näiteks võib üle vaadata nimed, kontaktandmed, kuupäevad, summad või muu kriitilise sisu, kuid iga töö puhul sõltub kontrollnimekiri tegelikust eesmärgist. Kui protsess kordub sageli, tasub kontroll teha võimalikult ühtseks. Nii väheneb võimalus, et mõni oluline samm ununeb kiiremal hetkel.","Skeem:
+{
+  ""ettemaks"": ""number"",
+  ""tähtaeg"": ""string (AAAA-KK-PP)"",
+  ""viitenumber"": ""string""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""ettemaks"":1500,""tähtaeg"":""2025-09-10"",""viitenumber"":""7712445""}"
+A47,"Tallinnas toimunud tehnoloogiakonverentsil osales 127 inimest 14 riigist. Korraldajad teatasid, et järgmise aasta eelarve on 2,4 miljonit eurot. Konverentsi peaesineja oli Soome ettevõtte tehnoloogiajuht.",Võta tekst kokku maksimaalselt 40 sõnaga. Kokkuvõte peab sisaldama osalejate arvu ja eelarve summat.,"Tallinnas toimunud tehnoloogiakonverentsil osales 127 inimest 14 riigist. Korraldajad teatasid, et järgmise aasta eelarve on 2,4 miljonit eurot; peaesinejaks oli Soome ettevõtte tehnoloogiajuht."
+A48,"Tere! Kuule, see arve mis te saatsite on jälle vale. Parandage ära, muidu ma maksma ei hakka.",Sõnasta sama sõnum viisakas ametlikus toonis. Maksimaalselt 50 sõna.,"Tere!
+
+Täname saadetud arve eest. Kahjuks oleme tuvastanud arvel ebatäpsusi. Palume arve üle vaadata ja parandatud versioon meile saata. Pärast korrektse arve saamist korraldame makse.
+
+Lugupidamisega"
+A49,Konverents toimub Tallinnas. Osalustasu sisaldab lõunat ja materjale.,"Kui suur on osalustasu? Kui tekstist ei selgu, vasta täpselt: EI SELGU",EI SELGU
+A50,Tellimus nr T-4471 on staatuses pakitud.,"Skeem:
+{
+  ""tellimuse_nr"": ""string"",
+  ""staatus"": ""string""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""tellimuse_nr"":""T-4471"",""staatus"":""pakitud""}"
+A51,Leping allkirjastati 12. veebruaril ja see jõustus kohe. Lepingu kestus on kirjas lisas 2.,"Kui pikk on lepingu kestus? Kui tekstist ei selgu, vasta täpselt: EI SELGU",EI SELGU
+A52,"Kreeditarve nr K-88 summas -240,00 eurot, kuupäev 09.09.2025. Seotud arve 2025/402.","Skeem:
+{
+  ""arve_nr"": ""string"",
+  ""summa"": ""number"",
+  ""kuupäev"": ""string (AAAA-KK-PP)"",
+  ""seotud_arve"": ""string"",
+  ""tüüp"": ""string: ARVE või KREEDITARVE""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""arve_nr"":""K-88"",""summa"":-240.00,""kuupäev"":""2025-09-09"",""seotud_arve"":""2025/402"",""tüüp"":""KREEDITARVE""}"
+A53,"Suurepärane, jälle üks uuendus, mis eemaldas nupu, mida ma iga päev kasutasin.",Klassifitseeri tagasiside. Vasta täpselt ühega: POSITIIVNE / NEGATIIVNE / NEUTRAALNE,NEGATIIVNE
+A54,Tootenimetus: juhtmevaba klaviatuur. Hind 49 eurot.,"Skeem:
+{
+  ""toode"": ""string"",
+  ""hind"": ""number""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""toode"": ""juhtmevaba klaviatuur"", ""hind"": 49}"
+A55,"Soovin viisakalt tähelepanu juhtida, et arve saabus teistkordselt vale summaga.",Klassifitseeri kiri. Vasta täpselt ühega: KAEBUS / KÜSIMUS / TÄNUAVALDUS,KAEBUS
+A56,"Uus raamatukogu avati Tartus möödunud reedel. Hoone maksumus oli 8,5 miljonit eurot ja ehitus kestis kaks aastat. Avapäeval külastas hoonet üle kolme tuhande inimese.",Võta tekst kokku kuni 30 sõnaga.,"Tartus avati möödunud reedel uus raamatukogu. Selle maksumus oli 8,5 miljonit eurot, ehitus kestis kaks aastat ja avapäeval külastas hoonet üle 3000 inimese."
+A57,Tarkvara versioon 4.2 parandas 17 viga ja lisas kaks uut funktsiooni. Uuendus on tasuta kõigile olemasolevatele klientidele. Vanemate versioonide tugi lõpeb 1. juunil 2026.,Esita sisu täpselt kolme täpploendi reana. Iga rida peab algama tegusõnaga ja olema kuni 8 sõna. Kuupäev peab esinema.,"- Parandab versioonis 4.2 17 viga, lisab kaks funktsiooni.
+- Pakub uuendust tasuta kõigile olemasolevatele klientidele.
+- Lõpetab vanemate versioonide toe 1. juunil 2026."
+A58,"Arve nr 2024/117, kuupäev 03.04.2024. Summa käibemaksuta 1 250,50 eurot, käibemaks 22%. Ostja: Näidis OÜ, registrikood 12345678.","Skeem:
+{
+  ""arve_nr"": ""string"",
+  ""kuupäev"": ""string (AAAA-KK-PP)"",
+  ""summa_km_ta"": ""number"",
+  ""km_määr"": ""number"",
+  ""ostja_nimi"": ""string"",
+  ""ostja_reg"": ""string""
+}
+
+Eralda tekstist andmed ja tagasta AINULT JSON vastavalt skeemile. Ära lisa selgitusi ega koodiploki märgiseid. Kui mõnda välja tekstis ei ole, pane selle väärtuseks null. Tekstiväljad esita nimetavas käändes.","{""arve_nr"":""2024/117"",""kuupäev"":""2024-04-03"",""summa_km_ta"":1250.5,""km_määr"":22,""ostja_nimi"":""Näidis OÜ"",""ostja_reg"":""12345678""}"
+A59,"Ettevõte viis läbi kliendiküsitluse, milles osales üheksa klienti. Kolm neist andis teenusele negatiivse hinnangu, viis positiivse ja üks jättis vastamata. Küsitlus viidi läbi e-posti teel märtsis.",Võta küsitluse tulemused kokku ühe lausega.,"Märtsis e-posti teel läbi viidud küsitluses andis üheksast kliendist viis teenusele positiivse hinnangu, kolm negatiivse ja üks jättis vastamata."
+A60,"Suurepärane, jälle üks uuendus, mis eemaldas nupu, mida ma iga päev kasutasin.",Klassifitseeri tagasiside. Vasta täpselt ühega: POSITIIVNE / NEGATIIVNE / NEUTRAALNE,NEGATIIVNE

@@ -124,6 +124,7 @@ src/
   judge/             prepare.js, run.js, claude.js (the call), common.js
   cost/              cost calculation
   report/            pilot run report data
+  human/             human evaluation: sample.js (the sample), import.js (the form responses)
   paths.js, random.js, csv.js   result paths, seeded randomness, CSV
 test/                Node tests (fixtures/ = sample answers, a stand-in for claude)
 analysis/            Python analysis: run_all.py, criteria, decision model, figures, tests/
@@ -235,6 +236,9 @@ On start, the existing keys are read and skipped (an error row also counts as st
 - `sample.csv`: `answerId`, source text, task, answer. No model name.
 - `key.csv`: `answerId` → `key`, scoring method. This file is not given to the raters.
 - `scores_rater1.csv`, `scores_rater2.csv`: `answerId`, `score` (0, 1 or 2), `comment`.
+- `kappa.csv`: `subset` (all / judge), `pair` (r1-r2, r1-auto, r2-auto), `n`, `kappa`.
+- Commands (docs/human.md): `node src/human/sample.js` (the sample, seed 20261107, once; never overwritten) → the author runs `tools/apps_script/create_form.gs` in their Google account with `sample.csv` and `rater_guide.txt` in Drive → `node src/human/import.js --file <responses.csv>` → `.venv/Scripts/python analysis/human_eval.py`.
+- The task column is the user message after the source text (for K2 with the schema). Every answer on its own page of the form, in the order of `sample.csv`; the form's own shuffle is not used (it would separate a comment from its answer).
 
 ### A run from start to end (pilot run, phase 5; the main run the same with `main`)
 

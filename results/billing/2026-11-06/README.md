@@ -10,6 +10,6 @@ Screenshots of the five providers' usage and spend pages, taken by the author be
 | `deepseek_181900.png` | DeepSeek | $0.03 total cost; balance $4.96 | $0.0377 | the dashboard seems to cut the decimals off; the usage details had not loaded yet; all requests at the off-peak price |
 | `xai_181908.png` | xAI | $0.47; 225,963 tokens; "484 requests" (31.10–6.11) | $0.4694; 225,963 tokens; 121 requests | tokens match per type (reasoning 53.9K, cached 141.1K, prompt 27.7K, completion 3.4K); 484 = 4 × 121, probably counted per token type |
 
-The computed values: `node src/cost/cost.js --run 2026-11-03-probe` and `--run pilot`. How the Google euros are converted in the billing check is still open (author, 6.11.2026).
+The computed values: `node src/cost/cost.js --run 2026-11-03-probe` and `--run pilot`. How the Google euros are converted in the billing check was open on 6.11.2026; on 7.11.2026 the author decided: the computed USD at the ECB rate of 6.11.2026 (1 EUR = 1.1165 USD), the same rate as the annual cost.
 
 For the later screenshots, set every dashboard's date range to start on or before 3.11.2026, so that the probe and the pilot run stay inside it (OpenAI and xAI show the last 7 days by default, Google 28 days, DeepSeek 30 days; Anthropic's "spend this month" resets on 1.12).
