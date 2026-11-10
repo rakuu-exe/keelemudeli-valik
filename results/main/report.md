@@ -4,7 +4,7 @@ Written on 7.11.2026 from the stored rows (PLAN.md phase 6). The data is in `res
 
 ## 1. The measurement
 
-- Config `config/run.main.json` at the tag `main-run` (commit `475ef94`, 7.11.2026); the prices checked again on the run day, unchanged (U13).
+- Config `config/run.main.json` at the tag `main-run` (commit `095d7b2`, 7.11.2026); the prices checked again on the run day, unchanged (U13).
 - 5 models × 120 tasks × 5 repeats = **3000 requests**, 3000 different keys, every model 600. The author started the run in their own terminal.
 - Time: 6.11.2026 23:25 – 7.11.2026 02:52 UTC (3 h 27 min); sum of the request times 206.6 min.
 - **0 error rows.** 2 retries, both xAI, "The model is currently at capacity due to high demand" (`main|K3-037|xai|1`, `main|K1-008|xai|2`); both answered on the second attempt, the failed attempts are in `retries` [PK1].

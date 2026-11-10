@@ -47,6 +47,7 @@ A `*` stands for any characters except `/` (one file name part).
 
 | file | doc | purpose |
 |---|---|---|
+| `README.md` | [project](project.md) | the entry point for a reader: installation, API keys, the judge, how to run each step [S9] |
 | `AGENTS.md` | [project](project.md) | rules for agents and contributors: a change log row and the docs with every change |
 | `CHANGELOG.md` | [project](project.md) | every implementation (I1, I2, …) and update (U1, U2, …) |
 | `CLAUDE.md` | [project](project.md) | project instructions: principles, formats, decisions |

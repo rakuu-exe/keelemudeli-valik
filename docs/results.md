@@ -48,7 +48,7 @@ Raw data (raw rows, judge scores) is only appended to, never changed (principle 
 ## Provider dashboards
 | file | content |
 |---|---|
-| `results/billing/*/*.png` | screenshots of the five providers' usage and spend pages on a day (folder = date), for the billing check [PK9]; the main run's spend = a later screenshot minus the one before it |
+| `results/billing/*/*.png` | screenshots of the five providers' usage and spend pages on a day (folder = date), for the billing check [PK9]; the main run's spend = a later screenshot minus the one before it. The account identity (name, e-mail, project and team IDs) is covered with grey boxes; the numbers are unchanged |
 | `results/billing/*/README.md` | which screenshot is which provider, what it shows and the computed `costBilled` at that time |
 
 ## Analysis

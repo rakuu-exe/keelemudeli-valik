@@ -1,5 +1,8 @@
 # Project files (the root)
 
+## `README.md`
+The entry point for a reader of the public repository (PLAN.md phase 9 [S9]): what the parts are, the requirements, installation and tests, computing the results again from the stored data, a dry run without keys, the API keys, a measurement from start to end, the LLM judge through Claude Code, adding a model, the human evaluation and the main rules of the measurement. Every command in it was run on 11.11.2026 (the dry run chain; `score.js`, `cost.js` and `run_all.py` on the main run gave unchanged files).
+
 ## `AGENTS.md`
 Rules for every agent and contributor that changes the repository: each change gets a row in `CHANGELOG.md` and updates the docs (and `CLAUDE.md` for rules and decisions) in the same commit; the commit message starts with the change's IDs. It points to `CLAUDE.md` for everything else.
 
@@ -10,7 +13,7 @@ Every implementation and every change, one row each: `I` + number for something 
 The project instructions, read by Claude Code at the start of every session: what is built, the principles (measure once, raw data is never changed, the same task text for every model, provider defaults, …), the LLM judge rules, the terminology, the data formats (raw row, score row, judge, cost row, human evaluation), the scoring and cost rules, the commands of a run, the analysis rules and the author's decisions with their dates. A change of a rule, a format or a decision goes here.
 
 ## `PLAN.md`
-The work plan of the author: "before starting" tasks, the confirmed choices, the phases 0–9 with their "done when" criteria, and the schedule. Only what is in the plan is built (CLAUDE.md). Tags in brackets (e.g. [M4]) refer to the rows of the author's `kavandi_tooplaan.xlsx`, which is not in the repository.
+The work plan of the author: the confirmed choices, the phases 0–9 with their "done when" criteria, and the schedule; a ticked box is a finished item. Only what is in the plan is built (CLAUDE.md). Tags in brackets (e.g. [M4]) refer to the rows of the author's `kavandi_tooplaan.xlsx`, which is not in the repository.
 
 ## `package.json`
 The Node package (ESM, Node 24). Dependencies with exact versions: `openai`, `@anthropic-ai/sdk`, `@google/genai`, `ajv`, `franc`, `dotenv`.

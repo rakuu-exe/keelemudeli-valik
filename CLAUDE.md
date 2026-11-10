@@ -98,6 +98,7 @@ Before using any provider SDK or Claude Code flag, check its current documentati
 Every file is described in `docs/` (file map: `docs/README.md`).
 
 ```
+README.md            for a reader: installation, API keys, the judge, how to run each step
 AGENTS.md            rules for agents: a change log row and the docs with every change
 CHANGELOG.md         every implementation (I1, I2, …) and update (U1, U2, …)
 docs/                documentation of every file (README.md = overview and file map)
@@ -142,7 +143,7 @@ results/
   pilot/             the pilot run report and the author's review files
   main/              the main run report
   prices/            price list screenshots of a measurement day
-  billing/           provider dashboard screenshots for the billing check (2026-11-06 = before the main run)
+  billing/           provider dashboard screenshots for the billing check (2026-11-06 = before the main run); the account identity is covered
 ```
 
 ## Data formats

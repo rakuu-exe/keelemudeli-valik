@@ -13,3 +13,5 @@ Screenshots of the five providers' usage and spend pages, taken by the author be
 The computed values: `node src/cost/cost.js --run 2026-11-03-probe` and `--run pilot`. How the Google euros are converted in the billing check was open on 6.11.2026; on 7.11.2026 the author decided: the computed USD at the ECB rate of 6.11.2026 (1 EUR = 1.1165 USD), the same rate as the annual cost.
 
 For the later screenshots, set every dashboard's date range to start on or before 3.11.2026, so that the probe and the pilot run stay inside it (OpenAI and xAI show the last 7 days by default, Google 28 days, DeepSeek 30 days; Anthropic's "spend this month" resets on 1.12).
+
+The account identity is covered with grey boxes in these screenshots (11.11.2026, before the repository becomes public): the author's name, e-mail address and profile picture, the Google project ID and the xAI team ID in the address bar, and the xAI team name. The sums, the numbers of requests and tokens, the dates and the clock are unchanged.
