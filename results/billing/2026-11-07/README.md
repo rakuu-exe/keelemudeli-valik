@@ -1,6 +1,6 @@
 # Provider dashboards of 7.11.2026 (after the main run and Luna)
 
-Screenshots taken by the author at 11:41–11:50 local time (GMT+2; the time is in the file name, HHMMSS), after the main run (6.11 23:25 – 7.11 02:52 UTC) and the Luna test (7.11 09:37–09:39 UTC) [PK9]. Computed values: the sum of `costBilled` of `2026-11-03-probe`, `pilot`, `main` and `luna` (`results/cost/`). Anthropic, DeepSeek and xAI are final; OpenAI and Google are preliminary (their data had not all arrived); see `results/main/report.md` section 7.
+Screenshots taken by the author at 11:41–11:50 local time (GMT+2; the time is in the file name, HHMMSS), after the main run (6.11 23:25 – 7.11 02:52 UTC) and the Luna test (7.11 09:37–09:39 UTC) [PK9]. Computed values: the sum of `costBilled` of `2026-11-03-probe`, `pilot`, `main` and `luna` (`results/cost/`). Anthropic, DeepSeek and xAI are final; OpenAI and Google were preliminary (their data had not all arrived) and are replaced by `results/billing/2026-11-10/`; see `results/main/report.md` section 7.
 
 | file | provider | dashboard shows | computed | note |
 |---|---|---|---|---|

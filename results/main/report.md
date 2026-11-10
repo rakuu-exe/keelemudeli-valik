@@ -1,6 +1,6 @@
 # Main run report
 
-Written on 7.11.2026 from the stored rows (PLAN.md phase 6). The data is in `results/raw/main.jsonl`, `results/scored/main.jsonl`, `results/cost/main.jsonl`, `results/judge/` and `results/figures/`. The billing check (section 7) is still preliminary.
+Written on 7.11.2026 from the stored rows (PLAN.md phase 6). The data is in `results/raw/main.jsonl`, `results/scored/main.jsonl`, `results/cost/main.jsonl`, `results/judge/` and `results/figures/`. The billing check (section 7) is final since 10.11.2026.
 
 ## 1. The measurement
 
@@ -64,24 +64,25 @@ From `results/figures/summary.md`. Exchange rate 1 EUR = 1.1165 USD, the ECB ref
 - `run_all.py` twice on the same data: 13 byte-identical files.
 - Luna (`gpt-6-luna`, 7.11.2026 09:37–09:39 UTC): 45/45 ok, scoring, cost and `run_all.py --run luna` without a change in `src/`, `config/`, `analysis/`, `data/` or `prompts/` after the tag (I32).
 
-## 7. Billing check [PK9], preliminary
+## 7. Billing check [PK9]
 
-Computed `costBilled` of all requests made with the experiment keys (probe requests, pilot run, main run, Luna) against the dashboards of 7.11.2026 (local time) in `results/billing/2026-11-07/`. Google bills in euros: the computed USD sum is converted at the same ECB rate as the annual cost, 1 EUR = 1.1165 USD of 6.11.2026 (author's decision 7.11.2026).
+Computed `costBilled` of all requests made with the experiment keys (probe requests, pilot run, main run, Luna) against the dashboards: Anthropic, DeepSeek and xAI of 7.11.2026 (`results/billing/2026-11-07/`), OpenAI and Google of 10.11.2026 (`results/billing/2026-11-10/`; on 7.11 their data had not all arrived). Google bills in euros: the computed USD sum is converted at the same ECB rate as the annual cost, 1 EUR = 1.1165 USD of 6.11.2026 (author's decision 7.11.2026).
 
 | provider | computed | dashboard | difference | status |
 |---|---|---|---|---|
-| OpenAI (Terra + Luna) | $0.4117; 766 requests | $0.41; 729 requests | 0.4% | only 8 of the 45 Luna requests had arrived, at 11:41 and still at 11:49 → take again later |
+| OpenAI (Terra + Luna) | $0.4117; 766 requests; 110,800 input tokens | $0.41; 766 requests; 110,800 input tokens (10.11, 22:59) | 0.4% | final; requests and input tokens match exactly (on 7.11 only 729 requests had arrived) |
 | Anthropic | $1.1448 | $1.14 spend this month | 0.4% | final |
-| Google | $2.3681 = €2.1210 at 1.1165 | spend cap €2.12; cost report €1.14 | 0.05% (spend cap) | the cost report lags ("might take longer than 24 hours") → take again on 8.11 or later |
+| Google | $2.3681 = €2.1210 at 1.1165 | cost report €2.13 (14.10–10.11); spend cap €2.12 (10.11, 22:59) | 0.4% (cost report); 0.05% (spend cap) | final; the cost report (the billed cost) is the dashboard value; on 7.11 it still showed €1.14 |
 | DeepSeek | $0.1815; 721 requests; 424,570 tokens | $0.18; 721 requests; 424,570 tokens | 0.8% | final; requests and tokens match exactly |
 | xAI | $2.6981; 1,331,037 tokens | $2.70; 1,331,037 tokens (usage page, 11:50) | 0.07% | final; every token type matches exactly; "2,882 requests" = requests counted per token type (721 + 719 + 721 + 721) |
 
 The Anthropic figure also shows that the judge (Claude Code on the Pro subscription) is not in the API bill.
 
+Every difference, rounded to one decimal, is below 5.0%: the largest is DeepSeek's 0.8% (the dashboard shows two decimals of a sum of $0.18), so condition 4 of the usability criterion holds.
+
 ## 8. Still open
 
-- Dashboards again: OpenAI (766 requests) and the Google spend page, on 8.11 or later; the date range from 3.11 or earlier.
 - The author's check in `analysis/wsm_check.xlsx` [M12].
 - Human evaluation [M14]: the sample of 60 exists (`results/human/`); the Google Form, two raters, kappa.
-- The usability table [E2]. Now: condition 1 holds (the process completed, a choice for both profiles); condition 2 (a), (c), (d) hold, (b) waits for the Excel check; conditions 3 and 4 wait for the kappa and the final billing check.
+- The usability table [E2]. Now: condition 1 holds (the process completed, a choice for both profiles); condition 2 (a), (c), (d) hold, (b) waits for the Excel check; condition 3 waits for the kappa; condition 4 holds (section 7).
 - Before the repository becomes public (phase 9): the screenshots show the author's name and e-mail, so crop them.
