@@ -69,12 +69,19 @@ function createForm() {
 
 // The only file with this name in Drive, as UTF-8 text (not a converted Google Sheets or Docs file).
 function readDriveFile_(name) {
+  const found = [];
   const files = DriveApp.getFilesByName(name);
-  if (!files.hasNext()) throw new Error('No file "' + name + '" in Google Drive: upload it first.');
-  const file = files.next();
-  if (files.hasNext()) throw new Error('More than one file "' + name + '" in Google Drive: keep only one.');
+  while (files.hasNext()) {
+    const f = files.next();
+    if (!f.isTrashed()) found.push(f); // a file in the bin does not count
+  }
+  if (found.length === 0) throw new Error('No file "' + name + '" in Google Drive: upload it first.');
+  if (found.length > 1) throw new Error('More than one file "' + name + '" in Google Drive: keep only one.');
+  const file = found[0];
+  // An uploaded .csv is 'text/csv' or, from Windows with Excel installed, 'application/vnd.ms-excel';
+  // both are the text as uploaded. Only a file converted to Google Sheets or Docs has no text.
   const type = file.getMimeType();
-  if (type !== 'text/csv' && type !== 'text/plain') {
+  if (type.indexOf('application/vnd.google-apps') === 0) {
     throw new Error('"' + name + '" is ' + type + ', not a text file: upload it again without converting it.');
   }
   return file.getBlob().getDataAsString('UTF-8').replace(/^﻿/, '');
