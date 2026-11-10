@@ -10,7 +10,8 @@ Hinda iga vastuse korrektsust skaalal 0–2:
 
 Mida arvestada
 • Võrdle vastust ainult lähtetekstiga. Kui vastus lisab fakte, mida tekstis ei ole, või muudab teksti tähendust, on see viga.
-• Hinda sisu, mitte vormistust. Vormistust (nt rasvane kiri **47**, koodiploki märgised ```, lõpupunkt, selgitus vastuse järel) ning pikkuse ja lausete arvu piiranguid mõõdetakse eraldi, seega need hinnet ei mõjuta.
+• Kui ülesanne nõuab lühivastust kindlal kujul (nt „Vasta: jah / ei“, „Vasta ainult arvuga“, „Vasta kujul HH.MM“, „Vasta ühe sõnaga“), on õige ainult nõutud kujul vastus. Suur- ja väiketähti ning lõpupunkti ei arvestata. Lisaselgitus või muu vormistus (nt rasvane kiri **Ei**) teeb vastuse valeks (hinne 0).
+• Teistes ülesannetes hinda sisu, mitte vormistust. Vormistust (nt koodiploki märgised ```, rasvane kiri) ning pikkuse ja lausete arvu piiranguid mõõdetakse eraldi, seega need hinnet ei mõjuta.
 • Vastus peab olema eesti keeles.
 • Kui sa ei ole kindel, vali hinne, mis kirjeldab vastust kõige paremini, ja kirjuta põhjus kommentaari. Kommentaar ei ole kohustuslik.
 
@@ -20,7 +21,8 @@ Näide 1
 Lähtetekst: Ujula on avatud esmaspäevast reedeni kella 7–21 ja laupäeval kella 9–17. Pühapäeval on ujula suletud.
 Ülesanne: Kas ujula on pühapäeval avatud? Vasta: jah / ei.
 „ei“ → 2
-„**Ei.** Pühapäeval on ujula suletud.“ → 2 (sisu on õige; vormistust ei hinnata)
+„Ei.“ → 2 (suurtähte ja lõpupunkti ei arvestata)
+„**Ei.** Pühapäeval on ujula suletud.“ → 0 (vastus ei ole nõutud kujul: ülesanne nõudis ainult „jah“ või „ei“)
 „jah“ → 0
 
 Näide 2
