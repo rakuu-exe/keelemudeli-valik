@@ -228,6 +228,7 @@ On start, the existing keys are read and skipped (an error row also counts as st
 - `costBilled` = (input − cached − written to cache) × input price + cached × cache price + written × cache write price + output × output price → billing check. Cache writes: Anthropic `cache_creation_input_tokens` (5 min / 1 h by `cache_creation`), OpenAI `prompt_tokens_details.cache_write_tokens` (30-minute price).
 - DeepSeek: peak or off-peak by `tsStartUtc` (Mon–Fri 01:00–04:00 and 06:00–10:00 UTC, start included, end excluded; `offPeakDates` for Chinese public holidays), in both sums.
 - A price that does not apply is an error, not a wrong number: Gemini after `validUntil` (31.12.2026), a prompt above `maxInputTokens` (OpenAI 272K, xAI from 200K), a non-standard `service_tier` / `serviceTier` / `speed`, or `inference_geo` other than `global`.
+- Billing check [PK9]: for Google the dashboard value is the cost report of the spend page (the billed cost, €2.13 on 10.11.2026), not the spend cap counter (author's decision 10.11.2026).
 - Checked on the probe of 3.11.2026: the xAI `costBilled` equals xAI's own `cost_in_usd_ticks` (1 tick = 1e-10 USD).
 - Prices: `config/pricing.json`, checked on the official price lists on 3.11.2026 (`priceListDate`, a `source` URL per model). Check again on the day of measurement and save the price lists.
 
@@ -257,7 +258,7 @@ On start, the existing keys are read and skipped (an error row also counts as st
 - Min-max [M8] with max = min → 1 for all (tolerance 1e-12); WSM [M9]; rank 1 = highest score; a tie keeps the model order of `config/models.json` and is reported (`tie`).
 - Sensitivity [M10]: one weight from 0 to 1 in steps of 0.05, the others in proportion. A tie at the top that includes the previous winner is not a change of the winner (author's decision 3.11.2026); ties are listed separately (`ties`), and the original winner "holds" where it is first or shares the first place.
 - Annual cost [PK7]: mean `costCriterion` × 10,000 × 365 (`config/profiles.json`), USD; EUR with one rate, `usdPerEur` in `analysis/settings.json` (1.1165, the ECB reference rate of 6.11.2026, the main run day [M4]; 7.11 is a Saturday without a rate).
-- Categories [M11]: criteria and min-max within each category, the same weights. `wsm_check_input.csv` [M12] starts with the columns of the "Sisend" sheet of `analysis/wsm_check.xlsx` (correctness, format, cost, latency in s, stability, the Python scores), then the normalized values.
+- Categories [M11]: criteria and min-max within each category, the same weights. `wsm_check_input.csv` [M12] starts with the columns of the "Sisend" sheet of `analysis/wsm_check.xlsx` (correctness, format, cost, latency in s, stability, the Python scores), then the normalized values. The author entered the main run values on 10.11.2026: "Kõik klapivad".
 - Figure colours: the categorical order of the dataviz reference palette by the model's position in `config/models.json` (never by rank); every model also has its own marker, and the exact values are in `sensitivity.csv`.
 
 ## Models
