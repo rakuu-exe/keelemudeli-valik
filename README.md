@@ -188,7 +188,7 @@ Two raters score 60 answers of the main run on the scale 0/1/2 without model nam
 ```
 node src/human/sample.js                           # the sample of 60 (already drawn: results/human/sample.csv)
 # create the Google Form: tools/apps_script/create_form.gs with sample.csv and rater_guide.txt in Google Drive
-node src/human/import.js --file <responses.csv>    # the raters' scores
+node src/human/import.js --file results/human/form_responses.csv    # the raters' scores
 .venv/Scripts/python analysis/human_eval.py        # kappa → results/human/kappa.csv
 ```
 

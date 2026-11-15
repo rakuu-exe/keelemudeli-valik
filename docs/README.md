@@ -146,7 +146,9 @@ A `*` stands for any characters except `/` (one file name part).
 | `results/main/report.md` | [results](results.md) | the main run report |
 | `results/human/sample.csv` | [results](results.md) | the 60 answers for the raters, without model names |
 | `results/human/key.csv` | [results](results.md) | answer ID → raw row key and scoring method (not for the raters) |
+| `results/human/form_responses.csv` | [results](results.md) | the Google Form responses of the two raters, as downloaded |
 | `results/human/scores_rater*.csv` | [results](results.md) | the raters' scores |
+| `results/human/kappa.csv` | [results](results.md) | the agreement of the raters and the automatic scoring |
 | `results/prices/*/README.md` | [results](results.md) | what the price list screenshots of a day show |
 | `results/prices/*/*.png` | [results](results.md) | price list screenshots of a measurement day |
 | `results/billing/*/README.md` | [results](results.md) | what the dashboard screenshots of a day show |

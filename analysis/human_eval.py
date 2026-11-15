@@ -87,6 +87,7 @@ def kappa_table(table):
 
 
 def main():
+    sys.stdout.reconfigure(encoding="utf-8")  # the Windows console default (cp1252) lacks some characters
     human = results_dir() / "human"
     key = pd.read_csv(human / "key.csv", dtype=str, keep_default_na=False)
     rater1 = pd.read_csv(human / "scores_rater1.csv", dtype={"answerId": str}, keep_default_na=False)

@@ -237,6 +237,7 @@ On start, the existing keys are read and skipped (an error row also counts as st
 
 - `sample.csv`: `answerId`, source text, task, answer. No model name.
 - `key.csv`: `answerId` → `key`, scoring method. This file is not given to the raters.
+- `form_responses.csv`: the responses downloaded from the Google Form, unchanged (author's decision 15.11.2026): `Ajatempel`, `Hindaja` (1 or 2), then for every answer the choice (`A01`) and the comment (`A01 kommentaar`). The input of `src/human/import.js`; no names.
 - `scores_rater1.csv`, `scores_rater2.csv`: `answerId`, `score` (0, 1 or 2), `comment`.
 - `kappa.csv`: `subset` (all / judge), `pair` (r1-r2, r1-auto, r2-auto), `n`, `kappa`.
 - Commands (docs/human.md): `node src/human/sample.js` (the sample, seed 20261107, once; never overwritten) → the author runs `tools/apps_script/create_form.gs` in their Google account with `sample.csv` and `rater_guide.txt` in Drive → `node src/human/import.js --file <responses.csv>` → `.venv/Scripts/python analysis/human_eval.py`.

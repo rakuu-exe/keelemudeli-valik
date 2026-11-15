@@ -2,15 +2,20 @@
 
     .venv/Scripts/python -m unittest discover -s analysis/tests
 """
+import io
+import json
 import math
 import sys
+import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+import human_eval  # noqa: E402
 from human_eval import auto_score, kappa_table, linear_kappa, scores_table  # noqa: E402
 
 
@@ -74,6 +79,22 @@ class Tables(unittest.TestCase):
     def test_mismatched_ids(self):
         with self.assertRaises(ValueError):
             scores_table(self.key, self.r1.iloc[:3], self.r2, self.scored)
+
+    def test_main_prints_on_a_cp1252_console(self):
+        # The Windows console default (cp1252) has no "→"; main must still finish after writing kappa.csv.
+        with tempfile.TemporaryDirectory() as tmp:
+            results = Path(tmp)
+            (results / "human").mkdir()
+            (results / "scored").mkdir()
+            self.key.to_csv(results / "human" / "key.csv", index=False)
+            self.r1.to_csv(results / "human" / "scores_rater1.csv", index=False)
+            self.r2.to_csv(results / "human" / "scores_rater2.csv", index=False)
+            (results / "scored" / "main.jsonl").write_text(
+                "".join(json.dumps(r) + "\n" for r in self.scored), encoding="utf-8")
+            console = io.TextIOWrapper(io.BytesIO(), encoding="cp1252")
+            with mock.patch.object(human_eval, "results_dir", lambda: results), mock.patch.object(sys, "stdout", console):
+                human_eval.main()
+            self.assertTrue((results / "human" / "kappa.csv").exists())
 
 
 if __name__ == "__main__":

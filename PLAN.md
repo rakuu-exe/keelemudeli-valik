@@ -157,12 +157,12 @@ All tables and figures with one command: `python analysis/run_all.py`.
 - [x] Sample of 60 answers from the main run, fixed seed: 3 categories × 5 models × 4; in K3, for each model 2 rule-scored and 2 judge-scored answers.
 - [x] `results/human/sample.csv` (answerId, source text, task, answer; without the model name, shuffled) and `key.csv` separately.
 - [x] Google Apps Script that creates a Google Form from `sample.csv`: every answer a separate question (ID in the title, text in the description), required 0/1/2, optional comment, shuffled order, a rating guide with examples at the start. The form and the guide are in Estonian.
-- [ ] Raters' answers (Sheets → CSV) → `scores_rater1.csv`, `scores_rater2.csv`.
-- [ ] Automatic correctness on the 0/1/2 scale: 0 → 0, in between → 1, 1 → 2; the judge median directly.
-- [ ] Weighted Cohen's kappa with **linear weights** (`sklearn cohen_kappa_score(weights="linear")`): r1–r2, r1–auto, r2–auto; also descriptively for the judge-scored answers separately.
+- [x] Raters' answers (Sheets → CSV) → `scores_rater1.csv`, `scores_rater2.csv`.
+- [x] Automatic correctness on the 0/1/2 scale: 0 → 0, in between → 1, 1 → 2; the judge median directly.
+- [x] Weighted Cohen's kappa with **linear weights** (`sklearn cohen_kappa_score(weights="linear")`): r1–r2, r1–auto, r2–auto; also descriptively for the judge-scored answers separately.
 
 **5. Usability table [E2]**
-- [ ] Table with the four conditions and the result: (1) the process completed and a choice made for both profiles; (2) calculations correct and reproducible (items 1–2); (3) r1–auto and r2–auto kappa ≥ 0.61; (4) billing difference < 5%.
+- [x] Table with the four conditions and the result: (1) the process completed and a choice made for both profiles; (2) calculations correct and reproducible (items 1–2); (3) r1–auto and r2–auto kappa ≥ 0.61; (4) billing difference < 5%.
 
 **Done when:** all results are in tables.
 

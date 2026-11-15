@@ -1,0 +1,7 @@
+subset,pair,n,kappa
+all,r1-r2,60,0.32126696832579194
+all,r1-auto,60,0.3706293706293706
+all,r2-auto,60,0.198218262806236
+judge,r1-r2,10,0.0
+judge,r1-auto,10,
+judge,r2-auto,10,0.0

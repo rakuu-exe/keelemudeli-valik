@@ -1,6 +1,6 @@
 # Main run report
 
-Written on 7.11.2026 from the stored rows (PLAN.md phase 6). The data is in `results/raw/main.jsonl`, `results/scored/main.jsonl`, `results/cost/main.jsonl`, `results/judge/` and `results/figures/`. The billing check (section 7) is final since 10.11.2026.
+Written on 7.11.2026 from the stored rows (PLAN.md phase 6). The data is in `results/raw/main.jsonl`, `results/scored/main.jsonl`, `results/cost/main.jsonl`, `results/judge/` and `results/figures/`. The billing check (section 7) is final since 10.11.2026; the result of the human evaluation (section 8) and the usability table (section 9) were added on 15.11.2026.
 
 ## 1. The measurement
 
@@ -80,8 +80,60 @@ The Anthropic figure also shows that the judge (Claude Code on the Pro subscript
 
 Every difference, rounded to one decimal, is below 5.0%: the largest is DeepSeek's 0.8% (the dashboard shows two decimals of a sum of $0.18), so condition 4 of the usability criterion holds.
 
-## 8. Still open
+## 8. Human evaluation [M14]
 
-- Human evaluation [M14]: the sample of 60 exists (`results/human/`); the Google Form, two raters, kappa. Written down before the raters score (10.11.2026): the automatic scores of the sample are 57 × 2, 1 × 1 and 2 × 0, and all three below 2 are borderline cases where the rule is stricter than a reading of the content: A16 (`main|K2-028|openai|1`, `"klient A"` where the reference is `"A"`, the only top-level field: correctness 0 → 0), A24 (`main|K2-020|google|5`, `null` for the VAT amount and the total, which the text does not state but which can be computed: correctness 1/3 → 1), A34 (`main|K1-025|anthropic|4`, `**05.00**` with an explanation: correctness 0 → 0). Because of the ceiling effect the kappa depends almost only on these three: if a rater agrees with every other score, the linearly weighted kappa is 1.00 when the rater also gives 1, 0, 0 to them (A24, A16, A34), 0.88 with 2, 0, 0, 0.74 with 1, 2, 0 or 1, 0, 2, 0.56 with 2, 2, 0, 0.32 with 1, 2, 2 and 0.00 with 2, 2, 2 (the kappa paradox: high agreement, low kappa). The rater guide (author's decision 10.11.2026, made knowing these automatic scores but before any rater saw the form): a short answer asked for in a given form is correct only in that form, so by the guide A34 is 0, as in the automatic scoring; the guide says nothing specific about A16 and A24, where the raters judge the content.
-- The usability table [E2]. Now: condition 1 holds (the process completed, a choice for both profiles); condition 2 holds: (a), (c), (d), and (b) since 10.11.2026, when the author entered the main run values of `wsm_check_input.csv` into `analysis/wsm_check.xlsx` (every model "OK", largest difference 1.7e-10 against the tolerance 1e-6, the same ranks as `wsm.csv`); condition 3 waits for the kappa; condition 4 holds (section 7).
-- Before the repository becomes public (phase 9): the screenshots show the author's name and e-mail, so crop them.
+**Before the raters scored** (written on 10.11.2026, unchanged): the automatic scores of the sample are 57 × 2, 1 × 1 and 2 × 0, and all three below 2 are borderline cases where the rule is stricter than a reading of the content: A16 (`main|K2-028|openai|1`, `"klient A"` where the reference is `"A"`, the only top-level field: correctness 0 → 0), A24 (`main|K2-020|google|5`, `null` for the VAT amount and the total, which the text does not state but which can be computed: correctness 1/3 → 1), A34 (`main|K1-025|anthropic|4`, `**05.00**` with an explanation: correctness 0 → 0). Because of the ceiling effect the kappa depends almost only on these three: if a rater agrees with every other score, the linearly weighted kappa is 1.00 when the rater also gives 1, 0, 0 to them (A24, A16, A34), 0.88 with 2, 0, 0, 0.74 with 1, 2, 0 or 1, 0, 2, 0.56 with 2, 2, 0, 0.32 with 1, 2, 2 and 0.00 with 2, 2, 2 (the kappa paradox: high agreement, low kappa). The rater guide (author's decision 10.11.2026, made knowing these automatic scores but before any rater saw the form): a short answer asked for in a given form is correct only in that form, so by the guide A34 is 0, as in the automatic scoring; the guide says nothing specific about A16 and A24, where the raters judge the content.
+
+**The result** (added on 15.11.2026). Two raters scored the 60 answers of the sample in the Google Form on 15.11.2026, without model names: `results/human/form_responses.csv` → `scores_rater1.csv`, `scores_rater2.csv` (`src/human/import.js`) → `kappa.csv` (`analysis/human_eval.py`).
+
+| scores | 0 | 1 | 2 |
+|---|---|---|---|
+| automatic | 2 | 1 | 57 |
+| rater 1 | 1 | 3 | 56 |
+| rater 2 | 2 | 7 | 51 |
+
+Linearly weighted Cohen's kappa:
+
+| pair | all answers (n = 60) | judge-scored answers (n = 10), descriptive |
+|---|---|---|
+| rater 1 – automatic | 0.37 | not defined (both sides gave 2 to all ten) |
+| rater 2 – automatic | 0.20 | 0.00 |
+| rater 1 – rater 2 | 0.32 | 0.00 |
+
+The 12 answers where a rater's score differs from the automatic score (rater 1 in 5, rater 2 in 10; the other 48 got the same score from all three):
+
+| answer | raw row | automatic | rater 1 | rater 2 | rater 1's comment |
+|---|---|---|---|---|---|
+| A02 | `main\|K3-036\|google\|2` | 2 | 2 | 1 | |
+| A04 | `main\|K3-028\|google\|2` (judge) | 2 | 2 | 1 | |
+| A14 | `main\|K1-040\|google\|5` | 2 | 2 | 0 | |
+| A16 | `main\|K2-028\|openai\|1` | 0 | 2 | 2 | |
+| A17 | `main\|K3-013\|openai\|5` | 2 | 2 | 1 | |
+| A24 | `main\|K2-020\|google\|5` | 1 | 2 | 2 | |
+| A30 | `main\|K3-019\|xai\|2` | 2 | 2 | 1 | |
+| A32 | `main\|K2-030\|google\|5` | 2 | 1 | 2 | "Tekstist ei tule kuskilt välja mis on vastuolu väärtus" |
+| A37 | `main\|K2-025\|google\|3` | 2 | 2 | 1 | |
+| A43 | `main\|K3-010\|google\|4` | 2 | 1 | 1 | "Peaks olema Soome ettevõtte tehnoloogia juht. Sisu muutub vastavalt sellele" |
+| A44 | `main\|K2-030\|xai\|1` | 2 | 1 | 2 | "Vastuolu ei tule kuskilt tekstist välja." |
+| A59 | `main\|K3-026\|xai\|5` (judge) | 2 | 2 | 1 | |
+
+Rater 2 wrote no comments. The fourth comment of rater 1 is on A34 ("Ei vastanud nõutud kujul."), where all three scores are 0.
+
+Of the three borderline cases above, A34 got 0 from both raters, as in the automatic scoring and as the rater guide says; A16 and A24 got 2 from both raters, against the automatic 0 and 1. That is the case "2, 2, 0" above: 0.56 if every other score were the same. The raters also differ from the automatic score on other answers, all with the automatic score 2: rater 1 on 3 (A32, A43, A44), rater 2 on 8 (A02, A04, A14, A17, A30, A37, A43, A59).
+
+## 9. The usability table [E2]
+
+The criterion was fixed before the main run (`docs/usability_criterion.md`, author's decision 6.11.2026): the methodology is usable if all four conditions hold.
+
+| # | condition | result | holds |
+|---|---|---|---|
+| 1 | The process was carried out from start to end and a model was chosen for both usage profiles. | 3000 requests measured (0 error rows), scored (rules and judge) and costed; profile A and profile B both choose deepseek (sections 1–5). | yes |
+| 2 | The calculations are correct and reproducible. | (a) The unit tests pass (`npm test`, `analysis/tests`). (b) `analysis/wsm_check.xlsx`: every model "OK", largest difference 1.7e-10 against the tolerance 1e-6, the same ranks as `wsm.csv` (10.11.2026). (c) `run_all.py` twice: 13 byte-identical files. (d) Luna: 45/45 ok, scoring, cost and analysis without code changes (section 6). | yes |
+| 3 | The automatic scoring agrees with human evaluation. | Kappa rater 1 – automatic 0.37, rater 2 – automatic 0.20; the limit is ≥ 0.61 for both (section 8). Rater 1 – rater 2 0.32 (reported, not part of the condition). | **no** |
+| 4 | The computed cost matches the provider's billing. | The largest difference is 0.8% (DeepSeek); the limit is < 5.0% for every provider (section 7). | yes |
+
+Conditions 1, 2 and 4 hold, condition 3 does not. By the criterion the usability of the methodology is therefore not shown in full: the agreement of the automatic scoring with the human raters is below the limit. As the criterion says, the thesis has not failed; the discussion chapter says what did not work and why (written by the author).
+
+## 10. Still open
+
+- The public GitHub repository (PLAN.md phase 9). The account identity in the billing screenshots is covered (U23).
