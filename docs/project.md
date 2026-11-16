@@ -1,7 +1,7 @@
 # Project files (the root)
 
 ## `README.md`
-The entry point for a reader of the public repository (PLAN.md phase 9 [S9]): what the parts are, the requirements, installation and tests, computing the results again from the stored data, a dry run without keys, the API keys, a measurement from start to end, the LLM judge through Claude Code, adding a model, the human evaluation and the main rules of the measurement. Every command in it was run on 11.11.2026 (the dry run chain; `score.js`, `cost.js` and `run_all.py` on the main run gave unchanged files).
+The entry point for a reader of the public repository (PLAN.md phase 9 [S9]): what the parts are, the requirements, installation and tests, computing the results again from the stored data, a dry run without keys, the API keys, a measurement from start to end, the LLM judge through Claude Code, adding a model, the human evaluation, the main rules of the measurement, and how generative AI was used (the code written with Claude Code, what the author did). Every command in it was run on 11.11.2026 (the dry run chain; `score.js`, `cost.js` and `run_all.py` on the main run gave unchanged files).
 
 ## `AGENTS.md`
 Rules for every agent and contributor that changes the repository: each change gets a row in `CHANGELOG.md` and updates the docs (and `CLAUDE.md` for rules and decisions) in the same commit; the commit message starts with the change's IDs. It points to `CLAUDE.md` for everything else.

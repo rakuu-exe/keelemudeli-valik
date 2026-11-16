@@ -204,3 +204,11 @@ The full list is in [`CLAUDE.md`](CLAUDE.md). The main ones:
 - The test set, the message template and the configuration were frozen at the git tag `main-run`, before the main run.
 
 A new measurement will not give the same raw rows as the study: the providers change their models and prices, and the answers of a model vary from request to request. What can be reproduced exactly is everything computed from the stored rows.
+
+## Use of generative AI
+
+The code, the tests, the documentation and the reports of this repository were written with [Claude Code](https://claude.com/claude-code) (Anthropic; the models Claude Opus 5.5 and Claude Fable 5.2). It worked from the author's signed thesis proposal, the work plan ([`PLAN.md`](PLAN.md)) and the author's decisions, which are recorded with their dates in [`CLAUDE.md`](CLAUDE.md) and [`CHANGELOG.md`](CHANGELOG.md). Every commit made this way ends with the line `Co-Authored-By: Claude …`.
+
+The author made the decisions, started the main run and the reproducibility test, and did the checks that are the author's by the plan: the review of 20 rule scores and 20 judge scores of the pilot run, the Excel check of the decision model, the price list and dashboard screenshots, and the Google Form for the raters.
+
+Claude Opus 5.5 is also the LLM judge of the study (see above). That is a part of the method and separate from the writing of the code.
