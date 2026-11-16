@@ -121,6 +121,25 @@ Rater 2 wrote no comments. The fourth comment of rater 1 is on A34 ("Ei vastanud
 
 Of the three borderline cases above, A34 got 0 from both raters, as in the automatic scoring and as the rater guide says; A16 and A24 got 2 from both raters, against the automatic 0 and 1. That is the case "2, 2, 0" above: 0.56 if every other score were the same. The raters also differ from the automatic score on other answers, all with the automatic score 2: rater 1 on 3 (A32, A43, A44), rater 2 on 8 (A02, A04, A14, A17, A30, A37, A43, A59).
 
+**The author's review of the 12 differing answers** (added on 16.11.2026). The author read the 12 answers after the kappa was known, with all three scores in view. It is an explanation for the discussion chapter, not a third rating: the scores, the kappa and condition 3 of the usability table stay as they are. The other 48 answers were not reviewed.
+
+One rule for a field whose value the text does not state (author's decision 16.11.2026): the instruction of category 2, "Kui mõnda välja tekstis ei ole, pane selle väärtuseks null", is read as written, so a value that has to be computed or inferred is not in the text and the right answer is `null`. The references of K2-020 (the VAT amount and the total), K2-025 (the due date from "maksetähtaeg 30 päeva") and K2-030 (`vastuolu`) expect the computed value: in these three tasks the reference and the instruction disagree. The test set was frozen at the tag `main-run` and is not changed.
+
+| answer | right by the author's review | why |
+|---|---|---|
+| A16 | the raters (2) | "klient A" names the same client as the reference "A"; the exact comparison of the text field is stricter than the content |
+| A24 | the raters (2) | the VAT amount and the total are not in the text, so `null` is right; the reference expects 22 and 122 |
+| A32, A44 | rater 1 (1) | `vastuolu` is not in the text, it is inferred, so `null` would be right; the automatic score and rater 2 gave 2 |
+| A37 | rater 2 (1) | the due date is computed from "30 päeva", so `null` would be right; the automatic score and rater 1 gave 2 |
+| A43 | the raters (1) | "Soome ettevõtte tehnoloogiajuht" became "Soome tehnoloogiajuht", which changes the meaning; the rules of K3-010 check only the length and the language |
+| A02, A04 | the automatic score and rater 1 (2) | exactly five words (A02) and one sentence with both facts (A04), as asked; the author's assumption is that rater 2 expected more content than the asked length allows (rater 2 wrote no comment) |
+| A14 | the automatic score and rater 1 (2) | the answer is exactly "EI SELGU", which the task asks for when the text does not say |
+| A17 | the automatic score and rater 1 (2) | 16 words and no number, as asked |
+| A30 | open | the answer says "osales üheksa klienti"; the author's assumption is that rater 2 read the number of participants as a result, which can be argued both ways |
+| A59 | the automatic score and rater 1 (2) | one sentence with the three results of the source text |
+
+By this review the automatic score is wrong in 6 of the 12 answers (A16, A24, A32, A37, A43, A44), rater 1 in 1 (A37) and rater 2 in 7 (A02, A04, A14, A17, A59 and, with the score 2, A32 and A44); A30 is left open. The six of the automatic scoring have three causes: an exact comparison stricter than the content (A16), a reference that expects a computed value against the instruction (A24, A32, A37, A44), and rules that do not check the content of a K3 answer (A43).
+
 ## 9. The usability table [E2]
 
 The criterion was fixed before the main run (`docs/usability_criterion.md`, author's decision 6.11.2026): the methodology is usable if all four conditions hold.

@@ -23,7 +23,7 @@ Raw data (raw rows, judge scores) is only appended to, never changed (principle 
 | `results/pilot/report.md` | the pilot run report: measurement, judge, findings F1–F8 with their places, the author's decisions and review (written by hand) |
 | `results/pilot/report_data.md` | the generated data of the report; `src/report/pilot.js` |
 | `results/pilot/judge_check.md` | 20 judge scores without model names, with the author's blind scores; `src/judge/review.js` |
-| `results/main/report.md` | the main run report: measurement, judge, criteria, findings, decision model, reproducibility, the billing check, the human evaluation, the usability table [E2] and what is still open (written by hand) |
+| `results/main/report.md` | the main run report: measurement, judge, criteria, findings, decision model, reproducibility, the billing check, the human evaluation with the author's review of the 12 answers where a rater and the automatic score differ, the usability table [E2] and what is still open (written by hand) |
 
 ## Human evaluation
 | file | content |
