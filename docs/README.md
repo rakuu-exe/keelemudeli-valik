@@ -52,6 +52,8 @@ A `*` stands for any characters except `/` (one file name part).
 | `CHANGELOG.md` | [project](project.md) | every implementation (I1, I2, …) and update (U1, U2, …) |
 | `CLAUDE.md` | [project](project.md) | project instructions: principles, formats, decisions |
 | `PLAN.md` | [project](project.md) | the work plan, phase by phase |
+| `LICENSE` | [project](project.md) | the MIT License of the code and the configuration |
+| `LICENSE-CC-BY-4.0` | [project](project.md) | the CC BY 4.0 licence of the test set, the data and the documentation |
 | `package.json` | [project](project.md) | Node package: dependencies and npm scripts |
 | `package-lock.json` | [project](project.md) | exact versions of the Node dependencies |
 | `.env.example` | [project](project.md) | template of the API key file `.env` |

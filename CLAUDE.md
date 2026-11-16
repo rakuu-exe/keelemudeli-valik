@@ -6,6 +6,8 @@ It is based on the signed thesis proposal and the author's decisions in `kavandi
 
 The thesis text is not in the scope of this repository. The author writes it.
 
+**Status (16.11.2026):** every phase of `PLAN.md` is done and the repository is public. Licences (author's decision 16.11.2026): MIT for the code and the configuration, CC BY 4.0 for the test set, the judge prompt, the rater guide, the data and the documentation; the screenshots are not covered (`README.md`, "Licence"). The 120 tasks of the test set were written by the author (the author's statement 16.11.2026).
+
 **Change log and documentation:** every change gets a row in `CHANGELOG.md` (I + the next number for an implementation, U + the next number for an update; the commit message starts with the IDs) and updates `docs/` (the file map in `docs/README.md` and the doc of the changed file) in the same commit. The rules are in `AGENTS.md`; `npm test` checks both (`test/changelog.test.js`, `test/docs.test.js`). Author's decisions 3.11.2026.
 
 ---
@@ -101,6 +103,8 @@ Every file is described in `docs/` (file map: `docs/README.md`).
 README.md            for a reader: installation, API keys, the judge, how to run each step
 AGENTS.md            rules for agents: a change log row and the docs with every change
 CHANGELOG.md         every implementation (I1, I2, …) and update (U1, U2, …)
+LICENSE              MIT: code and configuration
+LICENSE-CC-BY-4.0    CC BY 4.0: test set, judge prompt, rater guide, data, documentation (not the screenshots)
 docs/                documentation of every file (README.md = overview and file map)
 config/
   models.json        models and the maximum output length

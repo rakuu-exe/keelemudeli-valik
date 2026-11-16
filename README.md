@@ -209,6 +209,14 @@ A new measurement will not give the same raw rows as the study: the providers ch
 
 The code, the tests, the documentation and the reports of this repository were written with [Claude Code](https://claude.com/claude-code) (Anthropic; the models Claude Opus 5.5 and Claude Fable 5.2). It worked from the author's signed thesis proposal, the work plan ([`PLAN.md`](PLAN.md)) and the author's decisions, which are recorded with their dates in [`CLAUDE.md`](CLAUDE.md) and [`CHANGELOG.md`](CHANGELOG.md). Every commit made this way ends with the line `Co-Authored-By: Claude …`.
 
+The 120 tasks of the test set were written by the author (the author's statement, 16.11.2026). The changes from version 1.2 to 1.3 ([`data/CHANGES_v1_3.md`](data/CHANGES_v1_3.md)) were made with Claude Code on the author's decisions.
+
 The author made the decisions, started the main run and the reproducibility test, and did the checks that are the author's by the plan: the review of 20 rule scores and 20 judge scores of the pilot run, the Excel check of the decision model, the price list and dashboard screenshots, and the Google Form for the raters.
 
 Claude Opus 5.5 is also the LLM judge of the study (see above). That is a part of the method and separate from the writing of the code.
+
+## Licence
+
+- **Code and configuration** (`src/`, `test/`, `analysis/*.py`, `tools/apps_script/create_form.gs`, `config/`, the package files): the MIT License, [`LICENSE`](LICENSE).
+- **Test set, judge prompt, rater guide, data and documentation** (`data/`, `prompts/`, `tools/apps_script/rater_guide.txt`, `results/`, `analysis/wsm_check.xlsx`, `docs/` and the other Markdown files): Creative Commons Attribution 4.0 International, [`LICENSE-CC-BY-4.0`](LICENSE-CC-BY-4.0). Attribution: Ragnar Rand, "Keelemudeli valiku mitmekriteeriumiline metoodika tarkvaraarenduses", TalTech, 2026.
+- **Not covered by either licence:** the screenshots in `results/prices/` and `results/billing/`. They show the pages of the providers and are here only as evidence of the prices and the billed amounts.

@@ -169,7 +169,9 @@ All tables and figures with one command: `python analysis/run_all.py`.
 ## Phase 9 – Appendices [S9]
 
 - [x] `README.md`: installation, API keys, the Claude Code judge, how to run each step.
-- [ ] Public GitHub repository without the `.env` file: code, test set v1.3, judge prompt, rater guide, raw data.
+- [x] Public GitHub repository without the `.env` file: code, test set v1.3, judge prompt, rater guide, raw data.
+
+**Every phase of the plan (0–9) is done** (16.11.2026; the repository was made public on the same day).
 
 ---
 

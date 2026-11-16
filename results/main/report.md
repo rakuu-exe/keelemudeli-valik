@@ -155,4 +155,4 @@ Conditions 1, 2 and 4 hold, condition 3 does not. By the criterion the usability
 
 ## 10. Still open
 
-- The public GitHub repository (PLAN.md phase 9). The account identity in the billing screenshots is covered (U23).
+Nothing (16.11.2026): the repository was made public on 16.11.2026 (PLAN.md phase 9; the account identity in the billing screenshots is covered, U23), and every phase of the plan is done.
